@@ -65,6 +65,8 @@ public class RoomCreator : EditorWindow
         }
     }
 
+    
+    //  TODO: Add support for an interactables layer
     private void CreateRoom()
     {
         var mTilemaps = _active.GetComponentsInChildren<Tilemap>();

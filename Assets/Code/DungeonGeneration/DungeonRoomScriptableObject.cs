@@ -1,6 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "Dungeon/Room", order = 1)]
+/// <summary>
+/// A scriptable object which holds data about a dungeon room
+/// </summary>
 public class DungeonRoomScriptableObject : ScriptableObject
 {
 

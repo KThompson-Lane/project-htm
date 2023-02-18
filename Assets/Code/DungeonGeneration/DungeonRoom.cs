@@ -2,6 +2,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// A class which handles loading in DungeonRoom scriptable objects
+/// </summary>
 public class DungeonRoom : MonoBehaviour
 {
     [field: SerializeField]
@@ -9,6 +12,12 @@ public class DungeonRoom : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+    {
+        LoadRoom();
+    }
+    
+    //TODO: adapt the room when loading such that doors can be placed
+    public void LoadRoom()
     {
         var mTilemaps = gameObject.GetComponentsInChildren<Tilemap>();
         var mFloorMap = mTilemaps.First(map => map.name == "Floor");
