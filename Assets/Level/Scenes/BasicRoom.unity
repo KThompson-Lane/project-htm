@@ -2364,7 +2364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef86aca226e0494baa66d64242ec4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
+  MoveSpeed: 0.7
+  RotationSpeed: 3
 --- !u!50 &635835809
 Rigidbody2D:
   serializedVersion: 4
@@ -2379,13 +2380,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &852518422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2988,6 +2989,10 @@ PrefabInstance:
     - target: {fileID: 8315017698281602391, guid: b2d40c96d7b39b546abf33fb2e141cae, type: 3}
       propertyPath: m_Name
       value: PlayerController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315017698281602391, guid: b2d40c96d7b39b546abf33fb2e141cae, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2d40c96d7b39b546abf33fb2e141cae, type: 3}

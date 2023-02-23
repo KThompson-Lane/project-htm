@@ -35,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.tag is "Player")
         {
-            Debug.Log("Ouchies");
+            //Debug.Log("Ouchies");
         }
     }
 }
