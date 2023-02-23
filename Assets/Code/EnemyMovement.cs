@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] 
@@ -27,5 +29,13 @@ public class EnemyMovement : MonoBehaviour
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
         var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag is "Player")
+        {
+            Debug.Log("Ouchies");
+        }
     }
 }
