@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13d5b7f9ede88184ba0ae5dc52af6801
-      internalID: -1610850343
+      spriteID: 33eda5aeb10cf674cba87d4d9a746853
+      internalID: -593739511
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c237fc8249d8d0c41aba5111b6bb61c6
-      internalID: -1032056834
+      spriteID: 72a4eb1a2a2f8eb4a97b5e76c403b9ca
+      internalID: 1298169695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Player1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1792
+        width: 256
+        height: 256
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19dc9c67dec55d549b89c0a8e3e475c6
+      internalID: -438054773
       vertices: []
       indices: 
       edges: []
@@ -157,8 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI_Heart: -1032056834
-      UI_Timer: -1610850343
+      UI_Player1: -438054773
+      UI_Heart: 1298169695
+      UI_Timer: -593739511
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

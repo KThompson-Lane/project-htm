@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UI
   m_EditorClassIdentifier: 
   hashCode: 2748
-  material: {fileID: 4292777790875527356}
+  material: {fileID: 8051185277648190606}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -42,22 +42,28 @@ MonoBehaviour:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
-    m_Scale: 1.25
+    m_Scale: 1
     m_Name: UI_Timer
     m_HashCode: -1513117116
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 1
-    m_Scale: 1.25
+    m_Scale: 1
     m_Name: UI_Heart
     m_HashCode: -1527478423
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 2
+    m_Scale: 1
+    m_Name: UI_Player1
+    m_HashCode: 738186081
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
       m_Width: 256
       m_Height: 256
       m_HorizontalBearingX: -0
-      m_HorizontalBearingY: 210
+      m_HorizontalBearingY: 256
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 0
@@ -66,13 +72,13 @@ MonoBehaviour:
       m_Height: 256
     m_Scale: 1
     m_AtlasIndex: 0
-    sprite: {fileID: -1610850343, guid: 1c6f73f26cec8ee4099a3a4e601ea5d3, type: 3}
+    sprite: {fileID: -593739511, guid: 1c6f73f26cec8ee4099a3a4e601ea5d3, type: 3}
   - m_Index: 1
     m_Metrics:
       m_Width: 256
       m_Height: 256
       m_HorizontalBearingX: -0
-      m_HorizontalBearingY: 180
+      m_HorizontalBearingY: 256
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 256
@@ -81,10 +87,25 @@ MonoBehaviour:
       m_Height: 256
     m_Scale: 1
     m_AtlasIndex: 0
-    sprite: {fileID: -1032056834, guid: 1c6f73f26cec8ee4099a3a4e601ea5d3, type: 3}
+    sprite: {fileID: 1298169695, guid: 1c6f73f26cec8ee4099a3a4e601ea5d3, type: 3}
+  - m_Index: 2
+    m_Metrics:
+      m_Width: 256
+      m_Height: 256
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 256
+      m_HorizontalAdvance: 256
+    m_GlyphRect:
+      m_X: 512
+      m_Y: 1792
+      m_Width: 256
+      m_Height: 256
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -438054773, guid: 1c6f73f26cec8ee4099a3a4e601ea5d3, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
---- !u!21 &4292777790875527356
+--- !u!21 &8051185277648190606
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 1
