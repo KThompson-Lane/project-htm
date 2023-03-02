@@ -36,7 +36,7 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.tag is "Player")
         {
             //Debug.Log("Ouchies");
-            collision.gameObject.GetComponent<Health>().TakeDamage(1);
+            collision.gameObject.GetComponent<Health>().TakeDamage(2);
         }
     }
 }
