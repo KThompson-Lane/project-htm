@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+#if UNITY_EDITOR
 public class RoomCreator : EditorWindow
 {
     private string roomName = "My Room";
@@ -95,3 +95,4 @@ public class RoomCreator : EditorWindow
         AssetDatabase.SaveAssets();                                                                                      
     }
 }
+#endif
