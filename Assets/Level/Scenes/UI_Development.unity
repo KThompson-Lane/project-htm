@@ -1244,6 +1244,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalHealth: 10
+--- !u!114 &700393620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700393612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: beccd5392c75ef545bb186592320ae5e, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 700393615}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0fb595e8-69a8-4214-ba70-6ec44155ca40
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 700393614}
+        m_TargetAssemblyTypeName: Shooting, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3ef6938c-0fce-482e-b400-9a70935f5cfa
+    m_ActionName: Player/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 700393615}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnRotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5b6f419c-9824-4b14-8c11-0c3a21bf11d4
+    m_ActionName: Player/Rotate[/Mouse/position]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &916857727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,33 +1789,33 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1043746923}
     m_ColliderPaths:
-    - - X: 49583392
-        Y: -40000084
-      - X: 50000084
-        Y: -39583388
+    - - X: 49583393
+        Y: -40000085
+      - X: 50000085
+        Y: -39583393
       - X: 50000100
-        Y: -39583352
+        Y: -39583356
       - X: 50000100
-        Y: 49583352
-      - X: 50000084
-        Y: 49583392
-      - X: 49583392
-        Y: 50000084
-      - X: 49583352
+        Y: 49583356
+      - X: 50000085
+        Y: 49583393
+      - X: 49583393
+        Y: 50000085
+      - X: 49583356
         Y: 50000100
-      - X: -39583352
+      - X: -39583356
         Y: 50000100
-      - X: -39583388
-        Y: 50000084
-      - X: -40000084
-        Y: 49583392
+      - X: -39583393
+        Y: 50000085
+      - X: -40000085
+        Y: 49583393
       - X: -40000100
-        Y: 49583352
+        Y: 49583356
       - X: -40000100
         Y: -40000044
       - X: -40000044
         Y: -40000100
-      - X: 49583352
+      - X: 49583356
         Y: -40000100
     - - X: -37291564
         Y: -29999900
@@ -1749,12 +1827,12 @@ CompositeCollider2D:
         Y: -29999900
   m_CompositePaths:
     m_Paths:
-    - - {x: 4.9583244, y: -4.00001}
-      - {x: 5.00001, y: -3.9583244}
+    - - {x: 4.958325, y: -4.00001}
+      - {x: 5.00001, y: -3.958325}
       - {x: 5.000001, y: 4.958347}
-      - {x: 4.9583244, y: 5.00001}
-      - {x: -3.9583464, y: 5.000001}
-      - {x: -4.00001, y: 4.9583244}
+      - {x: 4.958325, y: 5.00001}
+      - {x: -3.9583468, y: 5.000001}
+      - {x: -4.00001, y: 4.958325}
       - {x: -3.9999752, y: -4.00001}
     - - {x: 4.7291565, y: -2.9999607}
       - {x: -3.7291565, y: -2.9999607}

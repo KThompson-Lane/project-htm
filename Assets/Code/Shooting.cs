@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Shooting : MonoBehaviour
 {
@@ -7,11 +8,18 @@ public class Shooting : MonoBehaviour
 
     public float bulletForce = 20f;
 
+    private bool isShooting = false;
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        isShooting = context.action.triggered;
+    }
+    
     // Update is called once per frame
     void Update()
     {
         //Fire on Click
-        if(Input.GetButtonDown("Fire1"))
+        //if(Input.GetButtonDown("Fire1"))
+        if(isShooting)
         {
             Shoot();
         }
