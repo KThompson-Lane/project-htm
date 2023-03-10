@@ -13,6 +13,7 @@ public class DungeonRoomScriptableObject : ScriptableObject
     public RuleTile WallTile;
     
     public BoundsInt RoomBounds;
+    public bool BossRoom, StarterRoom;
     
     public void Init(string roomName, RuleTile floor, RuleTile wall, Vector2Int roomSize)
     {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NormalRoom
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 7482667652216324306, guid: 6c35389b781163b41a73a3d448e69008, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   m_Transform:
     e00: 1
     e01: 0

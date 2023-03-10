@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf7cf89b88cbe04fbb3c0c37fcee400, type: 3}
   m_Name: Test floor
   m_EditorClassIdentifier: 
-  RoomDimensions: {x: 7, y: 7}
-  level: 1
+  floorSize: {x: 8, y: 9}
+  level: 2
+  rooms: 11
   StartRoom: {fileID: 11400000, guid: f73806be0a4b1ec41a207ecefa18d03b, type: 2}
   BasicRooms: []
-  BossRooms: []
-  rooms: 8
-  addedNeighbour: 0
+  BossRooms:
+  - {fileID: 11400000, guid: e70f1f4c43cd2cc40a48263a6773bd82, type: 2}

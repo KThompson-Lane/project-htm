@@ -11,9 +11,9 @@ public class DungeonFloor : MonoBehaviour
     public TileBase startRoom;
     public TileBase bossRoom;
 
-    void OnEnable()
+    public void GenerateFloor()
     {
-        if(floorObject != null)
+        if (floorObject != null)
             floorObject.GenerateFloor();
         if (floorPreview != null)
         {
@@ -27,15 +27,21 @@ public class DungeonFloor : MonoBehaviour
                 int roomPosition = room.Key;
                 int roomX = roomPosition % 10;
                 int roomY = roomPosition / 10;
-                Vector3Int tilePosition = new Vector3Int(roomX-(floorSize.x/2), roomY-floorSize.y/2, 1);
+                Vector3Int tilePosition = new Vector3Int(roomX - (floorSize.x / 2), roomY - floorSize.y / 2, 1);
                 //  Starter room
-                if(room.Value != null)
-                    floorPreview.SetTile(tilePosition, startRoom);
+                if (room.Value != null)
+                    floorPreview.SetTile(tilePosition, room.Value.StarterRoom ? startRoom : bossRoom);
                 else
                     floorPreview.SetTile(tilePosition, normalRoom);
             }
+
             floorPreview.CompressBounds();
         }
     }
-    
+
+    public void Debug()
+    {
+        UnityEngine.Debug.Log("Debugging");
+    }
+
 }

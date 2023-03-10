@@ -15,7 +15,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Dungeon floor", menuName = "Hack the Mainframe/Dungeon floor", order = 1)]
 public class DungeonFloorScriptableObject : ScriptableObject
 {
-    //  top left cell is 0,1, bottom right is 4,5
+    //  top left cell is 0,1, bottom right is y-1, x
     public Vector2Int floorSize = new(7, 7);
     public int level;
     public int rooms;
@@ -86,6 +86,8 @@ public class DungeonFloorScriptableObject : ScriptableObject
     }
     private void CheckNeighbourConditions(int cell)
     {
+        if (cell % 10 == 0 || cell < 0)
+            return;
         if (floorplan.ContainsKey(cell))
             return;
         if (filledNeighbours(cell) > 1)
