@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cdc8e7a14674cdcb6e38baeb279457d, type: 3}
   m_Name: Demo room
   m_EditorClassIdentifier: 
-  FloorTile: {fileID: 0}
-  WallTile: {fileID: 0}
+  FloorTile: {fileID: 11400000, guid: 4f476609b7981864197ecc58e467c078, type: 2}
+  WallTile: {fileID: 11400000, guid: e83700726d2440d49ace424ebd2b3a1a, type: 2}
   RoomBounds:
-    m_Position: {x: 0, y: 0, z: 0}
-    m_Size: {x: 0, y: 0, z: 0}
+    m_Position: {x: -4, y: -3, z: 0}
+    m_Size: {x: 9, y: 7, z: 1}
+  Cleared: 0
+  northNeighbour: {fileID: 0}
+  eastNeighbour: {fileID: 0}
+  southNeighbour: {fileID: 0}
+  westNeighbour: {fileID: 0}
