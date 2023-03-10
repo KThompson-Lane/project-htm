@@ -268,7 +268,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 465d0e5bad891e54b8a5500c21f9fb1c, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -362,7 +362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 7.200012, y: -5.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &347575114
@@ -439,7 +439,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 300, y: 84.9336}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &349014881
 MonoBehaviour:
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[Icon] [Ammo]'
+  m_text: "[Icon] \u221E"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -488,14 +488,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 616221554}
   - component: {fileID: 616221553}
   - component: {fileID: 616221552}
+  - component: {fileID: 616221557}
   m_Layer: 0
   m_Name: Monster_B
   m_TagString: Untagged
@@ -853,6 +854,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &616221557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616221551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d9c1f60d868b64e843ad2e9bc89b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalHealth: 2
 --- !u!1 &620205357
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +1000,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1029,7 +1043,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player1Health: {fileID: 1383574888}
-  PlayerOneHP: 4
 --- !u!1001 &700393611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1188,9 +1201,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.059994012, y: 0.5692716}
-      - {x: -0.27547002, y: -0.22723837}
-      - {x: 0.25293204, y: -0.091927364}
+    - - {x: 0.15958731, y: 0.16022469}
+      - {x: 0.13841695, y: 0.41655305}
+      - {x: 0.015868995, y: 0.40248576}
+      - {x: 0.008795567, y: 0.15532286}
+      - {x: -0.09516019, y: 0.15343075}
+      - {x: -0.23943442, y: -0.029370967}
+      - {x: -0.20783709, y: -0.16172925}
+      - {x: -0.09385881, y: -0.1859631}
+      - {x: 0.2199118, y: 0.0030057952}
 --- !u!50 &700393617
 Rigidbody2D:
   serializedVersion: 4
@@ -1212,6 +1231,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &700393619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700393612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad023d7a3661d945865549cd70a769c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalHealth: 10
 --- !u!1 &916857727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &972291268
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1679,33 +1711,33 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1043746923}
     m_ColliderPaths:
-    - - X: 49583393
-        Y: -40000085
-      - X: 50000085
-        Y: -39583393
+    - - X: 49583392
+        Y: -40000084
+      - X: 50000084
+        Y: -39583388
       - X: 50000100
-        Y: -39583356
+        Y: -39583352
       - X: 50000100
-        Y: 49583356
-      - X: 50000085
-        Y: 49583393
-      - X: 49583393
-        Y: 50000085
-      - X: 49583356
+        Y: 49583352
+      - X: 50000084
+        Y: 49583392
+      - X: 49583392
+        Y: 50000084
+      - X: 49583352
         Y: 50000100
-      - X: -39583356
+      - X: -39583352
         Y: 50000100
-      - X: -39583393
-        Y: 50000085
-      - X: -40000085
-        Y: 49583393
+      - X: -39583388
+        Y: 50000084
+      - X: -40000084
+        Y: 49583392
       - X: -40000100
-        Y: 49583356
+        Y: 49583352
       - X: -40000100
-        Y: -40000041
-      - X: -40000041
+        Y: -40000044
+      - X: -40000044
         Y: -40000100
-      - X: 49583356
+      - X: 49583352
         Y: -40000100
     - - X: -37291564
         Y: -29999900
@@ -1717,13 +1749,13 @@ CompositeCollider2D:
         Y: -29999900
   m_CompositePaths:
     m_Paths:
-    - - {x: 4.958325, y: -4.00001}
-      - {x: 5.00001, y: -3.958325}
+    - - {x: 4.9583244, y: -4.00001}
+      - {x: 5.00001, y: -3.9583244}
       - {x: 5.000001, y: 4.958347}
-      - {x: 4.958325, y: 5.00001}
-      - {x: -3.9583468, y: 5.000001}
-      - {x: -4.00001, y: 4.958325}
-      - {x: -3.9999747, y: -4.00001}
+      - {x: 4.9583244, y: 5.00001}
+      - {x: -3.9583464, y: 5.000001}
+      - {x: -4.00001, y: 4.9583244}
+      - {x: -3.9999752, y: -4.00001}
     - - {x: 4.7291565, y: -2.9999607}
       - {x: -3.7291565, y: -2.9999607}
       - {x: -3.7291272, y: 3.99999}

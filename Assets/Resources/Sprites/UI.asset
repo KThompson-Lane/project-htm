@@ -22,6 +22,7 @@ MonoBehaviour:
     m_StyleName: 
     m_PointSize: 0
     m_Scale: 0
+    m_UnitsPerEM: 0
     m_LineHeight: 0
     m_AscentLine: 0
     m_CapLine: 0
@@ -42,7 +43,7 @@ MonoBehaviour:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
-    m_Scale: 1
+    m_Scale: 1.25
     m_Name: UI_Timer
     m_HashCode: -1513117116
   - m_ElementType: 2
@@ -63,7 +64,7 @@ MonoBehaviour:
       m_Width: 256
       m_Height: 256
       m_HorizontalBearingX: -0
-      m_HorizontalBearingY: 256
+      m_HorizontalBearingY: 210
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 0
@@ -72,6 +73,7 @@ MonoBehaviour:
       m_Height: 256
     m_Scale: 1
     m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
     sprite: {fileID: -593739511, guid: 1c6f73f26cec8ee4099a3a4e601ea5d3, type: 3}
   - m_Index: 1
     m_Metrics:
@@ -87,6 +89,7 @@ MonoBehaviour:
       m_Height: 256
     m_Scale: 1
     m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
     sprite: {fileID: 1298169695, guid: 1c6f73f26cec8ee4099a3a4e601ea5d3, type: 3}
   - m_Index: 2
     m_Metrics:
@@ -102,6 +105,7 @@ MonoBehaviour:
       m_Height: 256
     m_Scale: 1
     m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
     sprite: {fileID: -438054773, guid: 1c6f73f26cec8ee4099a3a4e601ea5d3, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

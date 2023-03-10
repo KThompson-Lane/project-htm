@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     protected int currentHealth;
 
     // Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
         currentHealth = totalHealth;
         Debug.Log("Health is: " + totalHealth);
