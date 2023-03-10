@@ -35,19 +35,8 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "b784e7c9-fc9a-4ed8-b0c4-f648a8bff592",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "WASD",
-                    "id": "1d5e47f9-2956-4abf-8925-0935870979c4",
+                    "id": "bc848df0-3d80-494f-8ebc-c906528ebecb",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -58,7 +47,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "6f6afe95-9008-4068-9264-90d914918b7f",
+                    "id": "04bab842-4178-4a35-8fd1-edc2642ca68e",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -69,7 +58,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "077f05c5-a57a-409e-9250-0ef41f3224a7",
+                    "id": "108c28eb-50ab-42f1-88ae-36d5490e4454",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -80,7 +69,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "cccd25a5-3d06-4dee-9d8d-8fd07bc68ad2",
+                    "id": "71d3a9e1-6653-4c7c-a54d-f4ae44460225",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -91,7 +80,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "8d3e06f5-6eaf-4e1c-84da-0ebf8d527ecf",
+                    "id": "c60af1e1-40de-4d55-9746-ac9fc6a870e8",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -102,7 +91,18 @@
                 },
                 {
                     "name": "",
-                    "id": "f0bdb247-1a9a-43a8-8e7d-7989dbf46167",
+                    "id": "7f43aa9f-a545-4050-859f-e25ede9fa796",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1e75e62-7863-4189-845a-eff6958bf4ab",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
