@@ -1,3 +1,4 @@
+using Code.DungeonGeneration;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,9 +8,9 @@ public class DungeonFloor : MonoBehaviour
     // Start is called before the first frame update
     public DungeonFloorScriptableObject floorObject;
     public Tilemap floorPreview;
-    public TileBase normalRoom;
-    public TileBase startRoom;
-    public TileBase bossRoom;
+    public TileBase normalRoomTile;
+    public TileBase startRoomTile;
+    public TileBase bossRoomTile;
 
     public void GenerateFloor()
     {
@@ -30,11 +31,21 @@ public class DungeonFloor : MonoBehaviour
                 Vector3Int tilePosition = new Vector3Int(roomX - (floorSize.x / 2), roomY - floorSize.y / 2, 1);
                 //  Starter room
                 if (room.Value != null)
-                    floorPreview.SetTile(tilePosition, room.Value.StarterRoom ? startRoom : bossRoom);
-                else
-                    floorPreview.SetTile(tilePosition, normalRoom);
+                {
+                    switch (room.Value)
+                    {
+                        case BossRoomScriptableObject:
+                            floorPreview.SetTile(tilePosition, bossRoomTile);
+                            break;
+                        case StartRoomScriptableObject:
+                            floorPreview.SetTile(tilePosition, startRoomTile);
+                            break;
+                        default:
+                            floorPreview.SetTile(tilePosition, normalRoomTile);
+                            break;
+                    }
+                }
             }
-
             floorPreview.CompressBounds();
         }
     }

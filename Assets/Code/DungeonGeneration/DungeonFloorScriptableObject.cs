@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -34,6 +32,15 @@ public class DungeonFloorScriptableObject : ScriptableObject
         bool validFloor = false;
         while (!validFloor)
             validFloor = CreateFloorPlan();
+        //  Once we have a valid floor plan, assign rooms
+        //  Make not icky
+        var emptyCells = floorplan.Where(cell => cell.Value == null).Select(cell => cell.Key).ToList();
+        
+        //  Set all our empty cells to a random basic room.
+        foreach (var cell in emptyCells)
+        {
+            floorplan[cell] = BasicRooms[_random.Next(BasicRooms.Count)];
+        }
     }
 
     private bool CreateFloorPlan()

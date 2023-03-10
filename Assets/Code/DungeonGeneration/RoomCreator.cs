@@ -89,7 +89,7 @@ public class RoomCreator : EditorWindow
     private void SaveRoom()
     {
         var dungeonRoomObject = CreateInstance<DungeonRoomScriptableObject>();                          
-        dungeonRoomObject.Init(roomName, _floorTile, _wallTile, roomSize);                                      
+        //dungeonRoomObject.Init(roomName, _floorTile, _wallTile, roomSize);                                      
         //var tiles = mWallMap.GetTilesBlock(mWallMap.cellBounds);                                                       
         AssetDatabase.CreateAsset(dungeonRoomObject, $"Assets/Level/Dungeon Rooms/{roomName}.asset");                    
         AssetDatabase.SaveAssets();                                                                                      
