@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,24 +9,46 @@ public class Shooting : MonoBehaviour
 
     public float bulletForce = 20f;
 
-    private bool isShooting = false;
+    [SerializeField]
+    private float rateOfFire = 60.0f;
+    
+    private float _coolDown = 0.0f;
+
+    private float _interval; // time between shots
+    
+    private bool _isShooting;
+
+    public void Start()
+    {
+        _interval = 60 / rateOfFire; //1 second / rate of fire
+    }
+
     public void OnShoot(InputAction.CallbackContext context)
     {
-        isShooting = context.action.triggered;
+        _isShooting = context.action.triggered;
     }
     
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //Fire on Click
-        //if(Input.GetButtonDown("Fire1"))
-        if(isShooting)
+        //Fire when left mouse held
+        if(_isShooting)
+        { ;
+            if (_coolDown <= 0f)
+            {
+                Shoot();
+                _coolDown = _interval;
+            }
+        }
+
+        if (_coolDown > 0)
         {
-            Shoot();
+            // update cooldown
+            _coolDown -= Time.deltaTime;
         }
     }
 
-    void Shoot()
+   private void Shoot()
     {
         //Create bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
