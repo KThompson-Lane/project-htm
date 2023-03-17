@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Code.DungeonGeneration;
 using UnityEngine;
@@ -17,7 +16,20 @@ public class DungeonFloor : MonoBehaviour
     
     private Tilemap _floorMap, _wallsMap, _doorMap;
     private RoomDoors _roomDoors;
-    
+
+    private void Awake()
+    {
+        //  Get tilemaps and room doors script
+        var mTilemaps = gameObject.GetComponentsInChildren<Tilemap>();
+        _floorMap = mTilemaps.First(map => map.name == "Floor");
+        _wallsMap = mTilemaps.First(map => map.name == "Walls");
+        _doorMap = mTilemaps.First(map => map.name == "Doors");
+        _roomDoors = gameObject.GetComponentInChildren<RoomDoors>();
+        
+        //  Subscribe to on room change event 
+        _roomDoors.OnRoomChange += OnRoomChange;
+    }
+
     private void Start()
     {
         //  First generate dungeon floor
@@ -25,11 +37,11 @@ public class DungeonFloor : MonoBehaviour
         Debug.Log("Floor generated Successfully");
 
         //  Then load start room
+        //  TODO: Remove magic numbers
         int startCell = ((floorObject.floorSize.y / 2) * 10) + (floorObject.floorSize.x / 2);
         var startRoom = floorObject.floorplan[startCell]; 
         Debug.Log("Loading start room");
         LoadRoom(startRoom);
-        _roomDoors.OnRoomChange += OnRoomChange;
     }
 
     public void GenerateFloor()
@@ -42,17 +54,16 @@ public class DungeonFloor : MonoBehaviour
             floorPreview.size = new Vector3Int(floorSize.x, floorSize.y, 1);
             floorPreview.origin = new Vector3Int(0, 0, 0);
             floorPreview.ResizeBounds();
-            foreach (var room in floorObject.floorplan)
+            foreach (var (roomIndex, room) in floorObject.floorplan)
             {
                 //  Calculate tile position
-                int roomPosition = room.Key;
-                int roomX = roomPosition % 10;
-                int roomY = roomPosition / 10;
+                int roomX = roomIndex % 10;
+                int roomY = roomIndex / 10;
                 Vector3Int tilePosition = new Vector3Int(roomX - (floorSize.x / 2), -roomY - floorSize.y / 2, 1);
                 //  Starter room
-                if (room.Value != null)
+                if (room != null)
                 {
-                    switch (room.Value)
+                    switch (room)
                     {
                         case BossRoomScriptableObject:
                             floorPreview.SetTile(tilePosition, bossRoomTile);
@@ -70,17 +81,14 @@ public class DungeonFloor : MonoBehaviour
         }
     }
     
-    public void LoadRoom(DungeonRoomScriptableObject roomData)
+    private void LoadRoom(DungeonRoomScriptableObject roomData)
     {
+        //  TODO: Move player to correct door location...
         //  Move player to centre
-        var mTilemaps = gameObject.GetComponentsInChildren<Tilemap>();
-        _floorMap = mTilemaps.First(map => map.name == "Floor");
-        _wallsMap = mTilemaps.First(map => map.name == "Walls");
-        _doorMap = mTilemaps.First(map => map.name == "Doors");
-        _roomDoors = gameObject.GetComponentInChildren<RoomDoors>();
         player.transform.position = Vector3.zero;
         if (roomData != null)
         {
+            //  Clear and reset all room tiles
             _floorMap.ClearAllTiles();
             _wallsMap.ClearAllTiles();
             _doorMap.ClearAllTiles();
@@ -99,7 +107,7 @@ public class DungeonFloor : MonoBehaviour
             _doorMap.size = roomData.RoomBounds.size;
             _doorMap.ResizeBounds();
             
-            //  Fill in doors
+            //  Set doors
             if (roomData.northNeighbour != 0)
             {
                 var position = new Vector3Int(0, roomData.RoomBounds.size.y / 2, 0); 
