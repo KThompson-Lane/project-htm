@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     
     private Vector2 _movement;
     private Vector2 _mousePos;
-    private Vector2 test;
 
     private Vector2 _movementInput = Vector2.zero;
     private Vector2 _rotationInput = Vector2.zero;

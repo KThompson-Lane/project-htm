@@ -11,20 +11,20 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     [SerializeField]
     public int maxHealth = 3;
 
-    [System.NonSerialized] public UnityEvent<int> healthChangedEvent;
+    [System.NonSerialized] public UnityEvent<int> HealthChangedEvent;
 
     private void OnEnable()
     {
         // When game starts ensure health is set to max
         health = maxHealth;
         // Set up healthChangedEvent
-        healthChangedEvent ??= new UnityEvent<int>();
+        HealthChangedEvent ??= new UnityEvent<int>();
     }
 
     public void DecreaseHealth(int amount)
     {
         health -= amount;
         // Trigger healthChangedEvent
-        healthChangedEvent.Invoke(health);
+        HealthChangedEvent.Invoke(health);
     }
 }

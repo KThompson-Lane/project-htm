@@ -34,13 +34,13 @@ public class UI_Manager : MonoBehaviour
     private void OnEnable()
     {
         // Listen for health changed trigger
-        _healthManager.healthChangedEvent.AddListener(ChangeHeartContainers);
+        _healthManager.HealthChangedEvent.AddListener(ChangeHeartContainers);
     }
     
     private void OnDisable()
     {
         // Stop listening for health changed trigger
-        _healthManager.healthChangedEvent.RemoveListener(ChangeHeartContainers);
+        _healthManager.HealthChangedEvent.RemoveListener(ChangeHeartContainers);
     }
 
     private void ChangeHeartContainers(int amount)
@@ -54,18 +54,7 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-
     //  TODO: Implement
-    //private TextMeshPro Player2Health;
+    //private TextMeshPro Player2Health; - will need a new health manager
    // private TextMeshPro Timer;
-
-   //  TODO: Remove
-    public void ChangePlayerHealth(int newHP)
-    {
-        Player1Health.text = "";
-        for (int i = 0; i < newHP; i+=2)
-        {
-            Player1Health.text += "<sprite index=1>";
-        }
-    }
 }

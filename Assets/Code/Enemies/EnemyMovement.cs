@@ -18,8 +18,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private HealthManager healthManager;
 
-    private int damage = 2;
-    
+    private const int Damage = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +29,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _mRb2d.MovePosition(Vector2.MoveTowards(_mRb2d.position, _mPlayerTransform.position, MoveSpeed*Time.fixedDeltaTime));
+        var position = _mPlayerTransform.position;
+        _mRb2d.MovePosition(Vector2.MoveTowards(_mRb2d.position, position, MoveSpeed*Time.fixedDeltaTime));
         
-        Vector3 vectorToTarget = _mPlayerTransform.position - transform.position;
+        Vector3 vectorToTarget = position - transform.position;
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
         var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
@@ -43,7 +44,7 @@ public class EnemyMovement : MonoBehaviour
         {
             //Debug.Log("Ouchies");
             //collision.gameObject.GetComponent<Health>().TakeDamage(2);
-            healthManager.DecreaseHealth(damage);
+            healthManager.DecreaseHealth(Damage);
         }
     }
 }
