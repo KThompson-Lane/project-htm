@@ -59,7 +59,7 @@ public class DungeonFloorScriptableObject : ScriptableObject
         List<int> endRooms = new List<int>();
         
         //  Place our starting cell (2,3 (middle)) into the queue
-        int startCell = ((floorSize.y / 2) * 10) + (floorSize.y / 2);
+        int startCell = ((floorSize.y / 2) * 10) + (floorSize.x / 2);
         floorplan.Add(startCell, Instantiate(StartRoom));
         Cells.Enqueue(startCell);
         

@@ -20,7 +20,7 @@ MonoBehaviour:
     m_Size: {x: 9, y: 7, z: 1}
   Cleared: 0
   northNeighbour: 0
-  eastNeighbour: 2
-  southNeighbour: 5
-  westNeighbour: 1
+  eastNeighbour: 0
+  southNeighbour: 0
+  westNeighbour: 0
   BossName: Bob L'eponge
