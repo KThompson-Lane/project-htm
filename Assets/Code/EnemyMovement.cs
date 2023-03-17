@@ -13,6 +13,12 @@ public class EnemyMovement : MonoBehaviour
     
     private Rigidbody2D _mRb2d;
     private Transform _mPlayerTransform;
+
+    // Damage on collision variables
+    [SerializeField]
+    private HealthManager healthManager;
+
+    private int damage = 2;
     
     // Start is called before the first frame update
     void Start()
@@ -36,7 +42,8 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.tag is "Player")
         {
             //Debug.Log("Ouchies");
-            collision.gameObject.GetComponent<Health>().TakeDamage(2);
+            //collision.gameObject.GetComponent<Health>().TakeDamage(2);
+            healthManager.DecreaseHealth(damage);
         }
     }
 }
