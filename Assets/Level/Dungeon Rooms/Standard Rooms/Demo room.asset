@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorTile: {fileID: 11400000, guid: 4f476609b7981864197ecc58e467c078, type: 2}
   WallTile: {fileID: 11400000, guid: e83700726d2440d49ace424ebd2b3a1a, type: 2}
+  DoorTile: {fileID: 11400000, guid: 1d5ecb12b8e7a3043b965988d11cc708, type: 2}
   RoomBounds:
     m_Position: {x: -4, y: -3, z: 0}
     m_Size: {x: 9, y: 7, z: 1}
   Cleared: 0
-  northNeighbour: {fileID: 0}
-  eastNeighbour: {fileID: 0}
-  southNeighbour: {fileID: 0}
-  westNeighbour: {fileID: 0}
+  northNeighbour: 0
+  eastNeighbour: 0
+  southNeighbour: 0
+  westNeighbour: 0

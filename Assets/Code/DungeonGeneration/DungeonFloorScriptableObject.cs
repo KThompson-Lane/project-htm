@@ -74,9 +74,9 @@ public class DungeonFloorScriptableObject : ScriptableObject
             if (CheckNeighbourConditions(currentCell - 10))
             {
                 var room = GetRandomRoom();
-                room.southNeighbour = floorplan[currentCell];
+                room.southNeighbour = currentCell;
                 floorplan.Add(currentCell - 10, room);
-                floorplan[currentCell].northNeighbour = floorplan[currentCell - 10];
+                floorplan[currentCell].northNeighbour = currentCell - 10;
                 Cells.Enqueue(currentCell - 10);
                 addedNeighbour = true;
             }
@@ -84,9 +84,9 @@ public class DungeonFloorScriptableObject : ScriptableObject
             if (CheckNeighbourConditions(currentCell + 10))
             {
                 var room = GetRandomRoom();
-                room.northNeighbour = floorplan[currentCell];
+                room.northNeighbour = currentCell;
                 floorplan.Add(currentCell + 10, room);
-                floorplan[currentCell].southNeighbour = floorplan[currentCell + 10];
+                floorplan[currentCell].southNeighbour = currentCell + 10;
                 Cells.Enqueue(currentCell + 10);
                 addedNeighbour = true;
             }
@@ -94,9 +94,9 @@ public class DungeonFloorScriptableObject : ScriptableObject
             if (CheckNeighbourConditions(currentCell + 1))
             {
                 var room = GetRandomRoom();
-                room.westNeighbour = floorplan[currentCell];
+                room.westNeighbour = currentCell;
                 floorplan.Add(currentCell + 1, room);
-                floorplan[currentCell].eastNeighbour = floorplan[currentCell + 1];
+                floorplan[currentCell].eastNeighbour = currentCell + 1;
                 Cells.Enqueue(currentCell + 1);
                 addedNeighbour = true;
             }
@@ -104,9 +104,9 @@ public class DungeonFloorScriptableObject : ScriptableObject
             if (CheckNeighbourConditions(currentCell - 1))
             {
                 var room = GetRandomRoom();
-                room.eastNeighbour = floorplan[currentCell];
+                room.eastNeighbour = currentCell;
                 floorplan.Add(currentCell - 1, room);
-                floorplan[currentCell].westNeighbour = floorplan[currentCell - 1];
+                floorplan[currentCell].westNeighbour = currentCell - 1;
                 Cells.Enqueue(currentCell - 1);
                 addedNeighbour = true;
             }

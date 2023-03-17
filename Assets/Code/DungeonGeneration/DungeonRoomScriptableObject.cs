@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// An abstract scriptable object class to represent a dungeon room
@@ -9,15 +10,16 @@ public abstract class DungeonRoomScriptableObject : ScriptableObject
 {
     public RuleTile FloorTile;
     public RuleTile WallTile;
+    public TileBase DoorTile;
     public BoundsInt RoomBounds;
 
     public bool Cleared;
     //TODO:
     //  Add positions of obstacles
 
-    //  Add neighbouring room options
-    [DoNotSerialize][CanBeNull] public DungeonRoomScriptableObject northNeighbour;
-    [DoNotSerialize][CanBeNull] public DungeonRoomScriptableObject eastNeighbour;
-    [DoNotSerialize][CanBeNull] public DungeonRoomScriptableObject southNeighbour;
-    [DoNotSerialize][CanBeNull] public DungeonRoomScriptableObject westNeighbour;
+    //  Add neighbouring cells (0 means does not exist)
+    [DoNotSerialize] public int northNeighbour;
+    [DoNotSerialize] public int eastNeighbour;
+    [DoNotSerialize] public int southNeighbour;
+    [DoNotSerialize] public int westNeighbour;
 }
