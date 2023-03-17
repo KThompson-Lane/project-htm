@@ -22,7 +22,6 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            //die - overriden for Player to restart level
             Destroy(gameObject);
         }
     }
