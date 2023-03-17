@@ -750,6 +750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 0.7
   RotationSpeed: 3
+  healthManager: {fileID: 0}
 --- !u!50 &616221553
 Rigidbody2D:
   serializedVersion: 4
@@ -1043,6 +1044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player1Health: {fileID: 1383574888}
+  _healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!1001 &700393611
 PrefabInstance:
   m_ObjectHideFlags: 0

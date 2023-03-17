@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HealthManager : ScriptableObject
+[CreateAssetMenu]
+public class HealthManager : ScriptableObject //todo - probably rename this to be PlayerHealthManager
 {
     public int health = 3;
     
