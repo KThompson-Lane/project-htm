@@ -6,13 +6,12 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] 
-    private float MoveSpeed = 3.0f; //todo - add to SO
-    
-    [SerializeField] 
-    private float RotationSpeed = 3.0f; //todo - add to SO
+    private float RotationSpeed = 3.0f; //todo - might want to move to SO, might want to have this fixed if it seems right, or maybe a calc based on move speed
 
     [SerializeField]
     private EnemySO enemySO;
+
+    private float _moveSpeed;
     
     private Rigidbody2D _mRb2d;
     private Transform _mPlayerTransform; // for look at location
@@ -24,6 +23,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _moveSpeed = enemySO.speed;
         _mRb2d = GetComponent<Rigidbody2D>();
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to add to SO so not all enemies follow player
     }
@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         var position = _mPlayerTransform.position;
-        _mRb2d.MovePosition(Vector2.MoveTowards(_mRb2d.position, position, MoveSpeed*Time.fixedDeltaTime));
+        _mRb2d.MovePosition(Vector2.MoveTowards(_mRb2d.position, position, _moveSpeed*Time.fixedDeltaTime));
         
         Vector3 vectorToTarget = position - transform.position;
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
