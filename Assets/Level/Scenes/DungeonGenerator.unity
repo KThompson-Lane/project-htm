@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 129959957}
   - component: {fileID: 129959958}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: Rooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1371,7 +1371,7 @@ GameObject:
   - component: {fileID: 1076975280}
   - component: {fileID: 1076975279}
   m_Layer: 0
-  m_Name: Floor Generator Preview
+  m_Name: Minimap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
