@@ -750,7 +750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 0.7
   RotationSpeed: 3
-  healthManager: {fileID: 0}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!50 &616221553
 Rigidbody2D:
   serializedVersion: 4
@@ -1234,19 +1234,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &700393619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700393612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad023d7a3661d945865549cd70a769c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalHealth: 10
 --- !u!114 &700393620
 MonoBehaviour:
   m_ObjectHideFlags: 0
