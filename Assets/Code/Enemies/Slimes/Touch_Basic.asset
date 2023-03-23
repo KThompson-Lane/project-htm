@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Touch_Basic
   m_EditorClassIdentifier: 
   damage: 1
-  range: 0
+  range: 2.5
