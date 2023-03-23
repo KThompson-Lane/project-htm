@@ -7,22 +7,22 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu]
 public class HealthManager : ScriptableObject //todo - probably rename this to be PlayerHealthManager
 {
-    public int health = 3;
+    public float health = 3;
     
     [SerializeField]
-    public int maxHealth = 3;
+    public float maxHealth = 3;
 
-    [System.NonSerialized] public UnityEvent<int> HealthChangedEvent;
+    [System.NonSerialized] public UnityEvent<float> HealthChangedEvent;
 
     private void OnEnable()
     {
         // When game starts ensure health is set to max
         health = maxHealth;
         // Set up healthChangedEvent
-        HealthChangedEvent ??= new UnityEvent<int>();
+        HealthChangedEvent ??= new UnityEvent<float>();
     }
 
-    public void DecreaseHealth(int amount)
+    public void DecreaseHealth(float amount)
     {
         health -= amount;
         // Trigger healthChangedEvent

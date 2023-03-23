@@ -3,28 +3,29 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class EnemyMovement : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     [SerializeField] 
-    private float MoveSpeed = 3.0f;
+    private float MoveSpeed = 3.0f; //todo - add to SO
     
     [SerializeField] 
-    private float RotationSpeed = 3.0f;
+    private float RotationSpeed = 3.0f; //todo - add to SO
+
+    [SerializeField]
+    private EnemySO enemySO;
     
     private Rigidbody2D _mRb2d;
-    private Transform _mPlayerTransform;
+    private Transform _mPlayerTransform; //for look at location
 
     // Damage on collision variables
     [SerializeField]
-    private HealthManager healthManager;
-
-    private const int Damage = 2;
+    private HealthManager healthManager; // for player health
 
     // Start is called before the first frame update
     void Start()
     {
         _mRb2d = GetComponent<Rigidbody2D>();
-        _mPlayerTransform = GameObject.FindWithTag("Player").transform;
+        _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to add to SO so not all enemies follow player
     }
 
     private void FixedUpdate()
@@ -40,11 +41,11 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //todo - select type of attack based on enemyAttackType
         if (collision.gameObject.tag is "Player")
         {
             //Debug.Log("Ouchies");
-            //collision.gameObject.GetComponent<Health>().TakeDamage(2);
-            healthManager.DecreaseHealth(Damage);
+            healthManager.DecreaseHealth(enemySO.enemyAttackType.damage);
         }
     }
 }

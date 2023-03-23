@@ -43,9 +43,9 @@ public class UI_Manager : MonoBehaviour
         _healthManager.HealthChangedEvent.RemoveListener(ChangeHeartContainers);
     }
 
-    private void ChangeHeartContainers(int amount)
+    private void ChangeHeartContainers(float amount)
     {
-        int newHP = _healthManager.health;
+        float newHP = _healthManager.health;
         Player1Health.text = "";
         //todo - can we do this without the loop?
         for (int i = 0; i < newHP; i+=2)
