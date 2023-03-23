@@ -5,12 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] 
-    private float RotationSpeed = 3.0f; //todo - might want to move to SO, might want to have this fixed if it seems right, or maybe a func of move speed
-
     [SerializeField]
     private EnemySO enemySO;
 
+    private float _currentHealth;
+    
+    [SerializeField] 
+    private float RotationSpeed = 3.0f; //todo - might want to move to SO, might want to have this fixed if it seems right, or maybe a func of move speed
+    
     private float _moveSpeed;
     
     private Rigidbody2D _mRb2d;
@@ -23,7 +25,11 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _moveSpeed = enemySO.getSpeed();
+        // health 
+        _currentHealth = enemySO.GetMaxHealth();
+        
+        // movement
+        _moveSpeed = enemySO.GetSpeed();
         _mRb2d = GetComponent<Rigidbody2D>();
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to add to SO so not all enemies follow player
     }
@@ -46,6 +52,17 @@ public class EnemyController : MonoBehaviour
         {
             //Debug.Log("Ouchies");
             healthManager.DecreaseHealth(enemySO.enemyAttackType.damage);
+        }
+    }
+    
+    public virtual void TakeDamage(int damage)
+    {
+        _currentHealth -= damage;
+        Debug.Log("Health is: " + _currentHealth);
+
+        if (_currentHealth <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

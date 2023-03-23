@@ -5,25 +5,25 @@ public class EnemySO : ScriptableObject
 {
     public float level = 1; //default to base
     //Note - current health cannot be stored here as it would effect all enemies using this SO
-    private float maxHealth; //todo - sort
-    private float speed;
+    private float _maxHealth;
+    private float _speed;
     public EnemyAttackSO enemyAttackType;
     
     //todo - add sprite?
 
     public void OnEnable()
     {
-        maxHealth = level; //todo - implement health
-        speed = level / 2;
+        _maxHealth = level;
+        _speed = level / 2;
     }
 
-    public float getSpeed()
+    public float GetSpeed()
     {
-        return speed;
+        return _speed;
     }
     
-    public float getMaxHealth()
+    public float GetMaxHealth()
     {
-        return maxHealth;
+        return _maxHealth;
     }
 }

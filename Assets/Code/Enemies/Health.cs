@@ -5,14 +5,23 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] protected int totalHealth;
-    private int _currentHealth;
+    private float _totalHealth;
+    private float _currentHealth;
+    
+    [SerializeField]
+    private EnemySO enemySO; //Note - this may change in future if other things that take damage don't use enemySO
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        _currentHealth = totalHealth;
-        Debug.Log("Health is: " + totalHealth);
+        _totalHealth = enemySO.GetMaxHealth();
+        _currentHealth = _totalHealth;
+        Debug.Log("Health is: " + _totalHealth);
+    }
+
+    protected void OnEnable()
+    {
+        
     }
 
     public virtual void TakeDamage(int damage)

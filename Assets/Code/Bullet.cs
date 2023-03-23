@@ -5,10 +5,12 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         Destroy(gameObject);
+
+        var enemyController = col.gameObject.GetComponent<EnemyController>();
         
-        if (col.gameObject.GetComponent<Health>() != null)
+        if (enemyController != null)
         {
-            col.gameObject.GetComponent<Health>().TakeDamage(1);
+            enemyController.TakeDamage(1); //todo - variable damage
         }
     }
 
