@@ -108,37 +108,37 @@ public class DungeonFloor : MonoBehaviour
             _doorMap.ResizeBounds();
             
             //  Set doors
-            if (roomData.northNeighbour != 0)
+            if (roomData.GetNeighbour(Direction.North) != 0)
             {
                 var position = new Vector3Int(0, roomData.RoomBounds.size.y / 2, 0); 
-                var neighbourRoom = roomData.northNeighbour;
+                var neighbourRoom = roomData.GetNeighbour(Direction.North);
                 _wallsMap.SetTile(position, null);
                 _doorMap.SetTile(position, roomData.DoorTile);
                 _roomDoors.AddDoor(position, neighbourRoom);
             }
 
-            if (roomData.southNeighbour != 0)
+            if (roomData.GetNeighbour(Direction.South) != 0)
             {
                 var position = new Vector3Int(0, -roomData.RoomBounds.size.y / 2, 0); 
-                var neighbourRoom = roomData.southNeighbour;
+                var neighbourRoom = roomData.GetNeighbour(Direction.South);
                 _wallsMap.SetTile(position, null);
                 _doorMap.SetTile(position, roomData.DoorTile);
                 _roomDoors.AddDoor(position, neighbourRoom);
             }
             
-            if (roomData.eastNeighbour != 0)
+            if (roomData.GetNeighbour(Direction.East) != 0)
             {
                 var position = new Vector3Int(roomData.RoomBounds.size.x / 2, 0, 0); 
-                var neighbourRoom = roomData.eastNeighbour;
+                var neighbourRoom = roomData.GetNeighbour(Direction.East);
                 _wallsMap.SetTile(position, null);
                 _doorMap.SetTile(position, roomData.DoorTile);
                 _roomDoors.AddDoor(position, neighbourRoom);
             }
             
-            if (roomData.westNeighbour != 0)
+            if (roomData.GetNeighbour(Direction.West) != 0)
             {
                 var position = new Vector3Int(-roomData.RoomBounds.size.x / 2, 0, 0); 
-                var neighbourRoom = roomData.westNeighbour;
+                var neighbourRoom = roomData.GetNeighbour(Direction.West);
                 _wallsMap.SetTile(position, null);
                 _doorMap.SetTile(position, roomData.DoorTile);
                 _roomDoors.AddDoor(position, neighbourRoom);

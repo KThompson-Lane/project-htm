@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.DungeonGeneration;
 using UnityEngine;
 
 /// <summary>
@@ -74,9 +75,9 @@ public class DungeonFloorScriptableObject : ScriptableObject
             if (CheckNeighbourConditions(currentCell - 10))
             {
                 var room = GetRandomRoom();
-                room.southNeighbour = currentCell;
+                room.SetNeighbour(Direction.South, currentCell);
                 floorplan.Add(currentCell - 10, room);
-                floorplan[currentCell].northNeighbour = currentCell - 10;
+                floorplan[currentCell].SetNeighbour(Direction.North, currentCell - 10);
                 Cells.Enqueue(currentCell - 10);
                 addedNeighbour = true;
             }
@@ -84,9 +85,9 @@ public class DungeonFloorScriptableObject : ScriptableObject
             if (CheckNeighbourConditions(currentCell + 10))
             {
                 var room = GetRandomRoom();
-                room.northNeighbour = currentCell;
+                room.SetNeighbour(Direction.North, currentCell);
                 floorplan.Add(currentCell + 10, room);
-                floorplan[currentCell].southNeighbour = currentCell + 10;
+                floorplan[currentCell].SetNeighbour(Direction.South, currentCell + 10);
                 Cells.Enqueue(currentCell + 10);
                 addedNeighbour = true;
             }
@@ -94,9 +95,9 @@ public class DungeonFloorScriptableObject : ScriptableObject
             if (CheckNeighbourConditions(currentCell + 1))
             {
                 var room = GetRandomRoom();
-                room.westNeighbour = currentCell;
+                room.SetNeighbour(Direction.West, currentCell);
                 floorplan.Add(currentCell + 1, room);
-                floorplan[currentCell].eastNeighbour = currentCell + 1;
+                floorplan[currentCell].SetNeighbour(Direction.East, currentCell + 1);
                 Cells.Enqueue(currentCell + 1);
                 addedNeighbour = true;
             }
@@ -104,9 +105,9 @@ public class DungeonFloorScriptableObject : ScriptableObject
             if (CheckNeighbourConditions(currentCell - 1))
             {
                 var room = GetRandomRoom();
-                room.eastNeighbour = currentCell;
+                room.SetNeighbour(Direction.East, currentCell);
                 floorplan.Add(currentCell - 1, room);
-                floorplan[currentCell].westNeighbour = currentCell - 1;
+                floorplan[currentCell].SetNeighbour(Direction.West, currentCell - 1);
                 Cells.Enqueue(currentCell - 1);
                 addedNeighbour = true;
             }
@@ -115,17 +116,16 @@ public class DungeonFloorScriptableObject : ScriptableObject
         }
 
         //  Ensure we made a valid floor
-        //TODO: MAKE THIS NOT ICKY
+        //  Check to ensure our floor has enough rooms
+        if (floorplan.Count != rooms) return false;
         //  Find our boss room and make sure it isn't neighbouring with start room
         int bossCell = endRooms.Last();
-        if (floorplan.Count != rooms) return false;
-        if (startCell + 10 == bossCell) return false;
-        if (startCell - 10 == bossCell) return false;
-        if (startCell + 1 == bossCell) return false;
-        if (startCell - 1 == bossCell) return false;
+        if (floorplan[bossCell].Neighbours.Any(pair => pair.Value == startCell))
+            return false;
         
-        var bossRoom = BossRooms[_random.Next(BossRooms.Count)];
-        floorplan[bossCell] = Instantiate(bossRoom);
+        var bossRoom = Instantiate(BossRooms[_random.Next(BossRooms.Count)]);
+        bossRoom.Neighbours = floorplan[bossCell].Neighbours;
+        floorplan[bossCell] = bossRoom;
         return true;
     }
     private bool CheckNeighbourConditions(int cell)
