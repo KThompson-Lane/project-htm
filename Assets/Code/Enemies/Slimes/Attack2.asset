@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b27cc4612c3a540859b663b448a664, type: 3}
   m_Name: Attack2
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 4
   range: 10
