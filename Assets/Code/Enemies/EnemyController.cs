@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     private EnemySO enemySO;
     
     private Rigidbody2D _mRb2d;
-    private Transform _mPlayerTransform; //for look at location
+    private Transform _mPlayerTransform; // for look at location
 
     // Damage on collision variables
     [SerializeField]
