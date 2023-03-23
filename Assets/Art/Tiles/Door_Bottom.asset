@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcb47c0eecc49fd9ca6663d985a22e4, type: 3}
+  m_Name: Door_Bottom
+  m_EditorClassIdentifier: 
+  m_Sprite: {fileID: 390437464, guid: 0c1553e0e0ff51b4fb9db3f8ab8d71b5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Transform:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  m_InstancedGameObject: {fileID: 3436931377998589423, guid: 4cd854006566d9c4b918b912888556b1, type: 3}
+  m_Flags: 1
+  m_ColliderType: 1
+  OpenSprite: {fileID: 866162727, guid: 0c1553e0e0ff51b4fb9db3f8ab8d71b5, type: 3}
+  ClosedSprite: {fileID: 390437464, guid: 0c1553e0e0ff51b4fb9db3f8ab8d71b5, type: 3}
+  direction: 1
+  DoorPrefab: {fileID: 3436931377998589423, guid: 4cd854006566d9c4b918b912888556b1, type: 3}

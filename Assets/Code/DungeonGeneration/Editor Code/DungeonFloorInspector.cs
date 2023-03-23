@@ -12,10 +12,23 @@ public class DungeonFloorInspector : Editor
     {
         DrawDefaultInspector();
         DungeonFloor myScript = (DungeonFloor)target;
+        if(GUILayout.Button("Clear room"))
+        {
+            myScript.ClearRoom();
+        }
+        if(GUILayout.Button("Clear floor"))
+        {
+            myScript.ClearFloor();
+        }
         if(GUILayout.Button("Generate floor"))
         {
             myScript.GenerateFloor();
         }
+        if(GUILayout.Button("Preview room"))
+        {
+            myScript.PreviewRoom();
+        }
+
     }
 }
 #endif
