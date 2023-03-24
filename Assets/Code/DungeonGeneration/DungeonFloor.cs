@@ -15,6 +15,13 @@ public class DungeonFloor : MonoBehaviour
     public TileBase startRoomTile;
     public TileBase bossRoomTile;
     
+    public delegate void RoomUpdate(int room);
+    public event RoomUpdate OnRoomChange;
+    //  Super inefficient, fix this and merge with other room clear event
+    private int _currentRoomIndex;
+    public event RoomUpdate OnRoomCleared;
+    public MinimapManager MinimapManager;
+
     private Tilemap _floorMap, _wallsMap;
     List<Vector3Int> _doorPositions = new();
     private Door[] _doors;
@@ -45,37 +52,8 @@ public class DungeonFloor : MonoBehaviour
     {
         if (floorObject != null)
             floorObject.GenerateFloor();
-        if (floorPreview != null)
-        {
-            var floorSize = floorObject.floorSize;
-            floorPreview.size = new Vector3Int(floorSize.x, floorSize.y, 1);
-            floorPreview.origin = new Vector3Int(0, 0, 0);
-            floorPreview.ResizeBounds();
-            foreach (var (roomIndex, room) in floorObject.floorplan)
-            {
-                //  Calculate tile position
-                int roomX = roomIndex % 10;
-                int roomY = roomIndex / 10;
-                Vector3Int tilePosition = new Vector3Int(roomX - (floorSize.x / 2), -roomY - floorSize.y / 2, 1);
-                //  Starter room
-                if (room != null)
-                {
-                    switch (room)
-                    {
-                        case BossRoomScriptableObject:
-                            floorPreview.SetTile(tilePosition, bossRoomTile);
-                            break;
-                        case StartRoomScriptableObject:
-                            floorPreview.SetTile(tilePosition, startRoomTile);
-                            break;
-                        default:
-                            floorPreview.SetTile(tilePosition, normalRoomTile);
-                            break;
-                    }
-                }
-            }
-            floorPreview.CompressBounds();
-        }
+        if(MinimapManager != null)
+            MinimapManager.LoadMap(floorObject);
     }
     
     private void LoadRoom(DungeonRoomScriptableObject newRoom)
@@ -164,10 +142,12 @@ public class DungeonFloor : MonoBehaviour
     private void OnDoorTriggered(Direction direction)
     {
         if (!_currentRoom.Cleared) return;
-        var newRoom = floorObject.floorplan[_currentRoom.GetNeighbour(direction)];
+        var newRoomIndex = _currentRoom.GetNeighbour(direction);
         //  Unsubscribe from our previous room
         _currentRoom.OnRoomCleared -= OnRoomClear;
-        LoadRoom(newRoom);
+        _currentRoomIndex = newRoomIndex;
+        LoadRoom(floorObject.floorplan[newRoomIndex]);
+        OnRoomChange?.Invoke(newRoomIndex);
         //  Move player.
         MovePlayer(direction);
     }
@@ -195,6 +175,7 @@ public class DungeonFloor : MonoBehaviour
             _wallsMap.GetTile<DoorTile>(doorPosition).OpenDoor();
             _wallsMap.RefreshTile(doorPosition);
         }
+        OnRoomCleared?.Invoke(_currentRoomIndex);
     }
 #if UNITY_EDITOR
     public void PreviewRoom()

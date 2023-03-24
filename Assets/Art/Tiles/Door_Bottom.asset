@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcb47c0eecc49fd9ca6663d985a22e4, type: 3}
   m_Name: Door_Bottom
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 390437464, guid: 0c1553e0e0ff51b4fb9db3f8ab8d71b5, type: 3}
+  m_Sprite: {fileID: 1469605040, guid: ac0ca8c66112bc64789a9670c7e47350, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,7 +34,7 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 3436931377998589423, guid: 4cd854006566d9c4b918b912888556b1, type: 3}
   m_Flags: 1
   m_ColliderType: 1
-  OpenSprite: {fileID: 866162727, guid: 0c1553e0e0ff51b4fb9db3f8ab8d71b5, type: 3}
-  ClosedSprite: {fileID: 390437464, guid: 0c1553e0e0ff51b4fb9db3f8ab8d71b5, type: 3}
+  OpenSprite: {fileID: -639040003, guid: ac0ca8c66112bc64789a9670c7e47350, type: 3}
+  ClosedSprite: {fileID: 1469605040, guid: ac0ca8c66112bc64789a9670c7e47350, type: 3}
   direction: 1
   DoorPrefab: {fileID: 3436931377998589423, guid: 4cd854006566d9c4b918b912888556b1, type: 3}
