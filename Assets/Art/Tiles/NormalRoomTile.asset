@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd54654bd434604baacf84b28ce0aa9, type: 3}
   m_Name: NormalRoomTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 930089164, guid: d379f4918a2a81f4f829ea6549107308, type: 3}
+  m_Sprite: {fileID: 12665792, guid: ae1cb6caac6074f4dbd0f64cccba00c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,6 +34,6 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  ClearedSprite: {fileID: -1218955145, guid: d379f4918a2a81f4f829ea6549107308, type: 3}
-  BaseSprite: {fileID: 930089164, guid: d379f4918a2a81f4f829ea6549107308, type: 3}
-  Cleared: 0
+  hiddenSprite: {fileID: 1350282633, guid: ae1cb6caac6074f4dbd0f64cccba00c9, type: 3}
+  incompleteSprite: {fileID: 812336808, guid: ae1cb6caac6074f4dbd0f64cccba00c9, type: 3}
+  clearedSprite: {fileID: 12665792, guid: ae1cb6caac6074f4dbd0f64cccba00c9, type: 3}

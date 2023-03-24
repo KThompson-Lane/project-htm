@@ -8,34 +8,26 @@ using UnityEngine.Tilemaps;
 public class DungeonFloor : MonoBehaviour
 {
     public Transform player;
-    // Start is called before the first frame update
     public DungeonFloorScriptableObject floorObject;
-    public Tilemap floorPreview;
-    public TileBase normalRoomTile;
-    public TileBase startRoomTile;
-    public TileBase bossRoomTile;
-    
     public delegate void RoomUpdate(int room);
     public event RoomUpdate OnRoomChange;
-    //  Super inefficient, fix this and merge with other room clear event
-    private int _currentRoomIndex;
     public event RoomUpdate OnRoomCleared;
-    public MinimapManager MinimapManager;
-
+    private DungeonRoomScriptableObject _currentRoom;
+    
     private Tilemap _floorMap, _wallsMap;
     List<Vector3Int> _doorPositions = new();
     private Door[] _doors;
-    private DungeonRoomScriptableObject _currentRoom;
+    
+    public DungeonRoomScriptableObject CurrentRoom =>  _currentRoom;
+    public DungeonRoomScriptableObject GetRoom(int index) => floorObject.floorplan[index];
+   
     private void Awake()
     {
         //  Get tilemaps and room doors script
         var mTilemaps = gameObject.GetComponentsInChildren<Tilemap>();
         _floorMap = mTilemaps.First(map => map.name == "Floor");
         _wallsMap = mTilemaps.First(map => map.name == "Walls");
-    }
-
-    private void Start()
-    {
+        
         //  First generate dungeon floor
         GenerateFloor();
         Debug.Log("Floor generated Successfully");
@@ -47,13 +39,10 @@ public class DungeonFloor : MonoBehaviour
         Debug.Log("Loading start room");
         LoadRoom(startRoom);
     }
-    
     public void GenerateFloor()
     {
         if (floorObject != null)
             floorObject.GenerateFloor();
-        if(MinimapManager != null)
-            MinimapManager.LoadMap(floorObject);
     }
     
     private void LoadRoom(DungeonRoomScriptableObject newRoom)
@@ -145,7 +134,6 @@ public class DungeonFloor : MonoBehaviour
         var newRoomIndex = _currentRoom.GetNeighbour(direction);
         //  Unsubscribe from our previous room
         _currentRoom.OnRoomCleared -= OnRoomClear;
-        _currentRoomIndex = newRoomIndex;
         LoadRoom(floorObject.floorplan[newRoomIndex]);
         OnRoomChange?.Invoke(newRoomIndex);
         //  Move player.
@@ -175,7 +163,7 @@ public class DungeonFloor : MonoBehaviour
             _wallsMap.GetTile<DoorTile>(doorPosition).OpenDoor();
             _wallsMap.RefreshTile(doorPosition);
         }
-        OnRoomCleared?.Invoke(_currentRoomIndex);
+        OnRoomCleared?.Invoke(_currentRoom.Index);
     }
 #if UNITY_EDITOR
     public void PreviewRoom()
@@ -191,13 +179,6 @@ public class DungeonFloor : MonoBehaviour
     public void ClearRoom()
     {
         _currentRoom.Cleared = true;
-    }
-    public void ClearFloor()
-    {
-        foreach (var room in floorObject.floorplan.Values)
-        {
-            room.Cleared = true;
-        }
     }
 #endif
 }

@@ -16,10 +16,6 @@ public class DungeonFloorInspector : Editor
         {
             myScript.ClearRoom();
         }
-        if(GUILayout.Button("Clear floor"))
-        {
-            myScript.ClearFloor();
-        }
         if(GUILayout.Button("Generate floor"))
         {
             myScript.GenerateFloor();

@@ -13,9 +13,8 @@ public abstract class DungeonRoomScriptableObject : ScriptableObject
     public DoorTile EastDoor;
     public DoorTile SouthDoor;
     public DoorTile WestDoor;
-    
     public BoundsInt RoomBounds;
-    
+    public int Index;
     private bool _cleared;
     public bool Cleared
     {
