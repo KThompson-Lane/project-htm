@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Slime_2
   m_EditorClassIdentifier: 
   level: 2
-  enemyAttackType: {fileID: 11400000, guid: c8efd1bbda8027d4088a6bf05ce99ef3, type: 2}
+  enemyAttackType: {fileID: 11400000, guid: 8d42379832dfd7641bce12fcbf792656, type: 2}

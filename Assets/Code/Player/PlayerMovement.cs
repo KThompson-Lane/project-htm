@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour //todo - maybe rename this class to PlayerController?
 {
     public float moveSpeed = 5f;
 

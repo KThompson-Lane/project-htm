@@ -1,4 +1,4 @@
-using System;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,7 +33,7 @@ public class Shooting : MonoBehaviour
     {
         //Fire when left mouse held
         if(_isShooting)
-        { ;
+        { 
             if (_coolDown <= 0f)
             {
                 Shoot();

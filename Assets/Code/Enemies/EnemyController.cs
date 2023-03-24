@@ -14,7 +14,6 @@ public class EnemyController : MonoBehaviour
     private float RotationSpeed = 3.0f; //todo - might want to move to SO, might want to have this fixed if it seems right, or maybe a func of move speed
     
     private float _moveSpeed;
-
     private float _range;
     
     private Rigidbody2D _mRb2d;
@@ -43,8 +42,9 @@ public class EnemyController : MonoBehaviour
         var playerPosition = _mPlayerTransform.position;
         var enemyPosition = transform.position;
 
-        var dist = Vector3.Distance(playerPosition, enemyPosition);
+        //todo - LOOK AT THIS WTF IS GOING ON
         var moveToPosition = playerPosition + (Vector3.Normalize(enemyPosition - playerPosition) * _range); // Note - this alone means they will move back if player is too close
+        var dist = Vector3.Distance(playerPosition, enemyPosition);
         var test = Vector3.Distance(playerPosition, moveToPosition);
         if(dist >= test)
             _mRb2d.MovePosition(Vector2.MoveTowards(_mRb2d.position, moveToPosition, _moveSpeed*Time.fixedDeltaTime));
@@ -55,16 +55,17 @@ public class EnemyController : MonoBehaviour
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
     }
 
+    // todo - should every enemy do 1 damage on collision??
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //todo - select type of attack based on enemyAttackType
+        if (_range != 0) return; //todo - change this to not use rate of fire when more types are added
         if (collision.gameObject.tag is "Player")
         {
             //Debug.Log("Ouchies");
             healthManager.DecreaseHealth(enemySO.enemyAttackType.damage);
         }
     }
-    
+
     public virtual void TakeDamage(int damage)
     {
         _currentHealth -= damage;
