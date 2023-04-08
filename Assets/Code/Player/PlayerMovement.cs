@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -15,6 +16,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _rotationInput = Vector2.zero;
 
     private string _inputType;
+
+    private Animator _playerAnimator;
+    private int _yMoveID, _xMoveID;
+
+    private void OnEnable()
+    {
+        _playerAnimator = GetComponent<Animator>();
+        _xMoveID = Animator.StringToHash("Movement_X");
+        _yMoveID = Animator.StringToHash("Movement_Y");
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         _movementInput = context.ReadValue<Vector2>();
@@ -62,5 +74,14 @@ public class PlayerMovement : MonoBehaviour
         }
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x
         rb.rotation = angle;
+    }
+
+    
+    //  We do our animations last for performance sake
+    private void LateUpdate()
+    {
+        //  Use the players current movement direction to determine which animation to play
+        _playerAnimator.SetFloat(_xMoveID, _movementInput.x);
+        _playerAnimator.SetFloat(_yMoveID, _movementInput.y);
     }
 }
