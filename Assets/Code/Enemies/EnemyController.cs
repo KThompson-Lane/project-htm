@@ -38,6 +38,7 @@ public class EnemyController : MonoBehaviour
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
         
         // shooting
+        if (enemySO.enemyAttackType.ranged != true) return;
         this.AddComponent<Shooting>();
         GetComponent<Shooting>().firePoint = _mRb2d.transform;
         GetComponent<Shooting>().bulletPrefab = enemySO.enemyAttackType.projectile;
@@ -65,10 +66,8 @@ public class EnemyController : MonoBehaviour
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
         
         // shooting
-        // if ranged enemy
-            // shoot bullet at rate of fire
-            GetComponent<Shooting>().UpdateEnemy(); //todo - variable
-
+        if (enemySO.enemyAttackType.ranged != true) return;
+        GetComponent<Shooting>().UpdateEnemy(); //todo - variable
     }
 
     // todo - should every enemy do 1 damage on collision??
@@ -93,7 +92,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public EnemySO getEnemySO()
+    public EnemySO GetEnemySo()
     {
         return enemySO;
     }
