@@ -15,16 +15,9 @@ public class BulletEnemy : Bullet
         Destroy(gameObject);
 
         var playerController = col.gameObject.GetComponent<PlayerMovement>();
-        
         if (playerController != null)
         {
             healthManager.DecreaseHealth(_damage);
         }
-    }
-
-    private void Start()
-    {
-        //Ensure bullet is destroyed after a set time so they don't linger
-        Destroy(gameObject, 10f);
     }
 }
