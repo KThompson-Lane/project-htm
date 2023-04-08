@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.DungeonGeneration;
@@ -9,7 +10,7 @@ public class DungeonFloor : MonoBehaviour
 {
     public Transform player;
     public DungeonFloorScriptableObject floorObject;
-    public delegate void RoomUpdate(int room);
+    public delegate void RoomUpdate(RoomIndex room);
     public event RoomUpdate OnRoomChange;
     public event RoomUpdate OnRoomCleared;
     private DungeonRoomScriptableObject _currentRoom;
@@ -19,7 +20,7 @@ public class DungeonFloor : MonoBehaviour
     private Door[] _doors;
     
     public DungeonRoomScriptableObject CurrentRoom =>  _currentRoom;
-    public DungeonRoomScriptableObject GetRoom(int index) => floorObject.floorplan[index];
+    public DungeonRoomScriptableObject GetRoom(RoomIndex index) => floorObject.floorplan[index];
    
     private void Awake()
     {
@@ -33,10 +34,7 @@ public class DungeonFloor : MonoBehaviour
         Debug.Log("Floor generated Successfully");
 
         //  Then load start room
-        //  TODO: Remove magic 
-        //  Cell coordinates are YX so we half the y dimension and multiply by 10 to get Y then half x to get X
-        int startCell = ((floorObject.floorSize.y / 2) * 10) + (floorObject.floorSize.x / 2);
-        var startRoom = floorObject.floorplan[startCell]; 
+        var startRoom = floorObject.GetStartRoom;
         Debug.Log("Loading start room");
         LoadRoom(startRoom);
     }
@@ -92,28 +90,28 @@ public class DungeonFloor : MonoBehaviour
     private void CreateDoors()
     {
         //  Set doors
-        if (_currentRoom.GetNeighbour(Direction.North) != 0)
+        if (_currentRoom.GetNeighbour(Direction.North) != null)
         {
             var position = new Vector3Int(0, _currentRoom.RoomBounds.size.y / 2, 0);
             _doorPositions.Add(position);
             _wallsMap.SetTile(position, _currentRoom.NorthDoor);
         }
 
-        if (_currentRoom.GetNeighbour(Direction.East) != 0)
+        if (_currentRoom.GetNeighbour(Direction.East) != null)
         {
             var position = new Vector3Int(_currentRoom.RoomBounds.size.x / 2, 0, 0); 
             _doorPositions.Add(position);
             _wallsMap.SetTile(position, _currentRoom.EastDoor);
         }
             
-        if (_currentRoom.GetNeighbour(Direction.South) != 0)
+        if (_currentRoom.GetNeighbour(Direction.South) != null)
         {
             var position = new Vector3Int(0, -_currentRoom.RoomBounds.size.y / 2, 0); 
             _doorPositions.Add(position);
             _wallsMap.SetTile(position, _currentRoom.SouthDoor);
         }
             
-        if (_currentRoom.GetNeighbour(Direction.West) != 0)
+        if (_currentRoom.GetNeighbour(Direction.West) != null)
         {
             var position = new Vector3Int(-_currentRoom.RoomBounds.size.x / 2, 0, 0); 
             _doorPositions.Add(position);
@@ -132,7 +130,8 @@ public class DungeonFloor : MonoBehaviour
     private void OnDoorTriggered(Direction direction)
     {
         if (!_currentRoom.Cleared) return;
-        var newRoomIndex = _currentRoom.GetNeighbour(direction);
+        var newRoomIndex = _currentRoom.GetNeighbour(direction) ?? 
+                           throw new Exception("Invalid room");
         //  Unsubscribe from our previous room
         _currentRoom.OnRoomCleared -= OnRoomClear;
         LoadRoom(floorObject.floorplan[newRoomIndex]);
@@ -172,8 +171,7 @@ public class DungeonFloor : MonoBehaviour
         var mTilemaps = gameObject.GetComponentsInChildren<Tilemap>();
         _floorMap = mTilemaps.First(map => map.name == "Floor");
         _wallsMap = mTilemaps.First(map => map.name == "Walls");
-        int startCell = ((floorObject.floorSize.y / 2) * 10) + (floorObject.floorSize.x / 2);
-        var startRoom = floorObject.floorplan[startCell]; 
+        var startRoom = floorObject.GetStartRoom;
         this.LoadRoom(startRoom);
     }
     //  TEST METHOD FOR CLEARING ROOMS
