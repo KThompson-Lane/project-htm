@@ -17,10 +17,12 @@ public class Shooting : MonoBehaviour
     private float _interval; // time between shots
     
     private bool _isShooting;
+    [SerializeField] private Animator _gunAnimator;
 
     public void Start()
     {
         _interval = 60 / rateOfFire; //1 second / rate of fire
+        _gunAnimator.SetFloat("Fire Rate", _interval);
     }
 
     public void OnShoot(InputAction.CallbackContext context)
@@ -33,7 +35,7 @@ public class Shooting : MonoBehaviour
     {
         //Fire when left mouse held
         if(_isShooting)
-        { ;
+        {
             if (_coolDown <= 0f)
             {
                 Shoot();
@@ -54,5 +56,6 @@ public class Shooting : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        _gunAnimator.SetTrigger("Shoot");
     }
 }
