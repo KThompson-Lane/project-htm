@@ -1,6 +1,4 @@
-using System;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,6 +7,10 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField]
     private EnemySO enemySO;
+
+    private EnemyAttackSO enemyAttackSO;
+
+    private Shooting shooting;
 
     private float _currentHealth;
     
@@ -28,22 +30,26 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyAttackSO = enemySO.enemyAttackType;
+        shooting = GetComponent<Shooting>();
+        
         // health 
         _currentHealth = enemySO.GetMaxHealth();
         
         // movement
         _moveSpeed = enemySO.GetSpeed();
-        _range = enemySO.enemyAttackType.range;
+        _range = enemyAttackSO.range;
         _mRb2d = GetComponent<Rigidbody2D>();
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
         
         // shooting
-        if (enemySO.enemyAttackType.ranged != true) return;
+        if (enemyAttackSO.ranged != true) return;
         this.AddComponent<Shooting>();
-        GetComponent<Shooting>().firePoint = _mRb2d.transform;
-        GetComponent<Shooting>().bulletPrefab = enemySO.enemyAttackType.projectile;
-        GetComponent<Shooting>().rateOfFire = enemySO.enemyAttackType.rateOfFire;
-        GetComponent<Shooting>().damage = enemySO.enemyAttackType.damage; //todo - variable for enemyAttackType
+        shooting = GetComponent<Shooting>();
+        shooting.firePoint = _mRb2d.transform;
+        shooting.bulletPrefab = enemyAttackSO.projectile;
+        shooting.rateOfFire = enemyAttackSO.rateOfFire;
+        shooting.damage = enemyAttackSO.damage; //todo - variable for enemyAttackType
 
     }
 
@@ -66,8 +72,8 @@ public class EnemyController : MonoBehaviour
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
         
         // shooting
-        if (enemySO.enemyAttackType.ranged != true) return;
-        GetComponent<Shooting>().UpdateEnemy(); //todo - variable
+        if (enemyAttackSO.ranged != true) return;
+        shooting.UpdateEnemy();
     }
 
     // todo - should every enemy do 1 damage on collision??
