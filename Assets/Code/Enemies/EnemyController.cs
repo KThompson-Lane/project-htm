@@ -1,4 +1,6 @@
 using System;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -34,6 +36,14 @@ public class EnemyController : MonoBehaviour
         _range = enemySO.enemyAttackType.range;
         _mRb2d = GetComponent<Rigidbody2D>();
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
+        
+        // shooting
+        this.AddComponent<Shooting>();
+        GetComponent<Shooting>().firePoint = _mRb2d.transform;
+        GetComponent<Shooting>().bulletPrefab = enemySO.enemyAttackType.projectile;
+        GetComponent<Shooting>().rateOfFire = enemySO.enemyAttackType.rateOfFire;
+        GetComponent<Shooting>().damage = enemySO.enemyAttackType.damage; //todo - variable for enemyAttackType
+
     }
 
     private void FixedUpdate()
@@ -53,6 +63,12 @@ public class EnemyController : MonoBehaviour
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
         var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
+        
+        // shooting
+        // if ranged enemy
+            // shoot bullet at rate of fire
+            GetComponent<Shooting>().UpdateEnemy(); //todo - variable
+
     }
 
     // todo - should every enemy do 1 damage on collision??
@@ -75,5 +91,10 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public EnemySO getEnemySO()
+    {
+        return enemySO;
     }
 }

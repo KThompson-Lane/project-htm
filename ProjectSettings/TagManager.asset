@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PreviewRoom
   - Enemy
+  - BulletObject
   layers:
   - Default
   - TransparentFX

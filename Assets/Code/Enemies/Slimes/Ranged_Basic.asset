@@ -15,3 +15,4 @@ MonoBehaviour:
   damage: 1
   range: 2.5
   rateOfFire: 120
+  projectile: {fileID: 372782904265678552, guid: 4ef3b97fedea0154c90d520b952c71e3, type: 3}
