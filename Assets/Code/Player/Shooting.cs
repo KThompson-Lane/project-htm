@@ -1,4 +1,3 @@
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +21,6 @@ public class Shooting : MonoBehaviour
     public void Start()
     {
         _interval = 60 / rateOfFire; //1 second / rate of fire
-        _isShooting = false;
     }
 
     // For Player

@@ -9,7 +9,6 @@ public class EnemyController : MonoBehaviour
     private EnemySO enemySO;
 
     private EnemyAttackSO enemyAttackSO;
-
     private Shooting shooting;
 
     private float _currentHealth;
@@ -55,23 +54,31 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // movement
+        // Movement
         var playerPosition = _mPlayerTransform.position;
         var enemyPosition = transform.position;
-
-        //todo - LOOK AT THIS WTF IS GOING ON
-        var moveToPosition = playerPosition + (Vector3.Normalize(enemyPosition - playerPosition) * _range); // Note - this alone means they will move back if player is too close
-        var dist = Vector3.Distance(playerPosition, enemyPosition);
-        var test = Vector3.Distance(playerPosition, moveToPosition);
-        if(dist >= test)
-            _mRb2d.MovePosition(Vector2.MoveTowards(_mRb2d.position, moveToPosition, _moveSpeed*Time.fixedDeltaTime));
+        var vectorToTarget = playerPosition - enemyPosition;
         
-        Vector3 vectorToTarget = playerPosition - enemyPosition;
-        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
+        //todo - LOOK AT THIS WTF IS GOING ON
+        // move towards player, in range
+        var moveToPosition = playerPosition + (Vector3.Normalize(enemyPosition - playerPosition) * _range); // Note - this alone means they will move back if player is too close
+        var playerToEnemyDistance = Vector3.Distance(playerPosition, enemyPosition);
+        var playerToMovePositionDistance = Vector3.Distance(playerPosition, moveToPosition);
+        if(playerToEnemyDistance >= _range)//playerToMovePositionDistance)
+            //_mRb2d.MovePosition(_mRb2d.position + (Vector2)vectorToTarget * (_moveSpeed * Time.fixedDeltaTime));
+            //_mRb2d.MovePosition(Vector2.MoveTowards(enemyPosition, playerPosition, _moveSpeed * Time.fixedDeltaTime));
+            transform.position = (Vector2.MoveTowards(enemyPosition, playerPosition, _moveSpeed * Time.fixedDeltaTime));
+
+        
+        enemyPosition = transform.position; //todo - check if this is need, might need updating because we just moved -- don't think it makes a difference so maybe remove this
+        
+        // rotate to look at player
+        //var vectorToTarget = playerPosition - enemyPosition;
+        var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
         var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
         
-        // shooting
+        // Shooting
         if (enemyAttackSO.ranged != true) return;
         shooting.UpdateEnemy();
     }
