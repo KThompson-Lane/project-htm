@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b27cc4612c3a540859b663b448a664, type: 3}
   m_Name: Ranged_Basic
   m_EditorClassIdentifier: 
-  damage: 1
-  range: 2.5
-  rateOfFire: 120
-  projectile: {fileID: 372782904265678552, guid: 4ef3b97fedea0154c90d520b952c71e3, type: 3}
+  ranged: 1
+  damage: 0
+  range: 3.5
+  rateOfFire: 30
+  projectile: {fileID: 372782904265678552, guid: 26ee6f9b80a1b7849aaf2894a81f9b54, type: 3}

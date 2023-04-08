@@ -715,6 +715,37 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &468538507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468538508}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &468538508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468538507}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 616221556}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &616221551
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +759,7 @@ GameObject:
   - component: {fileID: 616221554}
   - component: {fileID: 616221553}
   - component: {fileID: 616221558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Monster_B
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -835,7 +866,8 @@ Transform:
   m_LocalPosition: {x: 2.003, y: -0.354, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 468538508}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -851,7 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef86aca226e0494baa66d64242ec4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySO: {fileID: 11400000, guid: 9449ea1c17ea6394a8b6b58a2b3946ab, type: 2}
+  enemySO: {fileID: 11400000, guid: e06af4c1022188542bffda35b809ab1d, type: 2}
   RotationSpeed: 3
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!1 &620205357
@@ -1150,6 +1182,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 372782904265678552, guid: 4ef3b97fedea0154c90d520b952c71e3, type: 3}
   bulletForce: 10
   rateOfFire: 120
+  damage: 1
 --- !u!114 &700393615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4350,7 +4383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef86aca226e0494baa66d64242ec4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySO: {fileID: 11400000, guid: e06af4c1022188542bffda35b809ab1d, type: 2}
+  enemySO: {fileID: 11400000, guid: 9449ea1c17ea6394a8b6b58a2b3946ab, type: 2}
   RotationSpeed: 3
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!50 &1636845433

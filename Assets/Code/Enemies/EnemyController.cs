@@ -8,8 +8,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private EnemySO enemySO;
 
-    private EnemyAttackSO enemyAttackSO;
-    private Shooting shooting;
+    private EnemyAttackSO _enemyAttackSo;
+    private Shooting _shooting;
 
     private float _currentHealth;
     
@@ -29,26 +29,26 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyAttackSO = enemySO.enemyAttackType;
-        shooting = GetComponent<Shooting>();
+        _enemyAttackSo = enemySO.enemyAttackType;
+        _shooting = GetComponent<Shooting>();
         
         // health 
         _currentHealth = enemySO.GetMaxHealth();
         
         // movement
         _moveSpeed = enemySO.GetSpeed();
-        _range = enemyAttackSO.range;
+        _range = _enemyAttackSo.range;
         _mRb2d = GetComponent<Rigidbody2D>();
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
         
         // shooting
-        if (enemyAttackSO.ranged != true) return;
+        if (_enemyAttackSo.ranged != true) return;
         this.AddComponent<Shooting>();
-        shooting = GetComponent<Shooting>();
-        shooting.firePoint = _mRb2d.transform;
-        shooting.bulletPrefab = enemyAttackSO.projectile;
-        shooting.rateOfFire = enemyAttackSO.rateOfFire;
-        shooting.damage = enemyAttackSO.damage; //todo - variable for enemyAttackType
+        _shooting = GetComponent<Shooting>();
+        _shooting.firePoint = _mRb2d.transform;
+        _shooting.bulletPrefab = _enemyAttackSo.projectile;
+        _shooting.rateOfFire = _enemyAttackSo.rateOfFire;
+        _shooting.damage = _enemyAttackSo.damage; //todo - variable for enemyAttackType
 
     }
 
@@ -59,28 +59,20 @@ public class EnemyController : MonoBehaviour
         var enemyPosition = transform.position;
         var vectorToTarget = playerPosition - enemyPosition;
         
-        //todo - LOOK AT THIS WTF IS GOING ON
         // move towards player, in range
-        var moveToPosition = playerPosition + (Vector3.Normalize(enemyPosition - playerPosition) * _range); // Note - this alone means they will move back if player is too close
         var playerToEnemyDistance = Vector3.Distance(playerPosition, enemyPosition);
-        var playerToMovePositionDistance = Vector3.Distance(playerPosition, moveToPosition);
-        if(playerToEnemyDistance >= _range)//playerToMovePositionDistance)
-            //_mRb2d.MovePosition(_mRb2d.position + (Vector2)vectorToTarget * (_moveSpeed * Time.fixedDeltaTime));
-            //_mRb2d.MovePosition(Vector2.MoveTowards(enemyPosition, playerPosition, _moveSpeed * Time.fixedDeltaTime));
-            transform.position = (Vector2.MoveTowards(enemyPosition, playerPosition, _moveSpeed * Time.fixedDeltaTime));
-
+        if(playerToEnemyDistance >= _range)
+            _mRb2d.MovePosition(_mRb2d.position + (Vector2)vectorToTarget * (_moveSpeed * Time.fixedDeltaTime));
         
-        enemyPosition = transform.position; //todo - check if this is need, might need updating because we just moved -- don't think it makes a difference so maybe remove this
         
         // rotate to look at player
-        //var vectorToTarget = playerPosition - enemyPosition;
         var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
         var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
         
         // Shooting
-        if (enemyAttackSO.ranged != true) return;
-        shooting.UpdateEnemy();
+        if (_enemyAttackSo.ranged != true) return;
+        _shooting.UpdateEnemy();
     }
 
     // todo - should every enemy do 1 damage on collision??
@@ -103,10 +95,5 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    public EnemySO GetEnemySo()
-    {
-        return enemySO;
     }
 }
