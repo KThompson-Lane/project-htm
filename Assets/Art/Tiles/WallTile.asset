@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: Wall Tile
+  m_Name: WallTile
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 703693119, guid: d41f9f28d7003864180fd274e2356bcd, type: 3}
   m_DefaultGameObject: {fileID: 0}

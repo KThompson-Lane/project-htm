@@ -33,7 +33,8 @@ public class DungeonFloor : MonoBehaviour
         Debug.Log("Floor generated Successfully");
 
         //  Then load start room
-        //  TODO: Remove magic numbers
+        //  TODO: Remove magic 
+        //  Cell coordinates are YX so we half the y dimension and multiply by 10 to get Y then half x to get X
         int startCell = ((floorObject.floorSize.y / 2) * 10) + (floorObject.floorSize.x / 2);
         var startRoom = floorObject.floorplan[startCell]; 
         Debug.Log("Loading start room");
