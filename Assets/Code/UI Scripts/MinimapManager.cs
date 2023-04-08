@@ -1,0 +1,80 @@
+using System;
+using Code.DungeonGeneration;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
+public class MinimapManager : MonoBehaviour
+{
+    public DungeonFloor floorScript;
+    [SerializeField] private Tilemap _dungeonFloorMap;
+    [SerializeField] private Transform _playerMapIcon;
+    [SerializeField] private MapTile bossRoomTile, startRoomTile, normalRoomTile;
+    private Vector2Int _floorSize;
+    private void Awake()
+    {
+        floorScript.OnRoomChange += DiscoverRoom;
+        floorScript.OnRoomCleared += ClearRoom;
+        _dungeonFloorMap.ClearAllTiles();
+    }
+
+    private void Start()
+    {
+        //  Place our start room onto the minimap
+        var startRoom = floorScript.CurrentRoom;
+        PlaceRoomTile(startRoom);
+        //  Place the neighbours onto the minimap
+        foreach (var (_, index) in startRoom.Neighbours)
+        {
+            PlaceRoomTile(floorScript.GetRoom(index));
+        }
+    }
+
+    private void PlaceRoomTile(DungeonRoomScriptableObject room)
+    {
+        int roomX = room.Index % 10;
+        int roomY = room.Index / 10;
+        Vector3Int tilePosition = new Vector3Int(roomX, -roomY, 1);
+        if (_dungeonFloorMap.HasTile(tilePosition))
+            return;
+        switch (room)
+        {
+            case BossRoomScriptableObject:
+                _dungeonFloorMap.SetTile(tilePosition, Instantiate(bossRoomTile));
+                break;
+            case StartRoomScriptableObject:
+                _dungeonFloorMap.SetTile(tilePosition, Instantiate(startRoomTile));
+                _dungeonFloorMap.origin = tilePosition;
+                _dungeonFloorMap.transform.localPosition = new Vector3(-roomX, roomY, 1);
+                break;
+            default:
+                _dungeonFloorMap.SetTile(tilePosition, Instantiate(normalRoomTile));
+                break;
+        }
+    }
+
+    private void DiscoverRoom(int roomIndex)
+    {
+        //  Reveal our current room and place neighbour rooms
+        int roomX = roomIndex % 10;
+        int roomY = roomIndex / 10;
+        Vector3Int tilePosition = new Vector3Int(roomX, -roomY, 1);
+        _dungeonFloorMap.GetTile<MapTile>(tilePosition).Discover();
+        _dungeonFloorMap.RefreshTile(tilePosition);
+        foreach (var (_, index) in floorScript.GetRoom(roomIndex).Neighbours)
+        {
+            PlaceRoomTile(floorScript.GetRoom(index));
+        }
+        //  Also move player
+        _dungeonFloorMap.transform.localPosition = new Vector3(-roomX, roomY, 1);
+        _playerMapIcon.position = _dungeonFloorMap.CellToWorld(tilePosition);
+    }
+
+    private void ClearRoom(int roomIndex)
+    {
+        int roomX = roomIndex % 10;
+        int roomY = roomIndex / 10;
+        Vector3Int tilePosition = new Vector3Int(roomX, -roomY, 1);
+        _dungeonFloorMap.GetTile<MapTile>(tilePosition).Clear();
+        _dungeonFloorMap.RefreshTile(tilePosition);
+    }
+}
