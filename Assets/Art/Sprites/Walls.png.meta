@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 220dfcc6a1f8cc7408eccd955fdc775f
+guid: d41f9f28d7003864180fd274e2356bcd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,6 +95,18 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -537,10 +549,15 @@ TextureImporter:
     nameFileIdTable:
       Wall_CentreTop: 703693119
       Wall_CornerBL: -2110453082
+      Door_TB_Open: 866162727
+      Door_L_Open: 739639217
+      Door_TB_Closed: 390437464
       Wall_InnerCorner_RB: -1829768475
       Wall_InnerCorner_TL: 888022710
       Wall_CentreBot: 369294223
       Wall_InnerCorner_LB: -1329770187
+      Door_R_Open: -2033339326
+      Door_L_Closed: -381407346
       Wall_Edge_LT: -1238919941
       Wall_CornerTR: 874127464
       Wall_Left: -473109540
@@ -551,6 +568,7 @@ TextureImporter:
       ZZZ_Empty: -1095311594
       Wall_CornerTL: 1214677163
       Wall_Edge_RB: -321883892
+      Door_R_Closed: 1252972941
       Wall_Edge_RT: -1176780835
       Wall_Right: -1868202401
       Wall_EdgeRight: 732874268
