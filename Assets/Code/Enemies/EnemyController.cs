@@ -70,6 +70,8 @@ public class EnemyController : MonoBehaviour
     {
         foreach (var attack in _enemyAttackSOs)
         {
+            if (attack == null)
+                return;
             var attackScript = this.AddComponent<Attack>();
             attackScript.SetHealthManager(healthManager);
             attackScript.SetBulletForce(bulletForce);
