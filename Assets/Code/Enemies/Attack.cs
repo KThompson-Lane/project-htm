@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
@@ -22,27 +23,33 @@ public class Attack : MonoBehaviour
     
     // Melee - collision damage
     private bool _inCollision;
-    
+
     public void Start()
     {
         _enemyAttackSo = GetComponent<EnemyController>().GetEnemyAttackSO();
+        
         _rateOfFire = _enemyAttackSo.rateOfFire;
         _damage = _enemyAttackSo.damage;
         _attackType = _enemyAttackSo.ranged;
         
         _interval = 60 / _rateOfFire; //1 second / rate of fire
     }
-    
+
     public void Update()
     {
         //Attack when not on cooldown
         if (_coolDown <= 0f)
         {
             if (_attackType)
+            {
                 Shoot();
-            else if(_inCollision)
+                _coolDown = _interval;
+            }
+            else if (_inCollision)
+            {
                 Hit();
-            _coolDown = _interval;
+                _coolDown = _interval;
+            }
         }
 
         if (_coolDown > 0)

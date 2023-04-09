@@ -21,12 +21,8 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D _mRb2d;
     private Transform _mPlayerTransform; // for look at location
 
-    // Damage on collision variables
-    [SerializeField]
-    private HealthManager healthManager; // for player health
-
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _enemyAttackSo = enemySO.enemyAttackType;
 
