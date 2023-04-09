@@ -9,8 +9,9 @@ public class Shooting : MonoBehaviour
 
     public float bulletForce = 20f;
 
-    [SerializeField]
-    private float rateOfFire = 60.0f;
+    public float rateOfFire = 60.0f;
+
+    public float damage = 1f;
     
     private float _coolDown = 0.0f;
 
@@ -29,13 +30,13 @@ public class Shooting : MonoBehaviour
     {
         _isShooting = context.action.triggered;
     }
-    
+
     // Update is called once per frame
     private void Update()
     {
         //Fire when left mouse held
         if(_isShooting)
-        {
+        { 
             if (_coolDown <= 0f)
             {
                 Shoot();
@@ -50,10 +51,11 @@ public class Shooting : MonoBehaviour
         }
     }
 
-   private void Shoot()
+    private void Shoot()
     {
         //Create bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.GetComponent<Bullet>().SetDamage(damage);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
         _gunAnimator.SetTrigger("Shoot");

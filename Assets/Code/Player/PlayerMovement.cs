@@ -72,7 +72,8 @@ public class PlayerMovement : MonoBehaviour
         {
             lookDir = _mousePos;
         }
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x
+        
+        var angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x
         rb.rotation = angle;
     }
 
