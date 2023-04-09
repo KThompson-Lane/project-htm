@@ -4255,6 +4255,7 @@ GameObject:
   - component: {fileID: 1453676484}
   - component: {fileID: 1453676483}
   - component: {fileID: 1453676482}
+  - component: {fileID: 1453676487}
   m_Layer: 0
   m_Name: Monster_B (2)
   m_TagString: Enemy
@@ -4379,6 +4380,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1453676487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453676481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7544c53b9cfe4d4abe205f19f9438cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
+  firePoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  bulletForce: 0
 --- !u!1 &1579666039
 GameObject:
   m_ObjectHideFlags: 0
