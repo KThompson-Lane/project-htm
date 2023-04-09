@@ -4,7 +4,6 @@ using System.Linq;
 using Code.DungeonGeneration;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Grid))]
 public class DungeonFloor : MonoBehaviour
@@ -22,7 +21,9 @@ public class DungeonFloor : MonoBehaviour
     
     public DungeonRoomScriptableObject CurrentRoom =>  _currentRoom;
     public DungeonRoomScriptableObject GetRoom(RoomIndex index) => floorObject.floorplan[index];
-   
+
+    private int _enemiesRemaining;
+    
     private void Awake()
     {
         //  Get tilemaps and room doors script
@@ -101,9 +102,14 @@ public class DungeonFloor : MonoBehaviour
                 var enemyTile = Instantiate(room.EnemyTile);
                 enemyTile.SetEnemy(enemy);
                 _floorMap.SetTile(position, enemyTile);
+                _enemiesRemaining++;
             }
         }
-       
+
+        foreach (var enemy in GetComponentsInChildren<EnemyController>())
+        {
+            enemy.OnDie += OnEnemyKilled;
+        }
     }
 
     private void CreateDoors()
@@ -174,6 +180,15 @@ public class DungeonFloor : MonoBehaviour
         };
         player.transform.position = _floorMap.CellToWorld(newLocation);
         
+    }
+
+    private void OnEnemyKilled()
+    {
+        if (--_enemiesRemaining == 0)
+        {
+            Debug.Log("clearing room");
+            _currentRoom.Cleared = true;
+        }
     }
     private void OnRoomClear()
     {

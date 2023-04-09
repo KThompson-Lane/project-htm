@@ -10,7 +10,9 @@ public class EnemyController : MonoBehaviour
     private EnemyAttackSO _enemyAttackSo;
 
     private float _currentHealth;
-
+    public delegate void EnemyDied();
+    public event EnemyDied OnDie;
+    
     private float _moveSpeed;
     private float _rotationSpeed;
     private float _range;
@@ -98,6 +100,7 @@ public class EnemyController : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
+            OnDie?.Invoke();
             Destroy(gameObject);
         }
     }
