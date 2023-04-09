@@ -5,7 +5,7 @@ public class BulletEnemy : Bullet
     [SerializeField]
     private HealthManager healthManager; // for player health
     
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         //todo - make this better!!
         var colController = col.gameObject.GetComponent<EnemyController>();

@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     protected float Damage;
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         var enemyController = col.gameObject.GetComponent<EnemyController>();
         
