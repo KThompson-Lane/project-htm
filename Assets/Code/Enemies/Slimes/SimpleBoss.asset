@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bc0f28f76b3ba4d86ea13d8d7070a1, type: 3}
   m_Name: SimpleBoss
   m_EditorClassIdentifier: 
-  level: 1
+  level: 5
   moveRange: 0
   rotationSpeed: 3
-  enemyAttackTypes: []
-  enemySprite: {fileID: 0}
+  enemyAttackTypes:
+  - {fileID: 11400000, guid: c8efd1bbda8027d4088a6bf05ce99ef3, type: 2}
+  - {fileID: 11400000, guid: 8d42379832dfd7641bce12fcbf792656, type: 2}
+  enemySprite: {fileID: 482162095, guid: ae1cb6caac6074f4dbd0f64cccba00c9, type: 3}
