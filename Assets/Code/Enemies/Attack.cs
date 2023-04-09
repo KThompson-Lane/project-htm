@@ -16,7 +16,7 @@ public class Attack : MonoBehaviour
     
     // Ranged - shooting
     public Transform firePoint;
-    public GameObject bulletPrefab;
+    private GameObject _bulletPrefab;
     public float bulletForce;
     private bool _isShooting;
     
@@ -30,6 +30,7 @@ public class Attack : MonoBehaviour
         _rateOfFire = _enemyAttackSo.rateOfFire;
         _damage = _enemyAttackSo.damage;
         _attackType = _enemyAttackSo.ranged;
+        _bulletPrefab = _enemyAttackSo.projectile;
         
         _interval = 60 / _rateOfFire; //1 second / rate of fire
     }
@@ -66,7 +67,7 @@ public class Attack : MonoBehaviour
     private void Shoot()
     {
         //Create bullet
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(_bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Bullet>().SetDamage(_damage);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);

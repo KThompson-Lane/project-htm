@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20bc0f28f76b3ba4d86ea13d8d7070a1, type: 3}
-  m_Name: Slime_Basic
+  m_Name: Slime_2_Melee
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
   rotationSpeed: 3
   enemyAttackType: {fileID: 11400000, guid: c8efd1bbda8027d4088a6bf05ce99ef3, type: 2}
-  enemySprite: {fileID: 21300000, guid: a4508e9b983fc7b4fa2c8c57e0e01f52, type: 3}
+  enemySprite: {fileID: -2413806693520163455, guid: 3b2b72a947095b645aa71c84b1807ada, type: 3}
