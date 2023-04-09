@@ -9,7 +9,6 @@ public class EnemyController : MonoBehaviour
     private EnemySO enemySO;
 
     private EnemyAttackSO _enemyAttackSo;
-    private Shooting _shooting;
 
     private float _currentHealth;
     
@@ -30,8 +29,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         _enemyAttackSo = enemySO.enemyAttackType;
-        _shooting = GetComponent<Shooting>();
-        
+
         // health 
         _currentHealth = enemySO.GetMaxHealth();
         
@@ -40,16 +38,6 @@ public class EnemyController : MonoBehaviour
         _range = _enemyAttackSo.range;
         _mRb2d = GetComponent<Rigidbody2D>();
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
-        
-        // shooting
-        if (_enemyAttackSo.ranged != true) return;
-        this.AddComponent<Shooting>();
-        _shooting = GetComponent<Shooting>();
-        _shooting.firePoint = _mRb2d.transform;
-        _shooting.bulletPrefab = _enemyAttackSo.projectile;
-        _shooting.rateOfFire = _enemyAttackSo.rateOfFire;
-        _shooting.damage = _enemyAttackSo.damage; //todo - variable for enemyAttackType
-
     }
 
     private void FixedUpdate()
@@ -69,21 +57,6 @@ public class EnemyController : MonoBehaviour
         var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
         var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * RotationSpeed);
-        
-        // Shooting
-        if (_enemyAttackSo.ranged != true) return;
-        _shooting.UpdateEnemy();
-    }
-
-    // todo - should every enemy do 1 damage on collision??
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (_range != 0) return; //todo - change this to not use rate of fire when more types are added
-        if (collision.gameObject.tag is "Player")
-        {
-            //Debug.Log("Ouchies");
-            healthManager.DecreaseHealth(enemySO.enemyAttackType.damage);
-        }
     }
 
     public virtual void TakeDamage(int damage)
@@ -95,5 +68,10 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public EnemyAttackSO GetEnemyAttackSO()
+    {
+        return _enemyAttackSo;
     }
 }

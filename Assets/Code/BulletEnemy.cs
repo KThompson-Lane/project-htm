@@ -11,13 +11,13 @@ public class BulletEnemy : Bullet
         var colController = col.gameObject.GetComponent<EnemyController>();
         if (colController != null) // don't destroy if collides with another enemy - used to also get around the fire point issue
             return;
-        
-        Destroy(gameObject);
 
         var playerController = col.gameObject.GetComponent<PlayerMovement>();
         if (playerController != null)
         {
-            healthManager.DecreaseHealth(_damage);
+            healthManager.DecreaseHealth(Damage);
         }
+        
+        Destroy(gameObject);
     }
 }

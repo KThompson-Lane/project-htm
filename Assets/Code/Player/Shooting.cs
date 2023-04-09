@@ -48,24 +48,8 @@ public class Shooting : MonoBehaviour
             _coolDown -= Time.deltaTime;
         }
     }
-    
-    public void UpdateEnemy() //todo - maybe rename this
-    {
-        //Fire when not on cooldown
-        if (_coolDown <= 0f)
-        {
-            Shoot();
-            _coolDown = _interval;
-        }
 
-        if (_coolDown > 0)
-        {
-            // update cooldown
-            _coolDown -= Time.deltaTime;
-        }
-    }
-
-   private void Shoot()
+    private void Shoot()
     {
         //Create bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ranged_Basic
   m_EditorClassIdentifier: 
   ranged: 1
-  damage: 0
+  damage: 1
   range: 3.5
   rateOfFire: 30
   projectile: {fileID: 372782904265678552, guid: 26ee6f9b80a1b7849aaf2894a81f9b54, type: 3}

@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    protected float _damage;
+    protected float Damage;
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(gameObject);
-
         var enemyController = col.gameObject.GetComponent<EnemyController>();
         
         if (enemyController != null)
         {
             enemyController.TakeDamage(1); //todo - variable damage
         }
+        
+        Destroy(gameObject);
     }
 
     private void Start()
@@ -23,6 +23,6 @@ public class Bullet : MonoBehaviour
     
     public void SetDamage(float damage)
     {
-        _damage = damage;
+        Damage = damage;
     }
 }
