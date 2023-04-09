@@ -5,11 +5,12 @@ using UnityEngine.Serialization;
 public class EnemySO : ScriptableObject
 {
     public float level = 1; //default to base
-    //Note - current health cannot be stored here as it would effect all enemies using this SO
+    public float moveRange; 
+        
     private float _maxHealth;
     private float _speed;
     [SerializeField] private float rotationSpeed = 3.0f; //Note - seems to be the right speed for all enemies but may need changing later
-    public EnemyAttackSO enemyAttackType;
+    public EnemyAttackSO[] enemyAttackTypes;
 
     public Sprite enemySprite;
 

@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -7,7 +9,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private EnemySO enemySO;
 
-    private EnemyAttackSO _enemyAttackSo;
+    public HealthManager healthManager;
+    public float bulletForce;
+    public Transform firePoint;
+
+    private EnemyAttackSO[] _enemyAttackSOs;
 
     private float _currentHealth;
 
@@ -23,7 +29,8 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        _enemyAttackSo = enemySO.enemyAttackType;
+        _enemyAttackSOs = enemySO.enemyAttackTypes;
+        InitializeAttacks();
 
         // sprite
         _sprite = enemySO.enemySprite;
@@ -35,7 +42,7 @@ public class EnemyController : MonoBehaviour
         // movement
         _moveSpeed = enemySO.GetSpeed();
         _rotationSpeed = enemySO.GetRotationSpeed();
-        _range = _enemyAttackSo.range;
+        _range = enemySO.moveRange;
         _mRb2d = GetComponent<Rigidbody2D>();
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
     }
@@ -59,6 +66,18 @@ public class EnemyController : MonoBehaviour
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * _rotationSpeed);
     }
 
+    private void InitializeAttacks()
+    {
+        foreach (var attack in _enemyAttackSOs)
+        {
+            var attackScript = this.AddComponent<Attack>();
+            attackScript.SetHealthManager(healthManager);
+            attackScript.SetBulletForce(bulletForce);
+            attackScript.SetFirePoint(firePoint);
+            attackScript.SetEnemyAttackSO(attack);
+        }
+    }
+
     public virtual void TakeDamage(int damage)
     {
         _currentHealth -= damage;
@@ -68,10 +87,5 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    public EnemyAttackSO GetEnemyAttackSO()
-    {
-        return _enemyAttackSo;
     }
 }

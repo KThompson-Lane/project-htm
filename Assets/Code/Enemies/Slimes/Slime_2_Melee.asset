@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Slime_2_Melee
   m_EditorClassIdentifier: 
   level: 2
+  moveRange: 0
   rotationSpeed: 3
-  enemyAttackType: {fileID: 11400000, guid: c8efd1bbda8027d4088a6bf05ce99ef3, type: 2}
+  enemyAttackTypes:
+  - {fileID: 11400000, guid: c8efd1bbda8027d4088a6bf05ce99ef3, type: 2}
   enemySprite: {fileID: -2413806693520163455, guid: 3b2b72a947095b645aa71c84b1807ada, type: 3}

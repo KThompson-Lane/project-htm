@@ -735,7 +735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &468434463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,8 +749,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
-  firePoint: {fileID: 1990360019}
-  bulletForce: 20
 --- !u!114 &468434464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,6 +762,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: f984bf5215f196d48be878eca54f6f11, type: 2}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
+  bulletForce: 10
+  firePoint: {fileID: 1990360019}
 --- !u!50 &468434465
 Rigidbody2D:
   serializedVersion: 4
@@ -4416,7 +4417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1453676482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4430,6 +4431,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: 9449ea1c17ea6394a8b6b58a2b3946ab, type: 2}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
+  bulletForce: 0
+  firePoint: {fileID: 0}
 --- !u!50 &1453676483
 Rigidbody2D:
   serializedVersion: 4
@@ -4547,8 +4551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
-  firePoint: {fileID: 0}
-  bulletForce: 0
 --- !u!1 &1579666039
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,7 +4907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1687082853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4919,8 +4921,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
-  firePoint: {fileID: 0}
-  bulletForce: 0
 --- !u!114 &1687082854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4934,6 +4934,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: a06d7391dd444f3478f2519e47c91679, type: 2}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
+  bulletForce: 0
+  firePoint: {fileID: 0}
 --- !u!50 &1687082855
 Rigidbody2D:
   serializedVersion: 4
@@ -5058,7 +5061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1729929506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5072,8 +5075,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
-  firePoint: {fileID: 1131282489}
-  bulletForce: 20
 --- !u!114 &1729929507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5087,6 +5088,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: e06af4c1022188542bffda35b809ab1d, type: 2}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
+  bulletForce: 10
+  firePoint: {fileID: 1131282489}
 --- !u!50 &1729929508
 Rigidbody2D:
   serializedVersion: 4
