@@ -19,5 +19,11 @@ MonoBehaviour:
   SouthDoor: {fileID: 11400000, guid: d8b6fcbabf921594b9157561c13a8cbb, type: 2}
   WestDoor: {fileID: 11400000, guid: 94378e333798ce344839124e545395ea, type: 2}
   RoomBounds:
-    m_Position: {x: -4, y: -3, z: 0}
-    m_Size: {x: 9, y: 7, z: 1}
+    m_Position: {x: -7, y: -4, z: 0}
+    m_Size: {x: 15, y: 9, z: 1}
+  EnemyPool:
+  - {fileID: 11400000, guid: e06af4c1022188542bffda35b809ab1d, type: 2}
+  - {fileID: 11400000, guid: 9449ea1c17ea6394a8b6b58a2b3946ab, type: 2}
+  HazardPool: []
+  EnemyTile: {fileID: 11400000, guid: 39ae01c641a4ec043a485c52dbcf090b, type: 2}
+  MaxEnemies: 8

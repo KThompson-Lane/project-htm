@@ -20,7 +20,7 @@ public abstract class DungeonRoomScriptableObject : ScriptableObject
     
     //TODO: Is this needed?
     public RoomIndex Index;
-    
+
     //  Is the room cleared
     private bool _cleared;
     public bool Cleared
@@ -38,7 +38,7 @@ public abstract class DungeonRoomScriptableObject : ScriptableObject
     //TODO:
     //  Add positions of obstacles
     public Dictionary<Direction, RoomIndex> Neighbours { get; set; } = new();
-    
+    public abstract void InitializeRoom();
     public void SetNeighbour(Direction direction, RoomIndex index)
     {
         Neighbours.Add(direction, index);

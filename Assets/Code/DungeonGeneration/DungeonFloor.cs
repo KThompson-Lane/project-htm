@@ -4,6 +4,7 @@ using System.Linq;
 using Code.DungeonGeneration;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Grid))]
 public class DungeonFloor : MonoBehaviour
@@ -76,15 +77,33 @@ public class DungeonFloor : MonoBehaviour
             _wallsMap.SetTile(new Vector3Int(_currentRoom.RoomBounds.xMax-1, y), _currentRoom.WallTile);
         }
 
-        // Create room doors
+        //  Create room doors
         CreateDoors();
         
+        if(!_currentRoom.Cleared)
+            PlaceEnemies();
+        //  Create hazards
+
         //  Load newly created door objects and subscribe to their events
         _doors = GetComponentsInChildren<Door>();
         foreach (var door in _doors)
         {
             door.OnDoorTrigger += OnDoorTriggered;
         }
+    }
+
+    private void PlaceEnemies()
+    {
+        if (_currentRoom is NormalRoomScriptableObject room)
+        {
+            foreach (var (position, enemy) in room.GetEnemies())
+            {
+                var enemyTile = Instantiate(room.EnemyTile);
+                enemyTile.SetEnemy(enemy);
+                _floorMap.SetTile(position, enemyTile);
+            }
+        }
+       
     }
 
     private void CreateDoors()

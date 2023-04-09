@@ -21,4 +21,6 @@ MonoBehaviour:
   RoomBounds:
     m_Position: {x: -4, y: -3, z: 0}
     m_Size: {x: 9, y: 7, z: 1}
+  hazards:
+  - {fileID: 11400000, guid: 4b4cc582d6bec274397fef5c4981adce, type: 2}
   BossName: Bob L'eponge
