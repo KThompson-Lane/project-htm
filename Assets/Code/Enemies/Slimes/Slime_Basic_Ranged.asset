@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Slime_Basic_Ranged
   m_EditorClassIdentifier: 
   level: 2
-  moveRange: 0
+  moveRange: 2.5
   rotationSpeed: 3
   enemyAttackTypes:
   - {fileID: 11400000, guid: 8d42379832dfd7641bce12fcbf792656, type: 2}
