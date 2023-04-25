@@ -65,13 +65,15 @@ public class EnemyController : MonoBehaviour
         var playerPosition = _mPlayerTransform.position;
         var enemyPosition = transform.position;
         var vectorToTarget = playerPosition - enemyPosition;
-        
+
         // move towards player, in range
         var playerToEnemyDistance = Vector3.Distance(playerPosition, enemyPosition);
         if(playerToEnemyDistance >= _range)
             _mRb2d.MovePosition(_mRb2d.position + (Vector2)vectorToTarget * (_moveSpeed * Time.fixedDeltaTime));
-        
-        
+
+        var vec = new Vector2(0, 0);
+        _mRb2d.velocity = vec;
+
         // rotate to look at player
         var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
         var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
