@@ -7,12 +7,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private EnemySO enemySO;
 
+    public delegate void EnemyDied();
+    public event EnemyDied OnDie;
+
     private EnemyAttackSO _enemyAttackSo;
 
     private float _currentHealth;
-    public delegate void EnemyDied();
-    public event EnemyDied OnDie;
-    
+
     private float _moveSpeed;
     private float _rotationSpeed;
     private float _range;
@@ -43,30 +44,6 @@ public class EnemyController : MonoBehaviour
         _rotationSpeed = enemySO.GetRotationSpeed();
         _range = _enemyAttackSo.range;
         _mRb2d = GetComponent<Rigidbody2D>();
-       
-    }
-    private void Awake()
-    {
-        /*
-        _enemyAttackSo = enemySO.enemyAttackType;
-
-        // sprite
-        _sprite = enemySO.enemySprite;
-        GetComponent<SpriteRenderer>().sprite = _sprite;
-        
-        //Create polygon collider after setting sprite
-        gameObject.AddComponent<PolygonCollider2D>();
-
-        // health 
-        _currentHealth = enemySO.GetMaxHealth();
-        
-        // movement
-        _moveSpeed = enemySO.GetSpeed();
-        _rotationSpeed = enemySO.GetRotationSpeed();
-        _range = _enemyAttackSo.range;
-        _mRb2d = GetComponent<Rigidbody2D>();
-        _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
-        */
     }
 
     private void Start()
