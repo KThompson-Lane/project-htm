@@ -52,6 +52,8 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        if(_mRb2d == null)
+            Initialise(enemySO);
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
     }
 
