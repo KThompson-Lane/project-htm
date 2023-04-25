@@ -1,11 +1,14 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
     private EnemySO enemySO;
+
+    public delegate void EnemyDied();
+    public event EnemyDied OnDie;
 
     private EnemyAttackSO _enemyAttackSo;
 
@@ -21,13 +24,17 @@ public class EnemyController : MonoBehaviour
     private Sprite _sprite;
 
     // Start is called before the first frame update
-    private void Awake()
+    public void Initialise(EnemySO enemy)
     {
+        enemySO = enemy;
         _enemyAttackSo = enemySO.enemyAttackType;
 
         // sprite
         _sprite = enemySO.enemySprite;
         GetComponent<SpriteRenderer>().sprite = _sprite;
+        
+        //Create polygon collider after setting sprite
+        gameObject.AddComponent<PolygonCollider2D>();
 
         // health 
         _currentHealth = enemySO.GetMaxHealth();
@@ -37,6 +44,10 @@ public class EnemyController : MonoBehaviour
         _rotationSpeed = enemySO.GetRotationSpeed();
         _range = _enemyAttackSo.range;
         _mRb2d = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
     }
 
@@ -66,6 +77,7 @@ public class EnemyController : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
+            OnDie?.Invoke();
             Destroy(gameObject);
         }
     }

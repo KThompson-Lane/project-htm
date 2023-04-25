@@ -7,14 +7,21 @@ using UnityEngine;
 /// </summary>
 public abstract class DungeonRoomScriptableObject : ScriptableObject
 {
+    //  Room tiles for the tilemap
     public RuleTile FloorTile;
     public RuleTile WallTile;
     public DoorTile NorthDoor;
     public DoorTile EastDoor;
     public DoorTile SouthDoor;
     public DoorTile WestDoor;
+    
+    //  Room size
     public BoundsInt RoomBounds;
-    public int Index;
+    
+    //TODO: Is this needed?
+    public RoomIndex Index;
+
+    //  Is the room cleared
     private bool _cleared;
     public bool Cleared
     {
@@ -30,14 +37,14 @@ public abstract class DungeonRoomScriptableObject : ScriptableObject
     public event ClearRoom OnRoomCleared;
     //TODO:
     //  Add positions of obstacles
-    public Dictionary<Direction, int> Neighbours { get; set; } = new();
-    
-    public void SetNeighbour(Direction direction, int room)
+    public Dictionary<Direction, RoomIndex> Neighbours { get; set; } = new();
+    public abstract void InitializeRoom();
+    public void SetNeighbour(Direction direction, RoomIndex index)
     {
-        Neighbours.Add(direction, room);
+        Neighbours.Add(direction, index);
     }
-    public int GetNeighbour(Direction direction)
+    public RoomIndex? GetNeighbour(Direction direction)
     {
-        return Neighbours.ContainsKey(direction) ? Neighbours[direction] : 0;
+        return Neighbours.TryGetValue(direction, out var neighbour) ? neighbour : null;
     }
 }

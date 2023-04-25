@@ -23,10 +23,13 @@ public class DungeonFloorScriptableObject : ScriptableObject
     public List<DungeonRoomScriptableObject> BasicRooms;
     public List<DungeonRoomScriptableObject> BossRooms;
     
-    public Dictionary<int, DungeonRoomScriptableObject> floorplan;
-    private Queue<int> Cells;
+    public Dictionary<RoomIndex, DungeonRoomScriptableObject> floorplan;
+    private RoomIndex _startRoom;
+    private Queue<RoomIndex> Cells;
     
     private bool addedNeighbour = false;
+    public DungeonRoomScriptableObject GetStartRoom => floorplan[_startRoom];
+
     private System.Random _random;
     public void GenerateFloor()
     {
@@ -43,13 +46,24 @@ public class DungeonFloorScriptableObject : ScriptableObject
         {
             floorplan[cell] = BasicRooms[_random.Next(BasicRooms.Count)];
         }
+        InitialiseRooms();
     }
 
+    private void InitialiseRooms()
+    {
+        //  Initialise Rooms!
+        foreach (var (_, room) in floorplan)
+        {
+            room.InitializeRoom();
+        }
+    }
+    
     private DungeonRoomScriptableObject GetRandomRoom()
     {
         var room = BasicRooms[_random.Next(BasicRooms.Count)];
         return Instantiate(room);
     }
+    
     private bool CreateFloorPlan()
     {
         floorplan = new();
@@ -58,58 +72,59 @@ public class DungeonFloorScriptableObject : ScriptableObject
         //  Determine number of rooms
         //  TODO: Change formula
         rooms = Random.Range(1, 3) + 5 +(int) (level * 2.6);
-        List<int> endRooms = new List<int>();
+        var endRooms = new List<RoomIndex>();
         
         //  Place our starting cell (2,3 (middle)) into the queue
-        int startCell = ((floorSize.y / 2) * 10) + (floorSize.x / 2);
+        RoomIndex startCell = new RoomIndex(floorSize.x / 2 , floorSize.y / 2);
         AddRoom(startCell, Instantiate(StartRoom));
+        _startRoom = startCell;
         Cells.Enqueue(startCell);
         
         //  Go over all cells adding neighbours
         while (Cells.Count > 0)
         {
             //  Check neighbouring cells
-            int currentCell = Cells.Dequeue();
+            var currentCell = Cells.Dequeue();
             addedNeighbour = false;
             
-            //  north neighbour
-            if (CheckNeighbourConditions(currentCell - 10))
+            //  Check if we can place a neighbour to north
+            if (CheckNeighbourConditions(currentCell.North()))
             {
                 var room = GetRandomRoom();
                 room.SetNeighbour(Direction.South, currentCell);
-                AddRoom(currentCell - 10, room);
-                floorplan[currentCell].SetNeighbour(Direction.North, currentCell - 10);
-                Cells.Enqueue(currentCell - 10);
+                AddRoom(currentCell.North(), room);
+                floorplan[currentCell].SetNeighbour(Direction.North, currentCell.North());
+                Cells.Enqueue(currentCell.North());
                 addedNeighbour = true;
             }
             //  south neighbour
-            if (CheckNeighbourConditions(currentCell + 10))
+            if (CheckNeighbourConditions(currentCell.South()))
             {
                 var room = GetRandomRoom();
                 room.SetNeighbour(Direction.North, currentCell);
-                AddRoom(currentCell + 10, room);
-                floorplan[currentCell].SetNeighbour(Direction.South, currentCell + 10);
-                Cells.Enqueue(currentCell + 10);
+                AddRoom(currentCell.South(), room);
+                floorplan[currentCell].SetNeighbour(Direction.South, currentCell.South());
+                Cells.Enqueue(currentCell.South());
                 addedNeighbour = true;
             }
             //  east neighbour
-            if (CheckNeighbourConditions(currentCell + 1))
+            if (CheckNeighbourConditions(currentCell.East()))
             {
                 var room = GetRandomRoom();
                 room.SetNeighbour(Direction.West, currentCell);
-                AddRoom(currentCell + 1, room);
-                floorplan[currentCell].SetNeighbour(Direction.East, currentCell + 1);
-                Cells.Enqueue(currentCell + 1);
+                AddRoom(currentCell.East(), room);
+                floorplan[currentCell].SetNeighbour(Direction.East, currentCell.East());
+                Cells.Enqueue(currentCell.East());
                 addedNeighbour = true;
             }
             //  west neighbour
-            if (CheckNeighbourConditions(currentCell - 1))
+            if (CheckNeighbourConditions(currentCell.West()))
             {
                 var room = GetRandomRoom();
                 room.SetNeighbour(Direction.East, currentCell);
-                AddRoom(currentCell - 1, room);
-                floorplan[currentCell].SetNeighbour(Direction.West, currentCell - 1);
-                Cells.Enqueue(currentCell - 1);
+                AddRoom(currentCell.West(), room);
+                floorplan[currentCell].SetNeighbour(Direction.West, currentCell.West());
+                Cells.Enqueue(currentCell.West());
                 addedNeighbour = true;
             }
             if(!addedNeighbour)
@@ -120,7 +135,7 @@ public class DungeonFloorScriptableObject : ScriptableObject
         //  Check to ensure our floor has enough rooms
         if (floorplan.Count != rooms) return false;
         //  Find our boss room and make sure it isn't neighbouring with start room
-        int bossCell = endRooms.Last();
+        var bossCell = endRooms.Last();
         if (floorplan[bossCell].Neighbours.Any(pair => pair.Value == startCell))
             return false;
         
@@ -131,18 +146,18 @@ public class DungeonFloorScriptableObject : ScriptableObject
         return true;
     }
 
-    private void AddRoom(int index, DungeonRoomScriptableObject room)
+    private void AddRoom(RoomIndex index, DungeonRoomScriptableObject room)
     {
         room.Index = index;
         floorplan.Add(index, room);
     }
-    private bool CheckNeighbourConditions(int cell)
+    private bool CheckNeighbourConditions(RoomIndex cell)
     {
-        if (cell % 10 == 0 || cell < 0)
+        if (cell.X < 0 || cell.Y <= 0)
             return false;
         if (floorplan.ContainsKey(cell))
             return false;
-        if (filledNeighbours(cell) > 1)
+        if (FilledNeighbours(cell) > 1)
             return false;
         if (floorplan.Count >= rooms)
             return false;
@@ -151,20 +166,20 @@ public class DungeonFloorScriptableObject : ScriptableObject
         return true;
     }
 
-    private int filledNeighbours(int cell)
+    private int FilledNeighbours(RoomIndex cell)
     {
         int filled = 0;
-        //  Top neighbour
-        if(floorplan.ContainsKey(cell - 10))
+        //  North neighbour
+        if(floorplan.ContainsKey(cell.North()))
             filled++;
-        //  Bottom neighbour
-        if(floorplan.ContainsKey(cell + 10))
+        //  South neighbour
+        if(floorplan.ContainsKey(cell.South()))
             filled++;
-        //  Right neighbour
-        if(floorplan.ContainsKey(cell + 1))
+        //  East neighbour
+        if(floorplan.ContainsKey(cell.East()))
             filled++;
-        //  Left neighbour
-        if(floorplan.ContainsKey(cell - 1))
+        //  West neighbour
+        if(floorplan.ContainsKey(cell.West()))
             filled++;
         return filled;
     }
