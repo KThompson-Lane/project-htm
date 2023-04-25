@@ -9,5 +9,9 @@ namespace Code.DungeonGeneration
         //TODO:
             //Add field for boss enemy
             //TBD
+            public override void InitializeRoom()
+            {
+                Debug.Log($"BOSS: {BossName}");
+            }
     }
 }

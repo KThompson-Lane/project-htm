@@ -1,14 +1,14 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
     private EnemySO enemySO;
 
+    public delegate void EnemyDied();
+    public event EnemyDied OnDie;
+    
     public HealthManager healthManager;
     public float bulletForce;
     public Transform firePoint;
@@ -27,14 +27,18 @@ public class EnemyController : MonoBehaviour
     private Sprite _sprite;
 
     // Start is called before the first frame update
-    private void Awake()
+    public void Initialise(EnemySO enemy)
     {
+        enemySO = enemy;
         _enemyAttackSOs = enemySO.enemyAttackTypes;
         InitializeAttacks();
 
         // sprite
         _sprite = enemySO.enemySprite;
         GetComponent<SpriteRenderer>().sprite = _sprite;
+        
+        //Create polygon collider after setting sprite
+        gameObject.AddComponent<PolygonCollider2D>();
 
         // health 
         _currentHealth = enemySO.GetMaxHealth();
@@ -44,6 +48,10 @@ public class EnemyController : MonoBehaviour
         _rotationSpeed = enemySO.GetRotationSpeed();
         _range = enemySO.moveRange;
         _mRb2d = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
     }
 
@@ -72,7 +80,7 @@ public class EnemyController : MonoBehaviour
         {
             if (attack == null)
                 return;
-            var attackScript = this.AddComponent<Attack>();
+            var attackScript = gameObject.AddComponent<Attack>();
             attackScript.SetHealthManager(healthManager);
             attackScript.SetBulletForce(bulletForce);
             attackScript.SetFirePoint(firePoint);
@@ -87,6 +95,7 @@ public class EnemyController : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
+            OnDie?.Invoke();
             Destroy(gameObject);
         }
     }
