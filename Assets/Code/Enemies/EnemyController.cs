@@ -10,8 +10,6 @@ public class EnemyController : MonoBehaviour
     public event EnemyDied OnDie;
     
     public HealthManager healthManager;
-    public float bulletForce;
-    public Transform firePoint;
 
     private EnemyAttackSO[] _enemyAttackSOs;
 
@@ -20,6 +18,9 @@ public class EnemyController : MonoBehaviour
     private float _moveSpeed;
     private float _rotationSpeed;
     private float _range;
+    
+    private Transform _firePoint;
+    //private float _bulletForce;
     
     private Rigidbody2D _mRb2d;
     private Transform _mPlayerTransform; // for look at location
@@ -30,6 +31,7 @@ public class EnemyController : MonoBehaviour
     public void Initialise(EnemySO enemy)
     {
         enemySO = enemy;
+        _firePoint = transform;
         _enemyAttackSOs = enemySO.enemyAttackTypes;
         InitializeAttacks();
 
@@ -84,8 +86,8 @@ public class EnemyController : MonoBehaviour
                 return;
             var attackScript = gameObject.AddComponent<Attack>();
             attackScript.SetHealthManager(healthManager);
-            attackScript.SetBulletForce(bulletForce);
-            attackScript.SetFirePoint(firePoint);
+            attackScript.SetBulletForce(attack.bulletForce);
+            attackScript.SetFirePoint(_firePoint);
             attackScript.SetEnemyAttackSO(attack);
         }
     }
