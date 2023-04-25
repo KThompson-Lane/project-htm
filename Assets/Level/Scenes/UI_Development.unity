@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: f2213c48eb1d77b4ba82cb17c8e8f708, type: 2}
-  healthManager: {fileID: 0}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!50 &191847274
 Rigidbody2D:
   serializedVersion: 4
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: f984bf5215f196d48be878eca54f6f11, type: 2}
-  healthManager: {fileID: 0}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!50 &468434465
 Rigidbody2D:
   serializedVersion: 4
@@ -4740,7 +4740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1453676482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4754,7 +4754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: 9449ea1c17ea6394a8b6b58a2b3946ab, type: 2}
-  healthManager: {fileID: 0}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!50 &1453676483
 Rigidbody2D:
   serializedVersion: 4
@@ -5228,7 +5228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: a06d7391dd444f3478f2519e47c91679, type: 2}
-  healthManager: {fileID: 0}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!50 &1687082855
 Rigidbody2D:
   serializedVersion: 4
@@ -5352,7 +5352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1729929507
 MonoBehaviour:
   m_ObjectHideFlags: 0
