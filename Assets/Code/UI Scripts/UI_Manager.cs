@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class UI_Manager : MonoBehaviour
     private TextMeshProUGUI Player1Health;
 
     [SerializeField] private HealthManager _healthManager;
+
+    [SerializeField] private GameObject deathScreen;
 
     private static UI_Manager _instance;
 
@@ -52,6 +55,18 @@ public class UI_Manager : MonoBehaviour
         {
             Player1Health.text += "<sprite index=1>";
         }
+    }
+
+    public void ShowDeathScreen(bool show)
+    {
+        //deathScreen.SetActive(!deathScreen.activeSelf);
+        deathScreen.SetActive(show);
+    }
+    
+    //todo - move to level manager?
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //todo - change to first level
     }
 
     //  TODO: Implement

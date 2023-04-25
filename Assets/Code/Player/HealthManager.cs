@@ -27,8 +27,17 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         HealthChangedEvent.Invoke(health);
 
         if (!(health <= 0)) return;
-        //reset game
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //todo - change this to first level
+        
+        // Show death screen
+        UI_Manager uiManager = UI_Manager.Instance;
+        uiManager.ShowDeathScreen(true);
+        
+        //Todo - continue button - should bring you to main menu/reset game
+        
+        // Reset game
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name); //todo - change this to first level
+
+        //reset health
         health = maxHealth;
         HealthChangedEvent.Invoke(health);
     }
