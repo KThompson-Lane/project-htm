@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1804800989551463369}
   - component: {fileID: 1804800989551463371}
   - component: {fileID: 1804800989551463372}
-  - component: {fileID: 1804800989551463373}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a4508e9b983fc7b4fa2c8c57e0e01f52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -122,22 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: e06af4c1022188542bffda35b809ab1d, type: 2}
---- !u!114 &1804800989551463373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804800989551463374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7544c53b9cfe4d4abe205f19f9438cac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
-  firePoint: {fileID: 1804800990038704261}
-  bulletPrefab: {fileID: 372782904265678552, guid: 26ee6f9b80a1b7849aaf2894a81f9b54, type: 3}
-  bulletForce: 20
 --- !u!1 &1804800990038704262
 GameObject:
   m_ObjectHideFlags: 0
