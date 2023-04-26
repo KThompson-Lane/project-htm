@@ -11,6 +11,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     public float maxHealth = 3;
 
     [System.NonSerialized] public UnityEvent<float> HealthChangedEvent;
+    [System.NonSerialized] public UnityEvent<float> MaxHealthChangedEvent;
 
     private void OnEnable()
     {
@@ -18,6 +19,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         health = maxHealth;
         // Set up healthChangedEvent
         HealthChangedEvent ??= new UnityEvent<float>();
+        MaxHealthChangedEvent ??= new UnityEvent<float>();
     }
 
     public void DecreaseHealth(float amount)
