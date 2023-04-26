@@ -208,6 +208,11 @@ public class DungeonFloor : MonoBehaviour
             _wallsMap.GetTile<DoorTile>(doorPosition).OpenDoor();
             _wallsMap.RefreshTile(doorPosition);
         }
+
+        if (_currentRoom is BossRoomScriptableObject boss)
+        {
+            Debug.Log($"Boss {boss.BossName} killed!");
+        }
         OnRoomCleared?.Invoke(_currentRoom.Index);
     }
 #if UNITY_EDITOR
