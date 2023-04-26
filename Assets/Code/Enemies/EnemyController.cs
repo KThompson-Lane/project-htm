@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     //private float _bulletForce;
     
     private Rigidbody2D _mRb2d;
+    private Animator _animator;
+
     private Transform _mPlayerTransform; // for look at location
 
     private Sprite _sprite;
@@ -50,6 +52,7 @@ public class EnemyController : MonoBehaviour
         _rotationSpeed = enemySO.GetRotationSpeed();
         _range = enemySO.moveRange;
         _mRb2d = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -96,7 +99,7 @@ public class EnemyController : MonoBehaviour
     {
         _currentHealth -= damage;
         Debug.Log("Health is: " + _currentHealth);
-
+        _animator.SetTrigger("Hit");
         if (_currentHealth <= 0)
         {
             OnDie?.Invoke();
