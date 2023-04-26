@@ -30,7 +30,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         
         // Show death screen
         UI_Manager uiManager = UI_Manager.Instance;
-        uiManager.ShowDeathScreen(true);
+        uiManager.ShowGameOverScreen(true);
         
         //Todo - continue button - should bring you to main menu/reset game
         

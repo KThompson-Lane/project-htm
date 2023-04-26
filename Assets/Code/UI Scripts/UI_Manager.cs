@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private HealthManager _healthManager;
 
-    [SerializeField] private GameObject deathScreen;
+    [FormerlySerializedAs("deathScreen")] [SerializeField] private GameObject gameOverScreen;
 
     [SerializeField] private GameObject heartPrefab;
 
@@ -58,7 +59,7 @@ public class UI_Manager : MonoBehaviour
         // If time runs out, show death screen
         if (time <= TimeSpan.FromSeconds(0))
         {
-            ShowDeathScreen(true);
+            ShowGameOverScreen(true);
         }
     }
 
@@ -95,10 +96,10 @@ public class UI_Manager : MonoBehaviour
             Destroy(child.gameObject);
     }
     
-    public void ShowDeathScreen(bool show)
+    public void ShowGameOverScreen(bool show)
     {
-        //deathScreen.SetActive(!deathScreen.activeSelf);
-        deathScreen.SetActive(show);
+        //gameOverScreen.SetActive(!deathScreen.activeSelf);
+        gameOverScreen.SetActive(show);
     }
     
     //todo - move to level manager?
