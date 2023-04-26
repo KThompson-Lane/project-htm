@@ -8,9 +8,6 @@ using UnityEngine.Serialization;
 
 public class UI_Manager : MonoBehaviour
 {
-    [SerializeField] 
-    private TextMeshProUGUI Player1Health;
-
     [SerializeField] private TextMeshProUGUI Timer;
 
     [SerializeField] private HealthManager _healthManager;
@@ -46,7 +43,8 @@ public class UI_Manager : MonoBehaviour
 
     private void Start()
     {
-        ChangeHeartContainers(_healthManager.health);
+        ChangeHeartContainers(_healthManager.maxHealth);
+        ChangeHealth(_healthManager.health);
         remainingTime = TimeLimit;
     }
 
@@ -66,24 +64,47 @@ public class UI_Manager : MonoBehaviour
     private void OnEnable()
     {
         // Listen for health changed trigger
-        _healthManager.HealthChangedEvent.AddListener(ChangeHeartContainers);
+        _healthManager.MaxHealthChangedEvent.AddListener(ChangeHeartContainers);
+        _healthManager.HealthChangedEvent.AddListener(ChangeHealth);
+
     }
     
     private void OnDisable()
     {
         // Stop listening for health changed trigger
-        _healthManager.HealthChangedEvent.RemoveListener(ChangeHeartContainers);
+        _healthManager.MaxHealthChangedEvent.RemoveListener(ChangeHeartContainers);
+        _healthManager.HealthChangedEvent.RemoveListener(ChangeHealth);
+
     }
 
+    private void ChangeHealth(float amount)
+    {
+        var health = (int) amount;
+        foreach (var heart in hearts)
+        {
+            switch (health)
+            {
+                case > 1:
+                    heart.UpdateContainer(HeartStatus.Full);
+                    break;
+                case 1:
+                    heart.UpdateContainer(HeartStatus.Half);
+                    break;
+                default:
+                    heart.UpdateContainer(HeartStatus.Empty);
+                    break;
+            }
+            health -= 2;
+        }
+    }
     private void ChangeHeartContainers(float amount)
     {
-        float newHP = _healthManager.health;
+        ClearHeartContainers();
         //todo - can we do this without the loop?
         for (int i = 0; i < _healthManager.maxHealth /2; i++)
         {
             GameObject heart = Instantiate(heartPrefab, healthBar, true);
             var container = heart.GetComponent<HeartContainer>();
-            container.UpdateContainer(HeartStatus.Full);
             hearts.Add(container);
         }
         
