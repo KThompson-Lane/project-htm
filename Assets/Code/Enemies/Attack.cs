@@ -15,21 +15,20 @@ public class Attack : MonoBehaviour
     private HealthManager healthManager; // for player health
     
     // Ranged - shooting
-    public Transform firePoint;
-    public GameObject bulletPrefab;
-    public float bulletForce;
+    private Transform _firePoint;
+    private GameObject _bulletPrefab;
+    private float _bulletForce;
     private bool _isShooting;
     
     // Melee - collision damage
     private bool _inCollision;
-
+    
     public void Start()
     {
-        _enemyAttackSo = GetComponent<EnemyController>().GetEnemyAttackSO();
-        
         _rateOfFire = _enemyAttackSo.rateOfFire;
         _damage = _enemyAttackSo.damage;
         _attackType = _enemyAttackSo.ranged;
+        _bulletPrefab = _enemyAttackSo.projectile;
         
         _interval = 60 / _rateOfFire; //1 second / rate of fire
     }
@@ -58,6 +57,26 @@ public class Attack : MonoBehaviour
         }
     }
 
+    public void SetBulletForce(float force)
+    {
+        _bulletForce = force;
+    }
+
+    public void SetFirePoint(Transform point)
+    {
+        _firePoint = point;
+    }
+
+    public void SetHealthManager(HealthManager hm)
+    {
+        healthManager = hm;
+    }
+
+    public void SetEnemyAttackSO(EnemyAttackSO eso)
+    {
+        _enemyAttackSo = eso;
+    }
+
     private void Hit()
     {
         healthManager.DecreaseHealth(_damage);
@@ -66,10 +85,10 @@ public class Attack : MonoBehaviour
     private void Shoot()
     {
         //Create bullet
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
         bullet.GetComponent<Bullet>().SetDamage(_damage);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

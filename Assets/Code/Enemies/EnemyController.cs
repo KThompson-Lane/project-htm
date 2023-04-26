@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,14 +8,19 @@ public class EnemyController : MonoBehaviour
 
     public delegate void EnemyDied();
     public event EnemyDied OnDie;
+    
+    public HealthManager healthManager;
 
-    private EnemyAttackSO _enemyAttackSo;
+    private EnemyAttackSO[] _enemyAttackSOs;
 
     private float _currentHealth;
 
     private float _moveSpeed;
     private float _rotationSpeed;
     private float _range;
+    
+    private Transform _firePoint;
+    //private float _bulletForce;
     
     private Rigidbody2D _mRb2d;
     private Transform _mPlayerTransform; // for look at location
@@ -27,7 +31,9 @@ public class EnemyController : MonoBehaviour
     public void Initialise(EnemySO enemy)
     {
         enemySO = enemy;
-        _enemyAttackSo = enemySO.enemyAttackType;
+        _firePoint = transform;
+        _enemyAttackSOs = enemySO.enemyAttackTypes;
+        InitializeAttacks();
 
         // sprite
         _sprite = enemySO.enemySprite;
@@ -42,12 +48,14 @@ public class EnemyController : MonoBehaviour
         // movement
         _moveSpeed = enemySO.GetSpeed();
         _rotationSpeed = enemySO.GetRotationSpeed();
-        _range = _enemyAttackSo.range;
+        _range = enemySO.moveRange;
         _mRb2d = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
+        if(_mRb2d == null)
+            Initialise(enemySO);
         _mPlayerTransform = GameObject.FindWithTag("Player").transform; //todo - might want to change if not all enemies follow player
     }
 
@@ -70,6 +78,20 @@ public class EnemyController : MonoBehaviour
         transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * _rotationSpeed);
     }
 
+    private void InitializeAttacks()
+    {
+        foreach (var attack in _enemyAttackSOs)
+        {
+            if (attack == null)
+                return;
+            var attackScript = gameObject.AddComponent<Attack>();
+            attackScript.SetHealthManager(healthManager);
+            attackScript.SetBulletForce(attack.bulletForce);
+            attackScript.SetFirePoint(_firePoint);
+            attackScript.SetEnemyAttackSO(attack);
+        }
+    }
+
     public virtual void TakeDamage(int damage)
     {
         _currentHealth -= damage;
@@ -80,10 +102,5 @@ public class EnemyController : MonoBehaviour
             OnDie?.Invoke();
             Destroy(gameObject);
         }
-    }
-
-    public EnemyAttackSO GetEnemyAttackSO()
-    {
-        return _enemyAttackSo;
     }
 }
