@@ -95,15 +95,26 @@ public class DungeonFloor : MonoBehaviour
 
     private void PlaceEnemies()
     {
-        if (_currentRoom is NormalRoomScriptableObject room)
+        switch (_currentRoom)
         {
-            foreach (var (position, enemy) in room.GetEnemies())
+            case NormalRoomScriptableObject room:
             {
-                var enemyTile = Instantiate(room.EnemyTile);
-                enemyTile.SetEnemy(enemy);
-                _floorMap.SetTile(position, enemyTile);
-                _enemiesRemaining++;
+                foreach (var (position, enemy) in room.GetEnemies())
+                {
+                    var enemyTile = Instantiate(room.EnemyTile);
+                    enemyTile.SetEnemy(enemy);
+                    _floorMap.SetTile(position, enemyTile);
+                    _enemiesRemaining++;
+                }
+
+                break;
             }
+            case BossRoomScriptableObject room:
+                var bossTile = Instantiate(room.BossTile);
+                bossTile.SetEnemy(room.BossSO);
+                _floorMap.SetTile(Vector3Int.RoundToInt(room.RoomBounds.center), bossTile);
+                _enemiesRemaining++;
+                break;
         }
 
         foreach (var enemy in GetComponentsInChildren<EnemyController>())

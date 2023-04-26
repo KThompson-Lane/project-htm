@@ -6,8 +6,9 @@ namespace Code.DungeonGeneration
     public class BossRoomScriptableObject : DungeonRoomScriptableObject
     {
         public string BossName;
+        public EnemyTile BossTile;
+        public EnemySO BossSO;
         //TODO:
-            //Add field for boss enemy
             //TBD
             public override void InitializeRoom()
             {
