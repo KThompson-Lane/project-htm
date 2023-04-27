@@ -9,6 +9,8 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     
     [SerializeField]
     public float maxHealth = 3;
+    
+    private bool _godMode = false;
 
     [System.NonSerialized] public UnityEvent<float> HealthChangedEvent;
     [System.NonSerialized] public UnityEvent<float> MaxHealthChangedEvent;
@@ -19,7 +21,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         // When game starts ensure health is set to max
         health = maxHealth;
         
-        // Set up healthChangedEvent
+        // Set up events
         HealthChangedEvent ??= new UnityEvent<float>();
         MaxHealthChangedEvent ??= new UnityEvent<float>();
         HealthDepletedEvent ??= new UnityEvent<bool>();
@@ -27,6 +29,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
 
     public void DecreaseHealth(float amount)
     {
+        if (_godMode) return; //ensure we are not in god mode
         health -= amount;
         
         // Trigger healthChangedEvent
@@ -42,5 +45,11 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         //reset health
         health = maxHealth;
         HealthChangedEvent.Invoke(health);
+    }
+    
+    public void ToggleGodMode()
+    {
+        _godMode = !_godMode;
+        Debug.Log("God Mode: " + _godMode);
     }
 }
