@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private UI_Manager uiManager;
     [SerializeField] private HealthManager healthManager;
+    [SerializeField] private DungeonFloor dungeonFloor;
 
     public float timeLimit;
     private float _remainingTime;
@@ -33,22 +34,29 @@ public class GameManager : MonoBehaviour
     
     private void OnEnable()
     {
-        // Listen for health depleted trigger
+        // Listen for events
         healthManager.HealthDepletedEvent.AddListener(PauseGame);
-
+        dungeonFloor.RoomClearedEvent.AddListener(IncTimer);
     }
 
     private void OnDisable()
     {
-        // Stop listening for health depleted trigger
+        // Stop listening for events
         healthManager.HealthDepletedEvent.RemoveListener(PauseGame);
-
+        dungeonFloor.RoomClearedEvent.RemoveListener(IncTimer);
     }
 
+    // Timer Functions
     public float GetRemainingTime()
     {
         return _remainingTime;
     }
+    
+    private void IncTimer() //todo - might want to take a value determined by the room cleared/ current level??
+    {
+        _remainingTime += 10;
+    }
+
 
     // Manage game state
 
