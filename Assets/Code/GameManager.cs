@@ -49,8 +49,7 @@ public class GameManager : MonoBehaviour
     {
         return _remainingTime;
     }
-    
-    
+
     // Manage game state
 
     public void StartGame()
