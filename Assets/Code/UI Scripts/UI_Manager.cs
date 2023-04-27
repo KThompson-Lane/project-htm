@@ -13,6 +13,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
 
     [FormerlySerializedAs("deathScreen")] [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject winScreen;
 
     [SerializeField] private GameObject heartPrefab;
 
@@ -107,14 +108,17 @@ public class UI_Manager : MonoBehaviour
             Destroy(child.gameObject);
     }
     
-    
     // Screens
-    
     public void ShowGameOverScreen(bool show)
     {
         gameOverScreen.SetActive(show);
     }
 
+    public void ShowWinScreen()
+    {
+        winScreen.SetActive(true);
+    }
+    
     //  TODO: Implement
     //private TextMeshPro Player2Health; - will need a new health manager
    // private TextMeshPro Timer;
