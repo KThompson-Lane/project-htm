@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         // Timer
         _remainingTime = timeLimit;
+        Time.timeScale = 0;
     }
 
     private void LateUpdate()
@@ -49,8 +50,14 @@ public class GameManager : MonoBehaviour
         return _remainingTime;
     }
     
-
+    
     // Manage game state
+
+    public void StartGame()
+    {
+        _remainingTime = timeLimit;
+        PauseGame(false);
+    }
     
     public void RestartGame()
     {
