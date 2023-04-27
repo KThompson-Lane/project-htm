@@ -51,9 +51,8 @@ public class GameManager : MonoBehaviour
         return _remainingTime;
     }
     
-    private void IncTimer()
+    private void IncTimer() //todo - might want to take a value determined by the room cleared/ current level??
     {
-        //UpdateTimer(10);
         _remainingTime += 10;
     }
 

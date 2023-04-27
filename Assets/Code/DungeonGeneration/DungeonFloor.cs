@@ -25,7 +25,7 @@ public class DungeonFloor : MonoBehaviour
 
     private int _enemiesRemaining;
     
-    [System.NonSerialized] public UnityEvent RoomClearedEvent;
+    [NonSerialized] public UnityEvent RoomClearedEvent;
     
     private void Awake()
     {
