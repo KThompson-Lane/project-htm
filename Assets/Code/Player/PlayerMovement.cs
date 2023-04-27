@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
                 _mousePos = _rotationInput;
             }
         }
-        
     }
     
     private void FixedUpdate()
