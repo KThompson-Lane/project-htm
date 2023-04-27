@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.DungeonGeneration;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Grid))]
@@ -24,6 +25,8 @@ public class DungeonFloor : MonoBehaviour
 
     private int _enemiesRemaining;
     
+    [System.NonSerialized] public UnityEvent RoomClearedEvent;
+    
     private void Awake()
     {
         //  Get tilemaps and room doors script
@@ -39,6 +42,9 @@ public class DungeonFloor : MonoBehaviour
         var startRoom = floorObject.GetStartRoom;
         Debug.Log("Loading start room");
         LoadRoom(startRoom);
+        
+        // Initialise events
+        RoomClearedEvent ??= new UnityEvent();
     }
     public void GenerateFloor()
     {
@@ -214,6 +220,7 @@ public class DungeonFloor : MonoBehaviour
             Debug.Log($"Boss {boss.BossName} killed!");
         }
         OnRoomCleared?.Invoke(_currentRoom.Index);
+        RoomClearedEvent.Invoke();
     }
 #if UNITY_EDITOR
     public void PreviewRoom()
