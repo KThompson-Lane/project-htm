@@ -218,6 +218,8 @@ public class DungeonFloor : MonoBehaviour
         if (_currentRoom is BossRoomScriptableObject boss)
         {
             Debug.Log($"Boss {boss.BossName} killed!");
+            //Show winscreen
+            UI_Manager.Instance.ShowWinScreen();
         }
         OnRoomCleared?.Invoke(_currentRoom.Index);
         RoomClearedEvent.Invoke();

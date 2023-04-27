@@ -2,8 +2,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour //todo - rename to PlayerController
 {
+    [SerializeField] private HealthManager _healthManager;
+    
     public float moveSpeed = 5f;
 
     public Rigidbody2D rb;
@@ -36,6 +38,13 @@ public class PlayerMovement : MonoBehaviour
     {
         _rotationInput = context.ReadValue<Vector2>();
         _inputType = context.control.path;
+    }
+    
+    public void OnGodMode(InputAction.CallbackContext context)
+    {
+        _inputType = context.control.path; // todo - remove if not needed
+        // enable on GameManager
+        _healthManager.ToggleGodMode();
     }
 
     // Update is called once per frame
