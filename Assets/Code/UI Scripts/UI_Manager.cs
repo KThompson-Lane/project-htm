@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class UI_Manager : MonoBehaviour
@@ -11,6 +9,8 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Timer;
 
     [SerializeField] private HealthManager _healthManager;
+    
+    [SerializeField] private GameManager gameManager;
 
     [FormerlySerializedAs("deathScreen")] [SerializeField] private GameObject gameOverScreen;
 
@@ -19,10 +19,6 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Transform healthBar;
     private List<HeartContainer> hearts;
 
-    //  TODO: Move into a game manager
-    public float TimeLimit;
-    private float remainingTime;
-    
     private static UI_Manager _instance;
 
     public static UI_Manager Instance
@@ -45,20 +41,13 @@ public class UI_Manager : MonoBehaviour
     {
         ChangeHeartContainers(_healthManager.maxHealth);
         ChangeHealth(_healthManager.health);
-        remainingTime = TimeLimit;
     }
 
     private void LateUpdate()
     {
-        remainingTime -= Time.deltaTime;
+        var remainingTime = gameManager.GetRemainingTime();
         var time = TimeSpan.FromSeconds(remainingTime);
         Timer.text = time.ToString("mm':'ss");
-        
-        // If time runs out, show death screen
-        if (time <= TimeSpan.FromSeconds(0))
-        {
-            ShowGameOverScreen(true);
-        }
     }
 
     private void OnEnable()
@@ -76,6 +65,8 @@ public class UI_Manager : MonoBehaviour
         _healthManager.HealthChangedEvent.RemoveListener(ChangeHealth);
 
     }
+    
+    // Heart Containers
 
     private void ChangeHealth(float amount)
     {
@@ -107,7 +98,6 @@ public class UI_Manager : MonoBehaviour
             var container = heart.GetComponent<HeartContainer>();
             hearts.Add(container);
         }
-        
     }
 
     private void ClearHeartContainers()
@@ -117,16 +107,12 @@ public class UI_Manager : MonoBehaviour
             Destroy(child.gameObject);
     }
     
+    
+    // Screens
+    
     public void ShowGameOverScreen(bool show)
     {
-        //gameOverScreen.SetActive(!deathScreen.activeSelf);
         gameOverScreen.SetActive(show);
-    }
-    
-    //todo - move to level manager?
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //todo - change to first level
     }
 
     //  TODO: Implement
