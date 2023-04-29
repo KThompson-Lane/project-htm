@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HealthManager healthManager;
     [SerializeField] private DungeonFloor dungeonFloor;
 
+    public float timePassed;
+    
     public float timeLimit;
     private float _remainingTime;
 
@@ -17,6 +19,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timePassed = 0;
+        
         // Timer
         _remainingTime = timeLimit;
         Time.timeScale = 0;
@@ -29,6 +33,8 @@ public class GameManager : MonoBehaviour
     
     private void LateUpdate()
     {
+        timePassed += Time.deltaTime;
+        
         // Decrement timer
         _remainingTime -= Time.deltaTime;
         var time = TimeSpan.FromSeconds(_remainingTime);
