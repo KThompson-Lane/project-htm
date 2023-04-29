@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public float timeLimit;
     private float _remainingTime;
 
-    private float _enemiesKilled;
+    private int _enemiesKilled;
 
     public Animator playerAnimator;
 
