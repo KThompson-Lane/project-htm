@@ -53,6 +53,7 @@ public class EnemyController : MonoBehaviour
         _range = enemySO.moveRange;
         _mRb2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _animator.runtimeAnimatorController = enemy.enemyAnimator;
     }
 
     private void Start()
@@ -71,9 +72,18 @@ public class EnemyController : MonoBehaviour
 
         // move towards player, in range
         var playerToEnemyDistance = Vector3.Distance(playerPosition, enemyPosition);
-        if(playerToEnemyDistance >= _range)
+        if (playerToEnemyDistance >= _range)
+        {
+            //  Move this
             _mRb2d.MovePosition(_mRb2d.position + (Vector2)vectorToTarget * (_moveSpeed * Time.fixedDeltaTime));
+            _animator.SetBool("Moving", true);
+        }
+        else
+        {
+            _animator.SetBool("Moving", false);
+        }
 
+        
         var vec = new Vector2(0, 0);
         _mRb2d.velocity = vec;
 
