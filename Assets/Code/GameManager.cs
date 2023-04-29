@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public float timeLimit;
     private float _remainingTime;
 
+    public Animator playerAnimator;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    private void OnPlayerHit(float _)
+    {
+        playerAnimator.SetTrigger("Hit");
+    }
+    
     private void LateUpdate()
     {
         // Decrement timer
@@ -36,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         // Listen for events
         healthManager.HealthDepletedEvent.AddListener(PauseGame);
+        healthManager.HealthChangedEvent.AddListener(OnPlayerHit);
         dungeonFloor.RoomClearedEvent.AddListener(IncTimer);
     }
 
@@ -43,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         // Stop listening for events
         healthManager.HealthDepletedEvent.RemoveListener(PauseGame);
+        healthManager.HealthChangedEvent.RemoveListener(OnPlayerHit);
         dungeonFloor.RoomClearedEvent.RemoveListener(IncTimer);
     }
 
