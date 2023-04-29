@@ -47,17 +47,17 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         // Listen for events
-        healthManager.HealthDepletedEvent.AddListener(PauseGame);
+        healthManager.HealthDepletedEvent.AddListener(LoseGame);
         healthManager.HealthChangedEvent.AddListener(OnPlayerHit);
-        dungeonFloor.RoomClearedEvent.AddListener(IncTimer);
+        dungeonFloor.RoomClearedEvent.AddListener(RoomCleared);
     }
 
     private void OnDisable()
     {
         // Stop listening for events
-        healthManager.HealthDepletedEvent.RemoveListener(PauseGame);
+        healthManager.HealthDepletedEvent.RemoveListener(LoseGame);
         healthManager.HealthChangedEvent.RemoveListener(OnPlayerHit);
-        dungeonFloor.RoomClearedEvent.RemoveListener(IncTimer);
+        dungeonFloor.RoomClearedEvent.RemoveListener(RoomCleared);
     }
 
     // Timer Functions
@@ -86,15 +86,37 @@ public class GameManager : MonoBehaviour
         _remainingTime = timeLimit;
         PauseGame(false);
     }
-
-    // When player dies, (todo) pause menu
+    
     private void PauseGame(bool pause)
     {
+        // Disable players inputs
         if(pause)
             _playerInput.Disable();
         else
             _playerInput.Enable();
         
         Time.timeScale = pause ? 0 : 1;
+    }
+
+    private void RoomCleared(bool bossRoom)
+    {
+        if (bossRoom)
+            WinGame(); //todo - will need changing when more floors added
+        else
+            IncTimer();
+    }
+    
+    private void LoseGame()
+    {
+        // Pause and show death screen
+        PauseGame(true);
+        uiManager.ShowGameOverScreen(true);
+    }
+    
+    private void WinGame()
+    {
+        // Pause and show win screen
+        PauseGame(true);
+        uiManager.ShowWinScreen();
     }
 }
