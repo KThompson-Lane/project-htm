@@ -13,6 +13,8 @@ public class EnemySO : ScriptableObject
     public EnemyAttackSO[] enemyAttackTypes;
 
     public Sprite enemySprite;
+    public Sprite enemyIcon;
+    public AnimatorOverrideController enemyAnimator;
 
     public void OnEnable()
     {
