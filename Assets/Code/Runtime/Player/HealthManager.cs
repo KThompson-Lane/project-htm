@@ -31,7 +31,6 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     {
         if (_godMode) return; //ensure we are not in god mode
         health -= amount;
-        
         // Trigger healthChangedEvent
         HealthChangedEvent.Invoke(health);
 

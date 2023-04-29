@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20bc0f28f76b3ba4d86ea13d8d7070a1, type: 3}
-  m_Name: Slime_Basic_Melee
+  m_Name: Slime_Basic_Ranged
   m_EditorClassIdentifier: 
-  level: 1
-  moveRange: 0
+  level: 2
+  moveRange: 2.5
   rotationSpeed: 3
   enemyAttackTypes:
-  - {fileID: 11400000, guid: c8efd1bbda8027d4088a6bf05ce99ef3, type: 2}
+  - {fileID: 11400000, guid: 8d42379832dfd7641bce12fcbf792656, type: 2}
   enemySprite: {fileID: 21300000, guid: a4508e9b983fc7b4fa2c8c57e0e01f52, type: 3}
