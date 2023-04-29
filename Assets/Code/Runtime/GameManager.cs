@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +12,15 @@ public class GameManager : MonoBehaviour
     private float _remainingTime;
 
     public Animator playerAnimator;
+
+    public bool paused;
+    
+    //todo - enum for game states
+    private enum GameState
+    {
+        Paused
+    }
+    
     
     // Start is called before the first frame update
     void Start()
@@ -85,6 +93,7 @@ public class GameManager : MonoBehaviour
     // When player dies, (todo) pause menu
     private void PauseGame(bool pause)
     {
+        paused = pause;
         Time.timeScale = pause ? 0 : 1;
     }
 }

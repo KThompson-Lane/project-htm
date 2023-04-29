@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour //todo - rename to PlayerController
 {
-    [SerializeField] private HealthManager _healthManager;
+    [SerializeField] private HealthManager healthManager;
+    [SerializeField] private GameManager gameManager;
     
     public float moveSpeed = 5f;
 
@@ -28,14 +30,17 @@ public class PlayerMovement : MonoBehaviour //todo - rename to PlayerController
         _xMoveID = Animator.StringToHash("Movement_X");
         _yMoveID = Animator.StringToHash("Movement_Y");
     }
-
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (gameManager.paused)
+            return;
         _movementInput = context.ReadValue<Vector2>();
     }
 
     public void OnRotate(InputAction.CallbackContext context)
     {
+        if (gameManager.paused)
+            return;
         _rotationInput = context.ReadValue<Vector2>();
         _inputType = context.control.path;
     }
@@ -44,7 +49,7 @@ public class PlayerMovement : MonoBehaviour //todo - rename to PlayerController
     {
         _inputType = context.control.path; // todo - remove if not needed
         // enable on GameManager
-        _healthManager.ToggleGodMode();
+        healthManager.ToggleGodMode();
     }
 
     // Update is called once per frame
