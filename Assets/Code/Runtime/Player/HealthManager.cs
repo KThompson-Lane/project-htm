@@ -12,9 +12,9 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     
     private bool _godMode = false;
 
-    [System.NonSerialized] public UnityEvent<float> HealthChangedEvent;
+    [System.NonSerialized] public UnityEvent<float> HealthChangedEvent; //Note: currently only when health is lost/reset
     [System.NonSerialized] public UnityEvent<float> MaxHealthChangedEvent;
-    [System.NonSerialized] public UnityEvent<bool> HealthDepletedEvent;
+    [System.NonSerialized] public UnityEvent HealthDepletedEvent;
 
     private void OnEnable()
     {
@@ -24,7 +24,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         // Set up events
         HealthChangedEvent ??= new UnityEvent<float>();
         MaxHealthChangedEvent ??= new UnityEvent<float>();
-        HealthDepletedEvent ??= new UnityEvent<bool>();
+        HealthDepletedEvent ??= new UnityEvent();
     }
 
     public void DecreaseHealth(float amount)
@@ -35,17 +35,16 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         HealthChangedEvent.Invoke(health);
 
         if (!(health <= 0)) return;
-        HealthDepletedEvent.Invoke(true);
-        
-        // Show death screen
-        UI_Manager uiManager = UI_Manager.Instance;
-        uiManager.ShowGameOverScreen(true);
+        HealthDepletedEvent.Invoke();
+    }
 
+    public void ResetHealth()
+    {
         //reset health
         health = maxHealth;
         HealthChangedEvent.Invoke(health);
     }
-    
+
     public void ToggleGodMode()
     {
         _godMode = !_godMode;

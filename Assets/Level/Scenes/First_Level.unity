@@ -2533,6 +2533,7 @@ MonoBehaviour:
   rateOfFire: 120
   damage: 1
   _gunAnimator: {fileID: 1044954317}
+  gameManager: {fileID: 863274192}
 --- !u!114 &418963750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2545,7 +2546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3bb4eb69c65d043a60a2ce92d2be0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthManager: {fileID: 0}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
   moveSpeed: 5
   rb: {fileID: 418963754}
   cam: {fileID: 1892569823}
@@ -5363,6 +5364,7 @@ MonoBehaviour:
   uiManager: {fileID: 648975774}
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
   dungeonFloor: {fileID: 536936515}
+  playerMovement: {fileID: 418963750}
   timeLimit: 30
   playerAnimator: {fileID: 418963752}
 --- !u!1 &865885426
@@ -6125,7 +6127,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1058965865}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863274192}
+        m_TargetAssemblyTypeName: GameManager, htm.runtime
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1058965865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8256,18 +8270,14 @@ CompositeCollider2D:
         Y: 34374905
       - X: 4375012
         Y: 34374900
-    - - X: 4166709
+    - - X: 4166708
         Y: 34374900
-      - X: 4166708
+      - X: 4166709
         Y: 34374900
-      - X: 4027836
-        Y: 34236028
-    - - X: 6249900
-        Y: 33749756
-      - X: 6249900
-        Y: 33749758
-      - X: 4896024
-        Y: 32395882
+      - X: 4083385
+        Y: 34291577
+      - X: 3750092
+        Y: 33958282
     - - X: 3645929
         Y: 33437466
       - X: 3708387
@@ -8276,6 +8286,12 @@ CompositeCollider2D:
         Y: 33437466
       - X: 3645914
         Y: 33437440
+    - - X: 6249900
+        Y: 33749756
+      - X: 6249900
+        Y: 33749758
+      - X: 4896024
+        Y: 32395882
     - - X: 6354056
         Y: 33020863
       - X: 6249901
@@ -8298,6 +8314,8 @@ CompositeCollider2D:
         Y: 32847318
     - - X: 6145741
         Y: 32395882
+      - X: 6249905
+        Y: 32916702
       - X: 6226757
         Y: 32800963
       - X: 6145740
@@ -8310,14 +8328,18 @@ CompositeCollider2D:
         Y: 31979123
       - X: 2812403
         Y: 31979142
+      - X: 2708234
+        Y: 32604156
       - X: 2742946
         Y: 32395882
       - X: 2812402
         Y: 31979142
       - X: 2812410
         Y: 31979122
-      - X: 2905419
-        Y: 31830309
+      - X: 2888286
+        Y: 31857721
+      - X: 3333258
+        Y: 31145763
     - - X: 4421511
         Y: 32002311
       - X: 4375261
@@ -8336,6 +8358,12 @@ CompositeCollider2D:
         Y: 31770932
       - X: 5104144
         Y: 31770932
+    - - X: 3645854
+        Y: 31041768
+      - X: 3645853
+        Y: 31041768
+      - X: 3645859
+        Y: 31041766
     - - X: 8124980
         Y: 31041768
       - X: 8124979
@@ -8353,12 +8381,6 @@ CompositeCollider2D:
       - X: 2708353
         Y: 31041768
       - X: 2708359
-        Y: 31041766
-    - - X: 3645854
-        Y: 31041768
-      - X: 3645853
-        Y: 31041768
-      - X: 3645859
         Y: 31041766
     - - X: 50000100
         Y: 6979162
@@ -8392,8 +8414,10 @@ CompositeCollider2D:
         Y: 2291707
     - - X: 47395740
         Y: 1770861
-      - X: 47579082
-        Y: 2229227
+      - X: 47604083
+        Y: 2291732
+      - X: 47543488
+        Y: 2140241
       - X: 47395736
         Y: 1770862
       - X: 47395736
@@ -8410,12 +8434,12 @@ CompositeCollider2D:
         Y: -28958232
       - X: 7083276
         Y: -28958247
-      - X: 6875000
-        Y: -29166524
+      - X: 6842947
+        Y: -29198577
       - X: 6822917
         Y: -29218606
-      - X: 6770834
-        Y: -29166524
+      - X: 6801218
+        Y: -29196908
       - X: 6562557
         Y: -28958247
       - X: 6562520
@@ -8434,12 +8458,12 @@ CompositeCollider2D:
         Y: -28958232
       - X: 5104110
         Y: -28958247
-      - X: 4999757
-        Y: -29062600
+      - X: 4865449
+        Y: -29196908
       - X: 4843750
         Y: -29218606
-      - X: 4687743
-        Y: -29062600
+      - X: 4822051
+        Y: -29196908
       - X: 4583390
         Y: -28958247
       - X: 4583353
@@ -8570,6 +8594,8 @@ CompositeCollider2D:
         Y: -24479225
     - - X: 5208276
         Y: -25520917
+      - X: 5104125
+        Y: -25416768
       - X: 5156201
         Y: -25468843
       - X: 5208276
@@ -8584,12 +8610,14 @@ CompositeCollider2D:
         Y: -25625095
       - X: 4375012
         Y: -25625100
-    - - X: 4166709
+    - - X: 4166708
         Y: -25625100
-      - X: 4166708
+      - X: 4166709
         Y: -25625100
-      - X: 4027836
-        Y: -25763972
+      - X: 4083385
+        Y: -25708423
+      - X: 3750092
+        Y: -26041718
     - - X: 3645929
         Y: -26562534
       - X: 3708387
@@ -8626,6 +8654,8 @@ CompositeCollider2D:
         Y: -27152682
     - - X: 6145741
         Y: -27604118
+      - X: 6249905
+        Y: -27083298
       - X: 6226757
         Y: -27199037
       - X: 6145740
@@ -8644,8 +8674,10 @@ CompositeCollider2D:
         Y: -28020858
       - X: 2812410
         Y: -28020878
-      - X: 2905419
-        Y: -28169691
+      - X: 2888286
+        Y: -28142279
+      - X: 3333258
+        Y: -28854237
     - - X: 4421511
         Y: -27997689
       - X: 4375261
@@ -8664,17 +8696,17 @@ CompositeCollider2D:
         Y: -28229068
       - X: 5104144
         Y: -28229068
-    - - X: 8124980
-        Y: -28958232
-      - X: 8124979
-        Y: -28958232
-      - X: 8124975
-        Y: -28958234
     - - X: 3645854
         Y: -28958232
       - X: 3645853
         Y: -28958232
       - X: 3645859
+        Y: -28958234
+    - - X: 8124980
+        Y: -28958232
+      - X: 8124979
+        Y: -28958232
+      - X: 8124975
         Y: -28958234
     - - X: 2708354
         Y: -28958232
@@ -10529,7 +10561,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1812659503}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863274192}
+        m_TargetAssemblyTypeName: GameManager, htm.runtime
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1812659503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11135,7 +11179,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1900246489}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863274192}
+        m_TargetAssemblyTypeName: GameManager, htm.runtime
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1900246489
 MonoBehaviour:
   m_ObjectHideFlags: 0

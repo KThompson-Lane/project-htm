@@ -25,8 +25,9 @@ public class DungeonFloor : MonoBehaviour
 
     private int _enemiesRemaining;
     
-    [NonSerialized] public UnityEvent RoomClearedEvent;
-    
+    [NonSerialized] public UnityEvent<bool> RoomClearedEvent;
+    [NonSerialized] public UnityEvent EnemyKilledEvent;
+
     private void Awake()
     {
         //  Get tilemaps and room doors script
@@ -44,7 +45,8 @@ public class DungeonFloor : MonoBehaviour
         LoadRoom(startRoom);
         
         // Initialise events
-        RoomClearedEvent ??= new UnityEvent();
+        RoomClearedEvent ??= new UnityEvent<bool>();
+        EnemyKilledEvent ??= new UnityEvent();
     }
     public void GenerateFloor()
     {
@@ -201,14 +203,14 @@ public class DungeonFloor : MonoBehaviour
 
     private void OnEnemyKilled()
     {
-        if (--_enemiesRemaining == 0)
-        {
-            Debug.Log("clearing room");
-            _currentRoom.Cleared = true;
-        }
+        EnemyKilledEvent.Invoke();
+        if (--_enemiesRemaining != 0) return;
+        Debug.Log("clearing room");
+        _currentRoom.Cleared = true;
     }
     private void OnRoomClear()
     {
+        var bossRoom = false;
         foreach (var doorPosition in _doorPositions)
         {
             _wallsMap.GetTile<DoorTile>(doorPosition).OpenDoor();
@@ -217,12 +219,11 @@ public class DungeonFloor : MonoBehaviour
 
         if (_currentRoom is BossRoomScriptableObject boss)
         {
+            bossRoom = true;
             Debug.Log($"Boss {boss.BossName} killed!");
-            //Show winscreen
-            UI_Manager.Instance.ShowWinScreen();
         }
         OnRoomCleared?.Invoke(_currentRoom.Index);
-        RoomClearedEvent.Invoke();
+        RoomClearedEvent.Invoke(bossRoom);
     }
 #if UNITY_EDITOR
     public void PreviewRoom()
