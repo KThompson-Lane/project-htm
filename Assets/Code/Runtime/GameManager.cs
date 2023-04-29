@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public float timeLimit;
     private float _remainingTime;
 
+    private float _enemiesKilled;
+
     public Animator playerAnimator;
 
     private InputActionAsset _playerInput;
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
         healthManager.HealthDepletedEvent.AddListener(LoseGame);
         healthManager.HealthChangedEvent.AddListener(OnPlayerHit);
         dungeonFloor.RoomClearedEvent.AddListener(RoomCleared);
+        dungeonFloor.EnemyKilledEvent.AddListener(IncEnemyKilled);
     }
 
     private void OnDisable()
@@ -58,6 +61,7 @@ public class GameManager : MonoBehaviour
         healthManager.HealthDepletedEvent.RemoveListener(LoseGame);
         healthManager.HealthChangedEvent.RemoveListener(OnPlayerHit);
         dungeonFloor.RoomClearedEvent.RemoveListener(RoomCleared);
+        dungeonFloor.EnemyKilledEvent.RemoveListener(IncEnemyKilled);
     }
 
     // Timer Functions
@@ -69,6 +73,11 @@ public class GameManager : MonoBehaviour
     private void IncTimer() //todo - might want to take a value determined by the room cleared/ current level??
     {
         _remainingTime += 10;
+    }
+
+    private void IncEnemyKilled()
+    {
+        _enemiesKilled++;
     }
 
 

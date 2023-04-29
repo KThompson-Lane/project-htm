@@ -26,6 +26,7 @@ public class DungeonFloor : MonoBehaviour
     private int _enemiesRemaining;
     
     [NonSerialized] public UnityEvent<bool> RoomClearedEvent;
+    [NonSerialized] public UnityEvent EnemyKilledEvent;
 
     private void Awake()
     {
@@ -45,6 +46,7 @@ public class DungeonFloor : MonoBehaviour
         
         // Initialise events
         RoomClearedEvent ??= new UnityEvent<bool>();
+        EnemyKilledEvent ??= new UnityEvent();
     }
     public void GenerateFloor()
     {
@@ -201,11 +203,10 @@ public class DungeonFloor : MonoBehaviour
 
     private void OnEnemyKilled()
     {
-        if (--_enemiesRemaining == 0)
-        {
-            Debug.Log("clearing room");
-            _currentRoom.Cleared = true;
-        }
+        EnemyKilledEvent.Invoke();
+        if (--_enemiesRemaining != 0) return;
+        Debug.Log("clearing room");
+        _currentRoom.Cleared = true;
     }
     private void OnRoomClear()
     {
