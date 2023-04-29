@@ -2399,6 +2399,7 @@ MonoBehaviour:
   rateOfFire: 120
   damage: 1
   _gunAnimator: {fileID: 1044954317}
+  gameManager: {fileID: 0}
 --- !u!114 &418963750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2411,7 +2412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3bb4eb69c65d043a60a2ce92d2be0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthManager: {fileID: 0}
+  healthManager: {fileID: 0}
   moveSpeed: 5
   rb: {fileID: 418963754}
   cam: {fileID: 1892569823}
@@ -4959,6 +4960,8 @@ MonoBehaviour:
   uiManager: {fileID: 648975774}
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
   dungeonFloor: {fileID: 536936515}
+  playerMovement: {fileID: 418963750}
+  timePassed: 0
   timeLimit: 30
   playerAnimator: {fileID: 418963752}
 --- !u!1 &865885426
@@ -7901,7 +7904,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1501274101}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863274192}
+        m_TargetAssemblyTypeName: GameManager, htm.runtime
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1501274101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10743,7 +10758,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1812659503}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863274192}
+        m_TargetAssemblyTypeName: GameManager, htm.runtime
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1812659503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11170,7 +11197,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1877126771}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863274192}
+        m_TargetAssemblyTypeName: GameManager, htm.runtime
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1877126771
 MonoBehaviour:
   m_ObjectHideFlags: 0
