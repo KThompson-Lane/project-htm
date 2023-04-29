@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private int _enemiesKilled;
 
+    private bool _hitThisRoom = false;
+
     public Animator playerAnimator;
 
     private InputActionAsset _playerInput;
@@ -29,11 +31,6 @@ public class GameManager : MonoBehaviour
         _playerInput = playerMovement.GetComponent<PlayerInput>().actions;
     }
 
-    private void OnPlayerHit(float _)
-    {
-        playerAnimator.SetTrigger("Hit");
-    }
-    
     private void LateUpdate()
     {
         // Decrement timer
@@ -70,14 +67,20 @@ public class GameManager : MonoBehaviour
         return _remainingTime;
     }
     
-    private void IncTimer() //todo - might want to take a value determined by the room cleared/ current level??
+    private void IncTimer(float amount) //todo - might want to take a value determined by the room cleared/ current level??
     {
-        _remainingTime += 10;
+        _remainingTime += amount;
     }
 
     private void IncEnemyKilled()
     {
         _enemiesKilled++;
+    }
+
+    private void OnPlayerHit(float _)
+    {
+        playerAnimator.SetTrigger("Hit");
+        _hitThisRoom = true;
     }
 
 
@@ -112,8 +115,12 @@ public class GameManager : MonoBehaviour
     {
         if (bossRoom)
             WinGame(); //todo - will need changing when more floors added
+        else if (_hitThisRoom)
+            IncTimer(10); //todo - remove magic number
         else
-            IncTimer();
+            IncTimer(20); //todo - remove magic number
+
+        _hitThisRoom = false;
     }
     
     private void LoseGame()

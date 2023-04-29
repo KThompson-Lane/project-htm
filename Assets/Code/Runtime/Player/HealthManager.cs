@@ -12,7 +12,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     
     private bool _godMode = false;
 
-    [System.NonSerialized] public UnityEvent<float> HealthChangedEvent;
+    [System.NonSerialized] public UnityEvent<float> HealthChangedEvent; //Note: currently only when health is lost/reset
     [System.NonSerialized] public UnityEvent<float> MaxHealthChangedEvent;
     [System.NonSerialized] public UnityEvent HealthDepletedEvent;
 
