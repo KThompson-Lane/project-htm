@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //todo - change to first level
         _remainingTime = timeLimit;
         PauseGame(false);
+        healthManager.ResetHealth();
     }
     
     private void PauseGame(bool pause)

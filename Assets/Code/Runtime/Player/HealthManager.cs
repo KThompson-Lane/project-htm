@@ -36,12 +36,15 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
 
         if (!(health <= 0)) return;
         HealthDepletedEvent.Invoke();
+    }
 
+    public void ResetHealth()
+    {
         //reset health
         health = maxHealth;
         HealthChangedEvent.Invoke(health);
     }
-    
+
     public void ToggleGodMode()
     {
         _godMode = !_godMode;
