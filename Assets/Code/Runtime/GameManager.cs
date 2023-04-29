@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -7,27 +8,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UI_Manager uiManager;
     [SerializeField] private HealthManager healthManager;
     [SerializeField] private DungeonFloor dungeonFloor;
+    [SerializeField] private PlayerMovement playerMovement;
 
     public float timeLimit;
     private float _remainingTime;
 
     public Animator playerAnimator;
 
-    public bool paused;
-    
-    //todo - enum for game states
-    private enum GameState
-    {
-        Paused
-    }
-    
-    
+    private InputActionAsset _playerInput;
+
     // Start is called before the first frame update
     void Start()
     {
         // Timer
         _remainingTime = timeLimit;
         Time.timeScale = 0;
+        
+        _playerInput = playerMovement.GetComponent<PlayerInput>().actions;
     }
 
     private void OnPlayerHit(float _)
@@ -93,7 +90,11 @@ public class GameManager : MonoBehaviour
     // When player dies, (todo) pause menu
     private void PauseGame(bool pause)
     {
-        paused = pause;
+        if(pause)
+            _playerInput.Disable();
+        else
+            _playerInput.Enable();
+        
         Time.timeScale = pause ? 0 : 1;
     }
 }

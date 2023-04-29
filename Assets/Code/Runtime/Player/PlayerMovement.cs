@@ -6,8 +6,7 @@ using UnityEngine.Serialization;
 public class PlayerMovement : MonoBehaviour //todo - rename to PlayerController
 {
     [SerializeField] private HealthManager healthManager;
-    [SerializeField] private GameManager gameManager;
-    
+
     public float moveSpeed = 5f;
 
     public Rigidbody2D rb;
@@ -32,15 +31,11 @@ public class PlayerMovement : MonoBehaviour //todo - rename to PlayerController
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (gameManager.paused)
-            return;
         _movementInput = context.ReadValue<Vector2>();
     }
 
     public void OnRotate(InputAction.CallbackContext context)
     {
-        if (gameManager.paused)
-            return;
         _rotationInput = context.ReadValue<Vector2>();
         _inputType = context.control.path;
     }

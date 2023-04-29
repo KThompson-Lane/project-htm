@@ -55,8 +55,6 @@ public class Shooting : MonoBehaviour
 
     private void Shoot()
     {
-        if (gameManager.paused)
-            return;
         //Create bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Bullet>().SetDamage(damage);
