@@ -12,12 +12,10 @@ namespace Code.DungeonGeneration
     {
         //TODO: 
         public List<EnemySO> EnemyPool;
-        public List<HazardTile> HazardPool;
         public EnemyTile EnemyTile;
 
         public int MaxEnemies;
         //  Lists for storing the positions of hazards and enemies
-        private List<Tuple<Vector3Int, HazardTile>>_hazards;
         private List<Tuple<Vector3Int, EnemySO>>_enemies;
         public List<Tuple<Vector3Int, EnemySO>> GetEnemies() => _enemies;
 
