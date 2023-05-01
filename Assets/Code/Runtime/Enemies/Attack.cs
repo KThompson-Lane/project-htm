@@ -23,6 +23,8 @@ public class Attack : MonoBehaviour
     // Melee - collision damage
     private bool _inCollision;
     
+    private Animator _animator;
+
     public void Start()
     {
         _rateOfFire = _enemyAttackSo.rateOfFire;
@@ -31,6 +33,7 @@ public class Attack : MonoBehaviour
         _bulletPrefab = _enemyAttackSo.projectile;
         
         _interval = 60 / _rateOfFire; //1 second / rate of fire
+        _animator = GetComponent<Animator>();
     }
 
     public void Update()
@@ -41,11 +44,13 @@ public class Attack : MonoBehaviour
             if (_attackType)
             {
                 Shoot();
+                _animator.SetTrigger("Attack");
                 _coolDown = _interval;
             }
             else if (_inCollision)
             {
                 Hit();
+                _animator.SetTrigger("Attack");
                 _coolDown = _interval;
             }
         }
