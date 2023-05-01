@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Runtime.DungeonGeneration;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
@@ -26,17 +27,10 @@ namespace Code.DungeonGeneration
             //throw new System.NotImplementedException();
             _enemies = new List<Tuple<Vector3Int, EnemySO>>();
             //  Generate list of possible positions
-            var cellBounds = RoomBounds;
-            var position = new Vector3Int(cellBounds.xMin+1, cellBounds.yMin+1, 0);
-            var size = new Vector3Int(cellBounds.size.x - 2, cellBounds.size.y - 2, 1);
-            var hazardBounds = new BoundsInt(position, size);
-            List<Vector3Int> possiblePositions = new();
-            foreach (var cellPosition in hazardBounds.allPositionsWithin)
-            {
-                possiblePositions.Add(cellPosition);
-            }
 
-            foreach (var enemyPosition in possiblePositions.OrderBy(_ => Guid.NewGuid()))
+            var possibleLocations = FloorTiles.Tiles.Where(x => (x.Tile is not RuleTile)).SelectMany(x => x.Positions);
+
+            foreach (var enemyPosition in possibleLocations.OrderBy(_ => Guid.NewGuid()))
             {
                 //  Check conditions
                 

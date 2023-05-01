@@ -19,7 +19,7 @@ public abstract class DungeonRoomScriptableObject : ScriptableObject
     public DoorTile WestDoor;
     
     [SerializeField]
-    private TileList FloorTiles;
+    protected TileList FloorTiles;
 
     public IEnumerable<Tuple<TileBase, Vector3Int>> GetFloorTiles()
     {
