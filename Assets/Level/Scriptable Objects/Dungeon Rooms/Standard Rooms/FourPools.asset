@@ -184,8 +184,11 @@ MonoBehaviour:
     m_Position: {x: -8, y: -4, z: 0}
     m_Size: {x: 17, y: 9, z: 1}
   EnemyPool:
-  - {fileID: 11400000, guid: 9449ea1c17ea6394a8b6b58a2b3946ab, type: 2}
-  - {fileID: 11400000, guid: a06d7391dd444f3478f2519e47c91679, type: 2}
-  - {fileID: 11400000, guid: f984bf5215f196d48be878eca54f6f11, type: 2}
+  - {fileID: 11400000, guid: 6bb29eaec5eb28342944c92240ff8ecc, type: 2}
+  - {fileID: 11400000, guid: 98479f6ccf8c16f4ab19ab84d2660307, type: 2}
+  - {fileID: 11400000, guid: e4b5bd65054197343afa8ed90d56ebda, type: 2}
+  - {fileID: 11400000, guid: 7f0e73ec5ab9baa448f3fe50fac81b4d, type: 2}
+  - {fileID: 11400000, guid: cd903b394b34474478846cc6f2bde769, type: 2}
+  - {fileID: 11400000, guid: 7910dca5a6ad2f64faa0ca1d47d65a85, type: 2}
   EnemyTile: {fileID: 11400000, guid: 39ae01c641a4ec043a485c52dbcf090b, type: 2}
   MaxEnemies: 6
