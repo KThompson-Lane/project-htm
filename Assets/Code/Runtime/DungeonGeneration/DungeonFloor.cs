@@ -74,7 +74,10 @@ public class DungeonFloor : MonoBehaviour
         _floorMap.origin = _currentRoom.RoomBounds.position;
         _floorMap.size = _currentRoom.RoomBounds.size;
         _floorMap.ResizeBounds();
-        _floorMap.FloodFill(Vector3Int.zero, _currentRoom.FloorTile);
+        foreach (var (tile, position) in _currentRoom.GetFloorTiles())
+        {
+            _floorMap.SetTile(position, tile);
+        }
         for (int x = _currentRoom.RoomBounds.xMin; x < _currentRoom.RoomBounds.xMax; x++)
         {
             _wallsMap.SetTile(new Vector3Int(x, _currentRoom.RoomBounds.yMin), _currentRoom.WallTile);
