@@ -27,9 +27,13 @@ namespace Code.DungeonGeneration
             //throw new System.NotImplementedException();
             _enemies = new List<Tuple<Vector3Int, EnemySO>>();
             //  Generate list of possible positions
-
+            
             var possibleLocations = FloorTiles.Tiles.Where(x => (x.Tile is not RuleTile)).SelectMany(x => x.Positions);
-
+            possibleLocations =
+                possibleLocations.Where(position =>
+                    (position.x != RoomBounds.xMax && position.x != RoomBounds.xMin) &&
+                    (position.y != (RoomBounds.yMax-1) && position.y != RoomBounds.yMin));
+            
             foreach (var enemyPosition in possibleLocations.OrderBy(_ => Guid.NewGuid()))
             {
                 //  Check conditions

@@ -11,14 +11,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Terrain
+  - 
   - Water
   - UI
   - Enemies
   - EnemyBullets
   - Bullets
   - Traps
-  - 
+  - Acid
   - 
   - 
   - 
