@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Code.DungeonGeneration;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,6 +23,8 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Transform healthBar;
     private List<HeartContainer> hearts;
 
+    //  Change this
+    public Animator transitionAnimator;
     private static UI_Manager _instance;
 
     public static UI_Manager Instance
@@ -117,6 +122,32 @@ public class UI_Manager : MonoBehaviour
     public void ShowWinScreen()
     {
         winScreen.SetActive(true);
+    }
+    
+    // Transition animation
+    public IEnumerator BeginTransition()
+    {
+        transitionAnimator.SetTrigger("Start");
+        do
+        {
+            yield return null;
+        } while (!transitionAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Start"));
+        do
+        {
+            yield return null;
+        } while (transitionAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Start"));
+    }
+    public IEnumerator FinishTransition()
+    {
+        transitionAnimator.SetTrigger("Finish");
+        do
+        {
+            yield return null;
+        } while (!transitionAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Finish"));
+        do
+        {
+            yield return null;
+        } while (transitionAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Finish"));
     }
     
     //  TODO: Implement
