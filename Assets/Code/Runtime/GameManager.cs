@@ -104,6 +104,12 @@ public class GameManager : MonoBehaviour
     
     public void RestartGame()
     {
+        StartCoroutine(ReloadScene());
+    }
+
+    private IEnumerator ReloadScene()
+    {
+        yield return StartCoroutine(uiManager.BeginTransition());
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //todo - change to first level
         _remainingTime = timeLimit;
         PauseGame(false);
