@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -13,15 +13,20 @@ public class Bullet : MonoBehaviour
             enemyController.TakeDamage(1); //todo - variable damage
         }
         
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void Start()
     {
         //Ensure bullet is destroyed after a set time so they don't linger
-        Destroy(gameObject, 10f);
+        StartCoroutine(DisableAfter(10));
     }
-    
+
+    public IEnumerator DisableAfter(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        gameObject.SetActive(false);
+    }
     public void SetDamage(float damage)
     {
         Damage = damage;
