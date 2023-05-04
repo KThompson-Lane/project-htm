@@ -1,10 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PickupSO", menuName = "ScriptableObject/Pickup")]
-public class PickupSO : ScriptableObject
+public abstract class PickupSO : ScriptableObject
 {
-    public int health;
-    public int damage;
-    public float rateOfFire;
-    public bool invulnerable;
+    [SerializeField] protected PlayerAttackSO playerAttackSo;
+    [SerializeField] protected HealthManager healthManager; // for player health
+
+    public abstract bool Apply();
 }

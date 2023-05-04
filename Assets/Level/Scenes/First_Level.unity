@@ -2208,7 +2208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73cae21c3380244b95a0853262d38ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSo: {fileID: 11400000, guid: 0cd5fbdeda654ca44a6e5db0eee500d9, type: 2}
+  pickupSo: {fileID: 0}
   playerAttackSo: {fileID: 11400000, guid: 331e9b3768bb31a4397f4f217c871734, type: 2}
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!50 &311771711
@@ -6653,7 +6653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73cae21c3380244b95a0853262d38ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSo: {fileID: 11400000, guid: c54ce3d255368c14d8a5d7ad8618dbcd, type: 2}
+  pickupSo: {fileID: 11400000, guid: b703ada0941fa6e47a33206d14e85cf3, type: 2}
   playerAttackSo: {fileID: 11400000, guid: 331e9b3768bb31a4397f4f217c871734, type: 2}
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!1 &787444921
@@ -7337,7 +7337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73cae21c3380244b95a0853262d38ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSo: {fileID: 11400000, guid: 3dc051c7be2b6aa4f8516a824e2d3980, type: 2}
+  pickupSo: {fileID: 0}
   playerAttackSo: {fileID: 11400000, guid: 331e9b3768bb31a4397f4f217c871734, type: 2}
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
 --- !u!60 &939174394

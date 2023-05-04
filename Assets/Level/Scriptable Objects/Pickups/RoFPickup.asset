@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 388f71a25765c6c4080887caf7f0d074, type: 3}
+  m_Script: {fileID: 11500000, guid: aaf8d62737416334fa343050f3a49c3e, type: 3}
   m_Name: RoFPickup
   m_EditorClassIdentifier: 
   health: 0
   damage: 0
-  rateOfFire: 30
+  rateOfFire: 0
   invulnerable: 0
+  playerAttackSo: {fileID: 0}
   healthManager: {fileID: 0}
+  amount: 0

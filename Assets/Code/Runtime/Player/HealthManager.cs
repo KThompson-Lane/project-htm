@@ -12,14 +12,14 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     
     private bool _godMode = false;
 
-    [System.NonSerialized] public UnityEvent<float> HealthChangedEvent; //Note: currently only when health is lost/reset
-    [System.NonSerialized] public UnityEvent<float> MaxHealthChangedEvent;
-    [System.NonSerialized] public UnityEvent HealthDepletedEvent;
+    [NonSerialized] public UnityEvent<float> HealthChangedEvent; //Note: currently only when health is lost/reset
+    [NonSerialized] public UnityEvent<float> MaxHealthChangedEvent;
+    [NonSerialized] public UnityEvent HealthDepletedEvent;
 
     private void OnEnable()
     {
         // When game starts ensure health is set to max
-        health = maxHealth;
+        //health = maxHealth;
         
         // Set up events
         HealthChangedEvent ??= new UnityEvent<float>();
@@ -38,17 +38,18 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         HealthDepletedEvent.Invoke();
     }
 
-    public void IncreaseHealth(int amount) //todo - could combine with decrease and have ModifyHealth
+    public bool IncreaseHealth(int amount) //todo - could combine with decrease and have ModifyHealth
     {
         // Ensure health is not already full
         if (health >= maxHealth)
-            return;
+            return false;
 
         // Ensure new health value isn't above max health, or below zero
         health = Math.Clamp(health + amount, 0, maxHealth);
         
         // Trigger healthChangedEvent
         HealthChangedEvent.Invoke(health);
+        return true;
     }
 
     public void ResetHealth()
