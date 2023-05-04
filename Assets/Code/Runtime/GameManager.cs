@@ -47,8 +47,7 @@ public class GameManager : MonoBehaviour
 
         // If time runs out, pause and show game over screen
         if (time > TimeSpan.FromSeconds(0)) return;
-        PauseGame(true);
-        uiManager.ShowGameOverScreen(true);
+        LoseGame();
     }
     
     private void OnEnable()
@@ -170,14 +169,14 @@ public class GameManager : MonoBehaviour
     {
         // Pause and show death screen
         PauseGame(true);
-        uiManager.ShowGameOverScreen(true);
+        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled);
     }
     
     private void WinGame()
     {
         // Pause and show win screen
         PauseGame(true);
-        uiManager.ShowWinScreen();
+        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled);
     }
 
     public void QuitGame()
