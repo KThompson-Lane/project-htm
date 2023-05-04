@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -16,9 +17,9 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        //Ensure bullet is destroyed after a set time so they don't linger
+        GetComponent<TrailRenderer>().Clear();
         StartCoroutine(DisableAfter(10));
     }
 

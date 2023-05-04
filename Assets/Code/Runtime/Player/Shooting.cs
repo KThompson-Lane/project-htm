@@ -59,9 +59,9 @@ public class Shooting : MonoBehaviour
         var bullet = ObjectPool.instance.RetrieveFromPool();
         if (bullet == null)
             return;
-        bullet.SetActive(true);
         bullet.transform.position = firePoint.position;
         bullet.transform.rotation = firePoint.rotation;
+        bullet.SetActive(true);
         bullet.GetComponent<Bullet>().SetDamage(damage);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
