@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c850b3aa40b5fcc4b8ce1f28ad2d10b4, type: 3}
-  m_Name: HealthManagerScriptableObj
+  m_Script: {fileID: 11500000, guid: aaf8d62737416334fa343050f3a49c3e, type: 3}
+  m_Name: RoFPickup
   m_EditorClassIdentifier: 
-  health: 13
-  maxHealth: 20
+  playerAttackSo: {fileID: 11400000, guid: 331e9b3768bb31a4397f4f217c871734, type: 2}
+  healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
+  amount: 30

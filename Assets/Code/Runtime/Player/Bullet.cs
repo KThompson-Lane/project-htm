@@ -1,17 +1,16 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    protected float Damage;
+    protected int Damage;
     private void OnTriggerEnter2D(Collider2D col)
     {
         var enemyController = col.gameObject.GetComponent<EnemyController>();
         
         if (enemyController != null)
         {
-            enemyController.TakeDamage(1); //todo - variable damage
+            enemyController.TakeDamage(Damage); //todo - variable damage
         }
         
         gameObject.SetActive(false);
@@ -28,7 +27,8 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         gameObject.SetActive(false);
     }
-    public void SetDamage(float damage)
+    
+    public void SetDamage(int damage)
     {
         Damage = damage;
     }
