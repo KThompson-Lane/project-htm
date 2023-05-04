@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class HealthPickup : MonoBehaviour
 {
-    public float healthValue = 2;
+    public int healthValue = 2;
     
     [SerializeField]
     private HealthManager healthManager; // for player health

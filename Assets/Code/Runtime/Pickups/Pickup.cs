@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,11 @@ public class Pickup : MonoBehaviour
     [SerializeField]
     private PlayerAttackSO playerAttackSo;
     
-    private float _health;
-    private float _damage;
+    private int _health;
+    private int _damage;
     private float _rateOfFire;
     private bool _invulnerable; //todo - add
-    private float[] _modifiers;
-    
+
     [SerializeField]
     private HealthManager healthManager; // for player health
 
@@ -26,14 +26,11 @@ public class Pickup : MonoBehaviour
         _damage = pickupSo.damage;
         _rateOfFire = pickupSo.rateOfFire;
         _invulnerable = pickupSo.invulnerable;
-        
-        _modifiers = new []{_health, _damage, _rateOfFire};
-
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.gameObject.tag is "Player")
+        if (col.gameObject.tag is "Player")
             PickUp();
     }
 

@@ -27,7 +27,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         HealthDepletedEvent ??= new UnityEvent();
     }
 
-    public void DecreaseHealth(float amount)
+    public void DecreaseHealth(int amount)
     {
         if (_godMode) return; //ensure we are not in god mode
         health -= amount;
@@ -38,7 +38,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         HealthDepletedEvent.Invoke();
     }
 
-    public void IncreaseHealth(float amount) //todo - could combine with decrease and have ModifyHealth
+    public void IncreaseHealth(int amount) //todo - could combine with decrease and have ModifyHealth
     {
         // Ensure health is not already full
         if (health >= maxHealth)

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +10,7 @@ public class Shooting : MonoBehaviour
 
     public float rateOfFire = 60.0f;
 
-    public float damage = 1f;
+    public int damage = 1;
     
     private float _coolDown = 0.0f;
 
@@ -21,11 +20,31 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Animator _gunAnimator;
     
     [SerializeField] private GameManager gameManager;
+    
+    [SerializeField]
+    private PlayerAttackSO playerAttackSo;
 
     public void Start()
     {
+        rateOfFire = playerAttackSo.rateOfFire;
+        damage = playerAttackSo.baseDamage;
+        //todo - all other so variables
+        
+        playerAttackSo.DamageModifiedEvent.AddListener(OnDamageModified);
+        playerAttackSo.RoFModifiedEvent.AddListener(OnRoFModified);
+        
         _interval = 60 / rateOfFire; //1 second / rate of fire
         _gunAnimator.SetFloat("Fire Rate", _interval);
+    }
+
+    private void OnDamageModified(int amount)
+    {
+        damage = amount;
+    }
+
+    private void OnRoFModified(float amount)
+    {
+        rateOfFire = amount;
     }
 
     public void OnShoot(InputAction.CallbackContext context)

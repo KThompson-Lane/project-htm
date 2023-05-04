@@ -6,7 +6,7 @@ public class Attack : MonoBehaviour
     private bool _attackType; //todo - change to enum, currently true is ranged
 
     private float _rateOfFire;
-    private float _damage;
+    private int _damage;
     
     private float _coolDown = 0.0f;
     private float _interval; // time between shots
