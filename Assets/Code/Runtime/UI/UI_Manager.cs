@@ -15,17 +15,17 @@ public class UI_Manager : MonoBehaviour
     
     [SerializeField] private GameManager gameManager;
 
-    [FormerlySerializedAs("deathScreen")] [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private GameObject winScreen;
-
     [SerializeField] private GameObject heartPrefab;
 
     [SerializeField] private Transform healthBar;
     private List<HeartContainer> hearts;
 
+    [SerializeField] private EndScreen endScreen;
+
     //  Change this
     public Animator transitionAnimator;
     private static UI_Manager _instance;
+    
 
     public static UI_Manager Instance
     {
@@ -41,6 +41,7 @@ public class UI_Manager : MonoBehaviour
     {
         _instance = this;
         hearts = new List<HeartContainer>();
+        //endScreen = GetComponentInChildren<EndScreen>();
     }
 
     private void Start()
@@ -114,16 +115,11 @@ public class UI_Manager : MonoBehaviour
     }
     
     // Screens
-    public void ShowGameOverScreen(bool show)
+    public void ShowEndScreen(bool win, float duration, int kills)
     {
-        gameOverScreen.SetActive(show);
+        endScreen.ShowEndScreen(win, duration, kills);
     }
 
-    public void ShowWinScreen()
-    {
-        winScreen.SetActive(true);
-    }
-    
     // Transition animation
     public IEnumerator BeginTransition()
     {

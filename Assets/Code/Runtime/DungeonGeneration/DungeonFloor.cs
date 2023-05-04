@@ -5,6 +5,7 @@ using Code.DungeonGeneration;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
+using UnityEngine.U2D;
 
 [RequireComponent(typeof(Grid))]
 public class DungeonFloor : MonoBehaviour
@@ -30,6 +31,8 @@ public class DungeonFloor : MonoBehaviour
     [NonSerialized] public UnityEvent<bool> RoomClearedEvent;
     [NonSerialized] public UnityEvent EnemyKilledEvent;
 
+    [SerializeField] private Light2DBase roomLight;
+    
     private void Awake()
     {
         //  Get tilemaps and room doors script
@@ -97,7 +100,9 @@ public class DungeonFloor : MonoBehaviour
 
         //  Create room doors
         CreateDoors();
-        
+
+        roomLight.enabled = _currentRoom.Cleared;
+
         if(!_currentRoom.Cleared)
             PlaceEnemies();
         //  Create hazards
@@ -231,6 +236,7 @@ public class DungeonFloor : MonoBehaviour
         }
         OnRoomCleared?.Invoke(_currentRoom.Index);
         RoomClearedEvent.Invoke(bossRoom);
+        roomLight.enabled = true;
     }
 #if UNITY_EDITOR
     public void PreviewRoom()
