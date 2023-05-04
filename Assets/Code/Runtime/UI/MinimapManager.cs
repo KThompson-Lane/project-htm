@@ -50,7 +50,7 @@ public class MinimapManager : MonoBehaviour
         }
     }
 
-    private void DiscoverRoom(RoomIndex room)
+    private void DiscoverRoom(RoomIndex room, Direction _)
     {
         //  Reveal our current room and place neighbour rooms
 

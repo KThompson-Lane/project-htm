@@ -11,9 +11,11 @@ public class DungeonFloor : MonoBehaviour
 {
     public Transform player;
     public DungeonFloorScriptableObject floorObject;
-    public delegate void RoomUpdate(RoomIndex room);
-    public event RoomUpdate OnRoomChange;
-    public event RoomUpdate OnRoomCleared;
+    public delegate void RoomChange(RoomIndex newRoom, Direction entryDirection);
+
+    public delegate void RoomClear(RoomIndex cleared);
+    public event RoomChange OnRoomChange;
+    public event RoomClear OnRoomCleared;
     private DungeonRoomScriptableObject _currentRoom;
     
     private Tilemap _floorMap, _wallsMap;
@@ -53,7 +55,11 @@ public class DungeonFloor : MonoBehaviour
         if (floorObject != null)
             floorObject.GenerateFloor();
     }
-    
+
+    public void ChangeRoom(RoomIndex index)
+    {
+        LoadRoom(floorObject.floorplan[index]);
+    }
     private void LoadRoom(DungeonRoomScriptableObject newRoom)
     {
         if (newRoom == null)
@@ -74,7 +80,10 @@ public class DungeonFloor : MonoBehaviour
         _floorMap.origin = _currentRoom.RoomBounds.position;
         _floorMap.size = _currentRoom.RoomBounds.size;
         _floorMap.ResizeBounds();
-        _floorMap.FloodFill(Vector3Int.zero, _currentRoom.FloorTile);
+        foreach (var (tile, position) in _currentRoom.GetFloorTiles())
+        {
+            _floorMap.SetTile(position, tile);
+        }
         for (int x = _currentRoom.RoomBounds.xMin; x < _currentRoom.RoomBounds.xMax; x++)
         {
             _wallsMap.SetTile(new Vector3Int(x, _currentRoom.RoomBounds.yMin), _currentRoom.WallTile);
@@ -171,6 +180,7 @@ public class DungeonFloor : MonoBehaviour
             _wallsMap.RefreshTile(doorPosition);
         }
     }
+    //  This should be moved to Game manager
     private void OnDoorTriggered(Direction direction)
     {
         if (!_currentRoom.Cleared) return;
@@ -178,13 +188,10 @@ public class DungeonFloor : MonoBehaviour
                            throw new Exception("Invalid room");
         //  Unsubscribe from our previous room
         _currentRoom.OnRoomCleared -= OnRoomClear;
-        LoadRoom(floorObject.floorplan[newRoomIndex]);
-        OnRoomChange?.Invoke(newRoomIndex);
-        //  Move player.
-        MovePlayer(direction);
+        OnRoomChange?.Invoke(newRoomIndex, direction);
     }
 
-    private void MovePlayer(Direction entranceDirection)
+    public void MovePlayer(Direction entranceDirection)
     {
         //  Entrance direction is the direction going *in* to the room,
         // i.e. entering from the north means you are in the south/bottom of the room.

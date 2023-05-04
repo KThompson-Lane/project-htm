@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 
-namespace Code.DungeonGeneration
+namespace Code.Runtime.DungeonGeneration
 {
-    [RequireComponent(typeof(BoxCollider2D))]
-    public class Hazard : MonoBehaviour
+    [RequireComponent(typeof(Collider2D))]
+    public class Hazards : MonoBehaviour
     {
         //TODO: Replace flat damage amount w/ a hazard/effect SO giving the hazard tile different effects
         [SerializeField] private HealthManager playerHealthManager;
-        private int _damage;
-        public void SetDamage(int value) => _damage = value;
+        
+        [SerializeField] int damage;
 
         private void Awake()
         {
-            GetComponent<BoxCollider2D>().isTrigger = true;
+            //GetComponent<BoxCollider2D>().isTrigger = true;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
-                playerHealthManager.DecreaseHealth(_damage);
+            {
+                Debug.Log("Player stepped on hazard");
+                playerHealthManager.DecreaseHealth(damage);
+            }
         }
     }
 }

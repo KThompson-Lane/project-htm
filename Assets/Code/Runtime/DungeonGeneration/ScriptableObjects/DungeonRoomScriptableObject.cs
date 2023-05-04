@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.DungeonGeneration;
+using Code.Runtime.DungeonGeneration;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// An abstract scriptable object class to represent a dungeon room
@@ -8,12 +12,24 @@ using UnityEngine;
 public abstract class DungeonRoomScriptableObject : ScriptableObject
 {
     //  Room tiles for the tilemap
-    public RuleTile FloorTile;
     public RuleTile WallTile;
     public DoorTile NorthDoor;
     public DoorTile EastDoor;
     public DoorTile SouthDoor;
     public DoorTile WestDoor;
+    
+    [SerializeField]
+    protected TileList FloorTiles;
+
+    public IEnumerable<Tuple<TileBase, Vector3Int>> GetFloorTiles()
+    {
+        return FloorTiles.Enumerate();
+    }
+
+    public void SetTilemaps(TileList floor)
+    {
+        FloorTiles = floor;
+    }
     
     //  Room size
     public BoundsInt RoomBounds;

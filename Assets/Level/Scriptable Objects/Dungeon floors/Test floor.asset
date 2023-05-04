@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorSize: {x: 8, y: 7}
   level: 1
-  rooms: 12
-  StartRoom: {fileID: 11400000, guid: 44f3adbc067ac864f99635aa3d65cf83, type: 2}
+  rooms: 9
+  StartRoom: {fileID: 11400000, guid: a80bc444d47d3bb4b8e9d2bb5bcb0503, type: 2}
   BasicRooms:
-  - {fileID: 11400000, guid: 469bed36c30b44b4d8ebef540d2873a5, type: 2}
+  - {fileID: 11400000, guid: b3c6239a61b493d4c832583ea0b54634, type: 2}
+  - {fileID: 11400000, guid: 7ecacfd4db12ebe43865a56365d3efc9, type: 2}
+  - {fileID: 11400000, guid: 8e699ff39dc5c4143aa81f53fde2eb19, type: 2}
+  - {fileID: 11400000, guid: 4ce9e90fff79f2c4c89a88b2af8e0758, type: 2}
   BossRooms:
-  - {fileID: 11400000, guid: fe523539f3b7bad4ea5d5c3ff0a11934, type: 2}
+  - {fileID: 11400000, guid: 5cd36fb4c5fed6440b7b56d4fc4282ba, type: 2}

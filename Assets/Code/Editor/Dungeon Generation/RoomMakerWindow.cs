@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 #if UNITY_EDITOR
-public class RoomCreator : EditorWindow
+public class RoomMakerWindow : EditorWindow
 {
     private string roomName = "My Room";
     private Vector2Int roomSize = new(5,5);
@@ -16,7 +16,7 @@ public class RoomCreator : EditorWindow
     [MenuItem("Window/Create Dungeon Room")]
     public static void ShowWindow()
     {
-        GetWindow<RoomCreator>();
+        GetWindow<RoomMakerWindow>();
     }
 
     private void OnGUI()
