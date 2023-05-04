@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 
 [CreateAssetMenu]
@@ -19,7 +21,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     private void OnEnable()
     {
         // When game starts ensure health is set to max
-        health = maxHealth;
+        //health = maxHealth;
         
         // Set up events
         HealthChangedEvent ??= new UnityEvent<float>();
@@ -36,6 +38,19 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
 
         if (!(health <= 0)) return;
         HealthDepletedEvent.Invoke();
+    }
+
+    public void IncreaseHealth(float amount)
+    {
+        // Ensure health is not already full
+        if (health >= maxHealth)
+            return;
+
+        // Ensure new health value isn't above max health, or below zero
+        health = Math.Clamp(health + amount, 0, maxHealth);
+        
+        // Trigger healthChangedEvent
+        HealthChangedEvent.Invoke(health);
     }
 
     public void ResetHealth()
