@@ -8,6 +8,7 @@ public class PlayerAttackSO : ScriptableObject
     public int baseDamage;
     public int damage = 1;
     public float range = 0f; //todo - sort!
+    public float baseRateOfFire;
     public float rateOfFire = 120f;
     
     [System.NonSerialized] public UnityEvent<int> DamageModifiedEvent;
@@ -16,6 +17,7 @@ public class PlayerAttackSO : ScriptableObject
     private void OnEnable()
     {
         damage = baseDamage;
+        rateOfFire = baseRateOfFire;
         // Set up events
         DamageModifiedEvent ??= new UnityEvent<int>();
         RoFModifiedEvent ??= new UnityEvent<float>();

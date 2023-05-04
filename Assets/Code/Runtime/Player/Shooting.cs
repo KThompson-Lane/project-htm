@@ -45,6 +45,9 @@ public class Shooting : MonoBehaviour
     private void OnRoFModified(float amount)
     {
         rateOfFire = amount;
+        
+        _interval = 60 / rateOfFire; //1 second / rate of fire
+        _gunAnimator.SetFloat("Fire Rate", _interval);
     }
 
     public void OnShoot(InputAction.CallbackContext context)
