@@ -7,13 +7,4 @@ public class PickupSO : ScriptableObject
     public int damage;
     public float rateOfFire;
     public bool invulnerable;
-    
-    [SerializeField]
-    private HealthManager healthManager;
-    
-    
-    
-    
-    
-    
 }

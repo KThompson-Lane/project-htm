@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-//todo - use this!
 [CreateAssetMenu(fileName = "PlayerAttackSO", menuName = "ScriptableObject/Player")]
 public class PlayerAttackSO : ScriptableObject
 {
