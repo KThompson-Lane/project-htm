@@ -19,7 +19,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
     private void OnEnable()
     {
         // When game starts ensure health is set to max
-        //health = maxHealth;
+        health = maxHealth;
         
         // Set up events
         HealthChangedEvent ??= new UnityEvent<float>();
