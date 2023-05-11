@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public float timeLimit;
     private float _remainingTime;
 
-    private int _enemiesKilled;
+    private int _enemiesKilled, _roomsCleared;
 
     private bool _hitThisRoom = false;
 
@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
 
     private void RoomCleared(bool bossRoom)
     {
+        _roomsCleared++;
         if (bossRoom)
             WinGame(); //todo - will need changing when more floors added
         else if (_hitThisRoom)
@@ -175,14 +176,14 @@ public class GameManager : MonoBehaviour
     {
         // Pause and show death screen
         PauseGame(true);
-        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled);
+        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared);
     }
     
     private void WinGame()
     {
         // Pause and show win screen
         PauseGame(true);
-        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled);
+        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared);
     }
 
     public void QuitGame()

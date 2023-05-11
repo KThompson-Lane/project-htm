@@ -6,14 +6,16 @@ public class EndScreen : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI missionDuration;
     [SerializeField] private TextMeshProUGUI enemiesKilled;
+    [SerializeField] private TextMeshProUGUI roomsCleared;
     [SerializeField] private TextMeshProUGUI missionStatus;
     [SerializeField] private GameObject failureCause;
     // Start is called before the first frame update
 
-    public void ShowEndScreen(bool win, float duration, int kills)
+    public void ShowEndScreen(bool win, float duration, int kills, int rooms)
     {
         gameObject.SetActive(true);
         enemiesKilled.text = kills.ToString();
+        roomsCleared.text = rooms.ToString();
         missionDuration.text = TimeSpan.FromSeconds(duration).ToString("mm':'ss");
         if (win)
         {

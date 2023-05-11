@@ -115,9 +115,9 @@ public class UI_Manager : MonoBehaviour
     }
     
     // Screens
-    public void ShowEndScreen(bool win, float duration, int kills)
+    public void ShowEndScreen(bool win, float duration, int kills, int roomsCleared)
     {
-        endScreen.ShowEndScreen(win, duration, kills);
+        endScreen.ShowEndScreen(win, duration, kills, roomsCleared);
     }
 
     // Transition animation
