@@ -27,6 +27,14 @@ public class GameManager : MonoBehaviour
 
     private InputActionAsset _playerInput;
 
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -147,12 +155,23 @@ public class GameManager : MonoBehaviour
             WinGame();
         else
         {
-            PauseGame(true);
-            StartCoroutine(ChangeFloor());
-            PauseGame(false);
+            BeginFloorChange();
         }
     }
 
+    private void BeginFloorChange()
+    {
+        PauseGame(true);
+        playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        playerAnimator.SetTrigger("Dissolve");
+    }
+    public void FinishFloorChange()
+    {
+        StartCoroutine(ChangeFloor());
+        playerAnimator.updateMode = AnimatorUpdateMode.Normal;
+        PauseGame(false);
+    }
+    
     IEnumerator ChangeFloor()
     {
         yield return new WaitForEndOfFrame();
