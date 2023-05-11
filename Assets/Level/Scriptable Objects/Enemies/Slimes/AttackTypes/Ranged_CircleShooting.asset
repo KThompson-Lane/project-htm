@@ -15,7 +15,7 @@ MonoBehaviour:
   ranged: 1
   angleSpread: 359
   startingDistance: 0.1
-  bulletsInBurst: 1
+  bulletsInBurst: 5
   damage: 1
   range: 3.5
   rateOfFire: 30
