@@ -152,6 +152,12 @@ public class GameManager : MonoBehaviour
         //  Begin animation
         //  Wait for fade in to finish
         yield return StartCoroutine(uiManager.BeginTransition());
+        //  Disable all powerups
+        foreach (var pickup in FindObjectsOfType<Pickup>())
+        {
+            pickup.gameObject.SetActive(false);
+        }
+
         //  Load new room
         dungeonFloor.ChangeRoom(newRoom);
         //  Move player.
