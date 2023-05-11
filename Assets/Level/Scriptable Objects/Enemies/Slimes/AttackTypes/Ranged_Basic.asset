@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Ranged_Basic
   m_EditorClassIdentifier: 
   ranged: 1
+  angleSpread: 160
+  startingDistance: 0.1
   damage: 1
   range: 3.5
   rateOfFire: 30

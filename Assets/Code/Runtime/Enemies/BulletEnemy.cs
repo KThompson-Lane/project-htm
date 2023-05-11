@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 public class BulletEnemy : Bullet
 {
     [SerializeField]
     private HealthManager healthManager; // for player health
-    
+
+    public float moveSpeed = 0; //todo - accessor!!!
     private void OnTriggerEnter2D(Collider2D col)
     {
         //todo - make this better!!
@@ -19,5 +21,15 @@ public class BulletEnemy : Bullet
         }
         
         Destroy(gameObject);
+    }
+
+    private void MoveProjectile()
+    {
+        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
+    }
+
+    private void Update()
+    {
+        MoveProjectile();
     }
 }
