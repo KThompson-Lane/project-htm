@@ -61,7 +61,8 @@ namespace Code.DungeonGeneration
         public bool RollPickups(Vector3Int dropPosition)
         {
             //  Roll whether to place a pickup
-            return _pickups.TryAdd(dropPosition, PickupPool[Random.Range(0, PickupPool.Count)]);
+            var roll = Random.Range(0, 10);
+            return roll < PickupPool.Count && _pickups.TryAdd(dropPosition, PickupPool[Random.Range(0, PickupPool.Count)]);
         }
     }
 }
