@@ -14,11 +14,12 @@ public class MinimapManager : MonoBehaviour
     {
         floorScript.OnRoomChange += DiscoverRoom;
         floorScript.OnRoomCleared += ClearRoom;
-        _dungeonFloorMap.ClearAllTiles();
+        floorScript.OnLevelChange += Reset;
     }
 
-    private void Start()
+    public void Reset()
     {
+        _dungeonFloorMap.ClearAllTiles();
         //  Place our start room onto the minimap
         var startRoom = floorScript.CurrentRoom;
         PlaceRoomTile(startRoom);
@@ -28,7 +29,6 @@ public class MinimapManager : MonoBehaviour
             PlaceRoomTile(floorScript.GetRoom(index));
         }
     }
-
     private void PlaceRoomTile(DungeonRoomScriptableObject room)
     {
         Vector3Int tilePosition = new Vector3Int(room.Index.X, room.Index.Y, 1);

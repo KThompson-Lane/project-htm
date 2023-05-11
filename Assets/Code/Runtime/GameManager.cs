@@ -11,8 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UI_Manager uiManager;
     [SerializeField] private HealthManager healthManager;
     [SerializeField] private DungeonFloor dungeonFloor;
+    [SerializeField] private GameObject portal;
     [FormerlySerializedAs("playerMovement")] [SerializeField] private PlayerController playerController;
-
+    
+    [SerializeField] private DungeonFloorScriptableObject[] levels;
+    private int currentLevel;
     public float timePassed;
     
     public float timeLimit;
@@ -26,6 +29,14 @@ public class GameManager : MonoBehaviour
 
     private InputActionAsset _playerInput;
 
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +46,8 @@ public class GameManager : MonoBehaviour
         _remainingTime = timeLimit;
         Time.timeScale = 0;
         
-        _playerInput = playerController.GetComponent<PlayerInput>().actions;
+        _playerInput = playerController.GetComponent<PlayerInput>().actions; 
+        dungeonFloor.LoadFloor(levels[currentLevel++]);
     }
 
     private void LateUpdate()
@@ -115,6 +127,11 @@ public class GameManager : MonoBehaviour
         PauseGame(false);
         healthManager.ResetHealth();
     }
+
+    public void ClearFloor()
+    {
+        portal.SetActive(true);
+    }
     
     public void PauseGame(bool pause)
     {
@@ -131,15 +148,45 @@ public class GameManager : MonoBehaviour
     {
         _roomsCleared++;
         if (bossRoom)
-            WinGame(); //todo - will need changing when more floors added
-        else if (_hitThisRoom)
+            ClearFloor(); //todo - will need changing when more floors added
+        if (_hitThisRoom)
             IncTimer(10); //todo - remove magic number
         else
             IncTimer(20); //todo - remove magic number
-
         _hitThisRoom = false;
     }
 
+    public void NextLevel()
+    {
+        portal.SetActive(false);
+        if(currentLevel == levels.Length)
+            WinGame();
+        else
+        {
+            BeginFloorChange();
+        }
+    }
+
+    private void BeginFloorChange()
+    {
+        PauseGame(true);
+        playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        playerAnimator.SetTrigger("Dissolve");
+    }
+    public void FinishFloorChange()
+    {
+        StartCoroutine(ChangeFloor());
+        playerAnimator.updateMode = AnimatorUpdateMode.Normal;
+        PauseGame(false);
+    }
+    
+    IEnumerator ChangeFloor()
+    {
+        yield return new WaitForEndOfFrame();
+        dungeonFloor.LoadFloor(levels[currentLevel++]);
+        dungeonFloor.ClearRoom();
+    }
+    
     private void RoomChanged(RoomIndex newRoom, Direction entryDirection)
     {
         StartCoroutine(ChangeRoom(newRoom, entryDirection));
@@ -177,14 +224,14 @@ public class GameManager : MonoBehaviour
     {
         // Pause and show death screen
         PauseGame(true);
-        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared);
+        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared, currentLevel);
     }
     
     private void WinGame()
     {
         // Pause and show win screen
         PauseGame(true);
-        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared);
+        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared, currentLevel);
     }
 
     public void QuitGame()

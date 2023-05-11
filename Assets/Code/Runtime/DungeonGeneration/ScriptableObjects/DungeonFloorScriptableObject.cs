@@ -20,8 +20,8 @@ public class DungeonFloorScriptableObject : ScriptableObject
     public int level;
     public int rooms;
     public DungeonRoomScriptableObject StartRoom;
-    public List<DungeonRoomScriptableObject> BasicRooms;
-    public List<DungeonRoomScriptableObject> BossRooms;
+    public List<NormalRoomScriptableObject> BasicRooms;
+    public List<BossRoomScriptableObject> BossRooms;
     
     public Dictionary<RoomIndex, DungeonRoomScriptableObject> floorplan;
     private RoomIndex _startRoom;

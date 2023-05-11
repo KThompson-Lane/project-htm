@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf7cf89b88cbe04fbb3c0c37fcee400, type: 3}
+  m_Name: SecondFloor
+  m_EditorClassIdentifier: 
+  floorSize: {x: 8, y: 7}
+  level: 1
+  rooms: 0
+  StartRoom: {fileID: 11400000, guid: a80bc444d47d3bb4b8e9d2bb5bcb0503, type: 2}
+  BasicRooms:
+  - {fileID: 11400000, guid: 7ecacfd4db12ebe43865a56365d3efc9, type: 2}
+  - {fileID: 11400000, guid: b3c6239a61b493d4c832583ea0b54634, type: 2}
+  - {fileID: 11400000, guid: 8e699ff39dc5c4143aa81f53fde2eb19, type: 2}
+  - {fileID: 11400000, guid: 4ce9e90fff79f2c4c89a88b2af8e0758, type: 2}
+  BossRooms:
+  - {fileID: 11400000, guid: 79a41e2b4223302459eabd15edba1665, type: 2}

@@ -16,8 +16,11 @@ public class DungeonFloor : MonoBehaviour
     public delegate void RoomChange(RoomIndex newRoom, Direction entryDirection);
 
     public delegate void RoomClear(RoomIndex cleared);
+
+    public delegate void LevelChange();
     public event RoomChange OnRoomChange;
     public event RoomClear OnRoomCleared;
+    public event LevelChange OnLevelChange;
     private DungeonRoomScriptableObject _currentRoom;
     
     private Tilemap _floorMap, _wallsMap;
@@ -40,8 +43,17 @@ public class DungeonFloor : MonoBehaviour
         var mTilemaps = gameObject.GetComponentsInChildren<Tilemap>();
         _floorMap = mTilemaps.First(map => map.name == "Floor");
         _wallsMap = mTilemaps.First(map => map.name == "Walls");
+
+        // Initialise events
+        RoomClearedEvent ??= new UnityEvent<bool>();
+        EnemyKilledEvent ??= new UnityEvent();
+    }
+
+    public void LoadFloor(DungeonFloorScriptableObject newFloor)
+    {
+        floorObject = newFloor;
         
-        //  First generate dungeon floor
+        //  Generate new floor
         GenerateFloor();
         Debug.Log("Floor generated Successfully");
 
@@ -50,9 +62,10 @@ public class DungeonFloor : MonoBehaviour
         Debug.Log("Loading start room");
         LoadRoom(startRoom);
         
-        // Initialise events
-        RoomClearedEvent ??= new UnityEvent<bool>();
-        EnemyKilledEvent ??= new UnityEvent();
+        //  Finally place player at the centre
+        player.position = _floorMap.cellBounds.center;
+        
+        OnLevelChange?.Invoke();
     }
     public void GenerateFloor()
     {
