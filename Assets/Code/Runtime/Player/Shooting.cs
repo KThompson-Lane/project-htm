@@ -1,10 +1,10 @@
+using Code.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
-    public GameObject bulletPrefab;
 
     public float bulletForce = 20f;
 
@@ -78,7 +78,7 @@ public class Shooting : MonoBehaviour
     private void Shoot()
     {
         //Create bullet
-        var bullet = ObjectPool.instance.RetrieveFromPool();
+        var bullet = ObjectPooler.SharedInstance.GetPooledObject("Bullet");
         if (bullet == null)
             return;
         bullet.transform.position = firePoint.position;

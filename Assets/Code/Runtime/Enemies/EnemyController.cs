@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private EnemySO enemySO;
 
-    public delegate void EnemyDied();
+    public delegate void EnemyDied(Vector3 deathPosition);
     public event EnemyDied OnDie;
     
     public HealthManager healthManager;
@@ -114,7 +114,7 @@ public class EnemyController : MonoBehaviour
         _animator.SetTrigger("Hit");
         if (_currentHealth <= 0)
         {
-            OnDie?.Invoke();
+            OnDie?.Invoke(transform.position);
             Destroy(gameObject);
         }
     }
