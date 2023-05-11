@@ -13,7 +13,6 @@ public class DungeonFloor : MonoBehaviour
 {
     public Transform player;
     public DungeonFloorScriptableObject floorObject;
-    public GameObject pickupPrefab;
     public delegate void RoomChange(RoomIndex newRoom, Direction entryDirection);
 
     public delegate void RoomClear(RoomIndex cleared);

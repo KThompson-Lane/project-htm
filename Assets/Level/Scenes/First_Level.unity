@@ -1965,7 +1965,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1642507218}
-  bulletPrefab: {fileID: 372782904265678552, guid: 4ef3b97fedea0154c90d520b952c71e3, type: 3}
   bulletForce: 20
   rateOfFire: 200
   damage: 1
@@ -2788,7 +2787,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 418963747}
   floorObject: {fileID: 11400000, guid: c1cf0e9f31398e14493093ca64885978, type: 2}
-  pickupPrefab: {fileID: 8511763033588874719, guid: 74037186b2910fc458838ec3c2d0c7ef, type: 3}
   roomLight: {fileID: 1575430685}
 --- !u!156049354 &536936516
 Grid:
@@ -4635,6 +4633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionDuration: {fileID: 2027276084}
   enemiesKilled: {fileID: 1089595641}
+  roomsCleared: {fileID: 1385919866}
   missionStatus: {fileID: 1958109305}
   failureCause: {fileID: 325623392}
 --- !u!1 &611149293
@@ -4830,7 +4829,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
