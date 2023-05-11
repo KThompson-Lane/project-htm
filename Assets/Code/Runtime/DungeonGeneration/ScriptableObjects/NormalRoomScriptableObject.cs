@@ -19,8 +19,11 @@ namespace Code.DungeonGeneration
         private List<Tuple<Vector3Int, EnemySO>>_enemies;
         public List<Tuple<Vector3Int, EnemySO>> GetEnemies() => _enemies;
         
-        private List<Tuple<Vector3Int, PickupSO>> _pickups;
-        public List<Tuple<Vector3Int, PickupSO>> GetPickups() => _pickups;
+        private Dictionary<Vector3Int, PickupSO> _pickups;
+        public Dictionary<Vector3Int, PickupSO> GetPickups() => _pickups;
+
+        public void RemovePickup(Vector3Int position) => _pickups.Remove(position);
+        
 
         
         //  Add obstacles / other data
@@ -28,7 +31,7 @@ namespace Code.DungeonGeneration
         {
             //throw new System.NotImplementedException();
             _enemies = new List<Tuple<Vector3Int, EnemySO>>();
-            _pickups = new List<Tuple<Vector3Int, PickupSO>>();
+            _pickups = new Dictionary<Vector3Int, PickupSO>();
             //  Generate list of possible positions
             
             var possibleLocations = FloorTiles.Tiles.Where(x => (x.Tile is not RuleTile)).SelectMany(x => x.Positions);
@@ -58,8 +61,7 @@ namespace Code.DungeonGeneration
         public bool RollPickups(Vector3Int dropPosition)
         {
             //  Roll whether to place a pickup
-            _pickups.Add(new (dropPosition, PickupPool.First()));
-            return true;
+            return _pickups.TryAdd(dropPosition, PickupPool[Random.Range(0, PickupPool.Count)]);
         }
     }
 }

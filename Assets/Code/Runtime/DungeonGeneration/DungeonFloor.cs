@@ -107,13 +107,39 @@ public class DungeonFloor : MonoBehaviour
 
         if(!_currentRoom.Cleared)
             PlaceEnemies();
-        //  Create hazards
+
+        //  Place pickups
+        PlacePickups();
 
         //  Load newly created door objects and subscribe to their events
         _doors = GetComponentsInChildren<Door>();
         foreach (var door in _doors)
         {
             door.OnDoorTrigger += OnDoorTriggered;
+        }
+    }
+
+    private void PlacePickups()
+    {
+        if (_currentRoom is NormalRoomScriptableObject room)
+        {
+            foreach (var (position, powerUp) in room.GetPickups())
+            {
+                var pickup = ObjectPooler.SharedInstance.GetPooledObject("Pickup");
+                pickup.transform.position = _floorMap.GetCellCenterWorld(position);
+                var component = pickup.GetComponent<Pickup>();
+                component.SetPickup(powerUp);
+                component.OnPickupApply.AddListener(RemovePickup);
+                pickup.SetActive(true);
+            }
+        }
+    }
+
+    private void RemovePickup(Vector3 pickupPosition)
+    {
+        if (_currentRoom is NormalRoomScriptableObject room)
+        {
+            room.RemovePickup(_floorMap.WorldToCell(pickupPosition));
         }
     }
 
@@ -233,11 +259,13 @@ public class DungeonFloor : MonoBehaviour
             if (dropped)
             {
                 //  place drop
-                var (dropPosition,drop) = room.GetPickups().Last();
+                var (dropPosition,powerUp) = room.GetPickups().Last();
 
                 var pickup = ObjectPooler.SharedInstance.GetPooledObject("Pickup");
                 pickup.transform.position = _floorMap.GetCellCenterWorld(dropPosition);
-                pickup.GetComponent<Pickup>().SetPickup(drop);
+                var component = pickup.GetComponent<Pickup>();
+                component.SetPickup(powerUp);
+                component.OnPickupApply.AddListener(RemovePickup);
                 pickup.SetActive(true);
             }
         }

@@ -1,9 +1,18 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Pickup : MonoBehaviour
 {
     [SerializeField]
     private PickupSO pickupSo;
+
+    public UnityEvent<Vector3> OnPickupApply;
+
+    private void Awake()
+    {
+        OnPickupApply = new UnityEvent<Vector3>();
+    }
 
     public void SetPickup(PickupSO _pickupSo)
     {
@@ -16,8 +25,12 @@ public class Pickup : MonoBehaviour
         bool destroy = false;
         if (col.gameObject.tag is not "Player") return;
         destroy = pickupSo.Apply();
-        
-        if(destroy)
+
+        if (destroy)
+        {
+            OnPickupApply?.Invoke(transform.position);
+            OnPickupApply?.RemoveAllListeners();
             gameObject.SetActive(false); //todo - only if heal works
+        }
     }
 }
