@@ -237,7 +237,7 @@ public class DungeonFloor : MonoBehaviour
             Direction.West => new Vector3Int((_currentRoom.RoomBounds.size.x / 2) - 2, 0, 0),
             _ => Vector3Int.zero
         };
-        player.transform.position = _floorMap.CellToWorld(newLocation);
+        player.transform.position = _floorMap.GetCellCenterWorld(newLocation);
         
     }
 
