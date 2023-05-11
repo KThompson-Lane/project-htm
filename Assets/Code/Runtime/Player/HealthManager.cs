@@ -38,7 +38,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         HealthDepletedEvent.Invoke();
     }
 
-    public bool IncreaseHealth(int amount) //todo - could combine with decrease and have ModifyHealth
+    public bool IncreaseHealth(int amount)
     {
         // Ensure health is not already full
         if (health >= maxHealth)

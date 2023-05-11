@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class Attack : MonoBehaviour // Used for Enemy Attacking
 {
     private EnemyAttackSO _enemyAttackSo;
     private bool _attackType; //todo - change to enum, currently true is ranged
