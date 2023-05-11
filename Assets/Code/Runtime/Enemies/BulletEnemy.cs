@@ -24,8 +24,9 @@ public class BulletEnemy : Bullet
         {
             healthManager.DecreaseHealth(Damage);
         }
-        
-        Destroy(gameObject);
+
+        _moveSpeed = 0;
+        gameObject.SetActive(false);
     }
 
     private void MoveProjectile()

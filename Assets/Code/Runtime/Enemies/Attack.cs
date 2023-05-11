@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Runtime;
+using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
@@ -116,7 +117,13 @@ public class Attack : MonoBehaviour
                 var pos = FindBulletSpawnLocation(currentAngle);
 
                 // Create bullet
-                GameObject bullet = Instantiate(_bulletPrefab, pos, Quaternion.identity);
+                //GameObject bullet = Instantiate(_bulletPrefab, pos, Quaternion.identity);
+                var bullet = ObjectPooler.SharedInstance.GetPooledObject("EnemyBullet");
+                if (bullet == null)
+                    return;
+                bullet.transform.position = pos;
+                bullet.transform.rotation = Quaternion.identity;
+                bullet.SetActive(true);
                 bullet.transform.right = bullet.transform.position - firePointPosition;
                 bullet.GetComponent<Bullet>().SetDamage(_damage);
                 if (bullet.TryGetComponent(out BulletEnemy bulletEnemy))
@@ -130,7 +137,13 @@ public class Attack : MonoBehaviour
         else
         {
             // Create single bullet
-            GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+            //GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+            var bullet = ObjectPooler.SharedInstance.GetPooledObject("EnemyBullet");
+            if (bullet == null)
+                return;
+            bullet.transform.position = _firePoint.position;
+            bullet.transform.rotation = _firePoint.rotation;
+            bullet.SetActive(true);
             bullet.GetComponent<Bullet>().SetDamage(_damage);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse); //todo - maybe change to move speed
