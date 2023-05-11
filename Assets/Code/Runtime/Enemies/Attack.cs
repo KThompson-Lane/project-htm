@@ -24,6 +24,9 @@ public class Attack : MonoBehaviour
     private float _projectilePerBurst;
     private float _startingDistance;
     private float _bulletsInBurst;
+
+    private float test = 0;
+    private bool alternateBurst = false;
     
     // Melee - collision damage
     private bool _inCollision;
@@ -37,6 +40,7 @@ public class Attack : MonoBehaviour
         _attackType = _enemyAttackSo.ranged;
         _bulletPrefab = _enemyAttackSo.projectile;
         _bulletForce = _enemyAttackSo.bulletForce;
+        _startingDistance = _enemyAttackSo.startingDistance;
 
         _angleSpread = _enemyAttackSo.angleSpread;
         _bulletsInBurst = _enemyAttackSo.bulletsInBurst;
@@ -69,6 +73,8 @@ public class Attack : MonoBehaviour
             // update cooldown
             _coolDown -= Time.deltaTime;
         }
+
+        //_firePoint.Rotate(new Vector3(0,0,10));
     }
 
     public void SetBulletForce(float force)
@@ -108,18 +114,63 @@ public class Attack : MonoBehaviour
             var angleStep = _angleSpread / (_bulletsInBurst);
             var halfAngleSpread = _angleSpread / 2f;
             var startAngle = targetAngle - halfAngleSpread;
+            
+            startAngle += test;
+            test += 7.5f;
+            
+            
+            //if (alternateBurst) // offset sideways alternating bursts
+            //{
+            //    startAngle += angleStep / 2;
+            //   
+            //    alternateBurst = false;
+            //}
+            //else
+            //{
+//
+            //    alternateBurst = true;
+            //}
             var currentAngle = startAngle;
 
 
             // Shoot bullets in bursts
             for (var i = 0; i < _bulletsInBurst; i++)
             {
-                var pos = FindBulletSpawnLocation(currentAngle);
+                float dist = _startingDistance;
+                
+                
+                //float dist; // offsets forwards alternating bursts of bullets
+                
+                //if (alternateBurst)
+                //{
+                //    dist = 0.5f;
+                //    alternateBurst = false;
+                //}
+                //else
+                //{
+                //    dist = _startingDistance;
+                //    alternateBurst = true;
+                //}
+
+                
+                
+                //if (i % 2 == 0) // offsets forwards alternating bullets
+                //{
+                //    dist = 0.5f;
+                //}
+                
+                
+
+
+                
+                
+                var pos = FindBulletSpawnLocation(currentAngle, dist);
 
                 // Create bullet
                 var bullet = ObjectPooler.SharedInstance.GetPooledObject("EnemyBullet");
                 if (bullet == null)
                     return;
+                
                 bullet.transform.position = pos;
                 bullet.transform.rotation = Quaternion.identity;
                 bullet.SetActive(true);
@@ -148,11 +199,11 @@ public class Attack : MonoBehaviour
         }
     }
 
-    private Vector2 FindBulletSpawnLocation(float currentAngle)
+    private Vector2 FindBulletSpawnLocation(float currentAngle, float distance)
     {
         var position = _firePoint.position;
-        var x = position.x + 0.1f * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
-        var y = position.y + 0.1f * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
+        var x = position.x + distance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
+        var y = position.y + distance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
 
         var newPosition = new Vector2(x, y);
         
