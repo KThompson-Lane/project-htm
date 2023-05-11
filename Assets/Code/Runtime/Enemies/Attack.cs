@@ -117,7 +117,6 @@ public class Attack : MonoBehaviour
                 var pos = FindBulletSpawnLocation(currentAngle);
 
                 // Create bullet
-                //GameObject bullet = Instantiate(_bulletPrefab, pos, Quaternion.identity);
                 var bullet = ObjectPooler.SharedInstance.GetPooledObject("EnemyBullet");
                 if (bullet == null)
                     return;
@@ -137,7 +136,6 @@ public class Attack : MonoBehaviour
         else
         {
             // Create single bullet
-            //GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
             var bullet = ObjectPooler.SharedInstance.GetPooledObject("EnemyBullet");
             if (bullet == null)
                 return;
