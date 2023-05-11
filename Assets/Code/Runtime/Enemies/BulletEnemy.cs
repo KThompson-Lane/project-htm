@@ -5,8 +5,13 @@ public class BulletEnemy : Bullet
 {
     [SerializeField]
     private HealthManager healthManager; // for player health
-
-    public float moveSpeed = 0; //todo - accessor!!!
+    
+    private float _moveSpeed = 0; //todo - accessor!!!
+    
+    private void Update()
+    {
+        MoveProjectile();
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         //todo - make this better!!
@@ -25,11 +30,11 @@ public class BulletEnemy : Bullet
 
     private void MoveProjectile()
     {
-        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
+        transform.Translate(Vector3.right * Time.deltaTime * _moveSpeed);
     }
 
-    private void Update()
+    public void SetMoveSpeed(float moveSpeed)
     {
-        MoveProjectile();
+        _moveSpeed = moveSpeed;
     }
 }

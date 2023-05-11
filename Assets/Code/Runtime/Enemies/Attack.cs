@@ -35,6 +35,7 @@ public class Attack : MonoBehaviour
         _damage = _enemyAttackSo.damage;
         _attackType = _enemyAttackSo.ranged;
         _bulletPrefab = _enemyAttackSo.projectile;
+        _bulletForce = _enemyAttackSo.bulletForce;
 
         _angleSpread = _enemyAttackSo.angleSpread;
         _bulletsInBurst = _enemyAttackSo.bulletsInBurst;
@@ -98,51 +99,41 @@ public class Attack : MonoBehaviour
     {
         if (_angleSpread != 0)
         {
-            // Calc cone of influence
+            // Shoot multiple bullets in a cone shape
+            
+            // Calc cone
             var firePointPosition = _firePoint.position;
-            var targetAngle = Mathf.Atan2(firePointPosition.y, firePointPosition.x) * Mathf.Rad2Deg;
-            var startAngle = targetAngle;
-            var endAngle = targetAngle;
-            var currentAngle = targetAngle;
-            var halfAngleSpread = 0f;
-            var angleStep = 0f;
-
-
-            angleStep = _angleSpread / (_bulletsInBurst);
-            halfAngleSpread = _angleSpread / 2f;
-            startAngle = targetAngle - halfAngleSpread;
-            endAngle = targetAngle + halfAngleSpread;
-            currentAngle = startAngle;
+            var targetAngle = Mathf.Atan2(firePointPosition.y, firePointPosition.x) * Mathf.Rad2Deg; // find in game angle
+            var angleStep = _angleSpread / (_bulletsInBurst);
+            var halfAngleSpread = _angleSpread / 2f;
+            var startAngle = targetAngle - halfAngleSpread;
+            var currentAngle = startAngle;
 
 
             // Shoot bullets in bursts
-
-            for (int i = 0; i < _bulletsInBurst; i++)
+            for (var i = 0; i < _bulletsInBurst; i++)
             {
-                Vector2 pos = FindBulletSpawnLocation(currentAngle);
+                var pos = FindBulletSpawnLocation(currentAngle);
 
                 // Create bullet
                 GameObject bullet = Instantiate(_bulletPrefab, pos, Quaternion.identity);
                 bullet.transform.right = bullet.transform.position - firePointPosition;
                 bullet.GetComponent<Bullet>().SetDamage(_damage);
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                //rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
                 if (bullet.TryGetComponent(out BulletEnemy bulletEnemy))
                 {
-                    bulletEnemy.moveSpeed = 6;
+                    bulletEnemy.SetMoveSpeed(_bulletForce);
                 }
-
-
+                
                 currentAngle += angleStep;
             }
         }
         else
         {
-            // Create bullet
+            // Create single bullet
             GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
             bullet.GetComponent<Bullet>().SetDamage(_damage);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
+            rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse); //todo - maybe change to move speed
         }
     }
 
