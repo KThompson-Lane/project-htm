@@ -5,6 +5,12 @@ public class Pickup : MonoBehaviour
     [SerializeField]
     private PickupSO pickupSo;
 
+    public void SetPickup(PickupSO _pickupSo)
+    {
+        pickupSo = _pickupSo;
+        GetComponent<SpriteRenderer>().sprite = _pickupSo.GetSprite();
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         bool destroy = false;
@@ -12,6 +18,6 @@ public class Pickup : MonoBehaviour
         destroy = pickupSo.Apply();
         
         if(destroy)
-            Destroy(gameObject); //todo - only if heal works
+            gameObject.SetActive(false); //todo - only if heal works
     }
 }

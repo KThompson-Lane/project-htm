@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] private GameObject poolObject;
-    [SerializeField] private int poolAmount = 20;
+    [SerializeField] protected GameObject poolObject;
+    [SerializeField] protected int poolAmount = 20;
 
     public static ObjectPool instance;
     

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.DungeonGeneration;
+using Code.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
@@ -12,6 +13,7 @@ public class DungeonFloor : MonoBehaviour
 {
     public Transform player;
     public DungeonFloorScriptableObject floorObject;
+    public GameObject pickupPrefab;
     public delegate void RoomChange(RoomIndex newRoom, Direction entryDirection);
 
     public delegate void RoomClear(RoomIndex cleared);
@@ -213,13 +215,34 @@ public class DungeonFloor : MonoBehaviour
         
     }
 
-    private void OnEnemyKilled()
+    private void OnEnemyKilled(Vector3 deathPosition)
     {
         EnemyKilledEvent.Invoke();
+        RollDrops(deathPosition);
         if (--_enemiesRemaining != 0) return;
         Debug.Log("clearing room");
         _currentRoom.Cleared = true;
     }
+
+    private void RollDrops(Vector3 deathPosition)
+    {
+        if (_currentRoom is NormalRoomScriptableObject room)
+        {
+            var cellPosition = _floorMap.WorldToCell(deathPosition);
+            var dropped = room.RollPickups(_floorMap.WorldToCell(cellPosition));
+            if (dropped)
+            {
+                //  place drop
+                var (dropPosition,drop) = room.GetPickups().Last();
+
+                var pickup = ObjectPooler.SharedInstance.GetPooledObject("Pickup");
+                pickup.transform.position = _floorMap.GetCellCenterWorld(dropPosition);
+                pickup.GetComponent<Pickup>().SetPickup(drop);
+                pickup.SetActive(true);
+            }
+        }
+    }
+    
     private void OnRoomClear()
     {
         var bossRoom = false;
