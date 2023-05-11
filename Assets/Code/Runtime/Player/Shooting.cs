@@ -22,7 +22,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     
     [SerializeField]
-    private PlayerAttackSO playerAttackSo;
+    private PlayerAttackSO playerAttackSo; //todo - fully implement this!!
 
     public void Start()
     {
