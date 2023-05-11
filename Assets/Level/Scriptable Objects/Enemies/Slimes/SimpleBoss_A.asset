@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20bc0f28f76b3ba4d86ea13d8d7070a1, type: 3}
-  m_Name: SimpleBoss
+  m_Name: SimpleBoss_A
   m_EditorClassIdentifier: 
   level: 5
   moveRange: 0
