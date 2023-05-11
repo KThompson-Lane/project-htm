@@ -19,7 +19,7 @@ public class BulletEnemy : Bullet
         if (colController != null) // don't destroy if collides with another enemy - used to also get around the fire point issue
             return;
 
-        var playerController = col.gameObject.GetComponent<PlayerMovement>();
+        var playerController = col.gameObject.GetComponent<PlayerController>();
         if (playerController != null)
         {
             healthManager.DecreaseHealth(Damage);

@@ -4,13 +4,14 @@ using Code.DungeonGeneration;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private UI_Manager uiManager;
     [SerializeField] private HealthManager healthManager;
     [SerializeField] private DungeonFloor dungeonFloor;
-    [SerializeField] private PlayerMovement playerMovement;
+    [FormerlySerializedAs("playerMovement")] [SerializeField] private PlayerController playerController;
 
     public float timePassed;
     
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
         _remainingTime = timeLimit;
         Time.timeScale = 0;
         
-        _playerInput = playerMovement.GetComponent<PlayerInput>().actions;
+        _playerInput = playerController.GetComponent<PlayerInput>().actions;
     }
 
     private void LateUpdate()

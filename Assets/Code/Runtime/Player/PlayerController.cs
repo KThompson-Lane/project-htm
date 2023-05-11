@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Animator))]
-public class PlayerMovement : MonoBehaviour //todo - rename to PlayerController
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private HealthManager healthManager;
 
