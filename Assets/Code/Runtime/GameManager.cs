@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HealthManager healthManager;
     [SerializeField] private DungeonFloor dungeonFloor;
     [SerializeField] private PlayerMovement playerMovement;
-
+    
+    [SerializeField] private DungeonFloorScriptableObject[] levels;
+    private int currentLevel;
     public float timePassed;
     
     public float timeLimit;
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         
         _playerInput = playerMovement.GetComponent<PlayerInput>().actions;
+        dungeonFloor.LoadFloor(levels[currentLevel++]);
     }
 
     private void LateUpdate()
@@ -130,15 +133,33 @@ public class GameManager : MonoBehaviour
     {
         _roomsCleared++;
         if (bossRoom)
-            WinGame(); //todo - will need changing when more floors added
-        else if (_hitThisRoom)
+            NextLevel(); //todo - will need changing when more floors added
+        if (_hitThisRoom)
             IncTimer(10); //todo - remove magic number
         else
             IncTimer(20); //todo - remove magic number
-
         _hitThisRoom = false;
     }
 
+    public void NextLevel()
+    {
+        if(currentLevel == levels.Length)
+            WinGame();
+        else
+        {
+            PauseGame(true);
+            StartCoroutine(ChangeFloor());
+            PauseGame(false);
+        }
+    }
+
+    IEnumerator ChangeFloor()
+    {
+        yield return new WaitForEndOfFrame();
+        dungeonFloor.LoadFloor(levels[currentLevel++]);
+        dungeonFloor.ClearRoom();
+    }
+    
     private void RoomChanged(RoomIndex newRoom, Direction entryDirection)
     {
         StartCoroutine(ChangeRoom(newRoom, entryDirection));
@@ -176,14 +197,14 @@ public class GameManager : MonoBehaviour
     {
         // Pause and show death screen
         PauseGame(true);
-        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared);
+        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared, currentLevel);
     }
     
     private void WinGame()
     {
         // Pause and show win screen
         PauseGame(true);
-        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared);
+        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared, currentLevel);
     }
 
     public void QuitGame()

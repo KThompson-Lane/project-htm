@@ -4634,6 +4634,7 @@ MonoBehaviour:
   missionDuration: {fileID: 2027276084}
   enemiesKilled: {fileID: 1089595641}
   roomsCleared: {fileID: 1385919866}
+  levelsCleared: {fileID: 622430790}
   missionStatus: {fileID: 1958109305}
   failureCause: {fileID: 325623392}
 --- !u!1 &611149293
@@ -5903,6 +5904,10 @@ MonoBehaviour:
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
   dungeonFloor: {fileID: 536936515}
   playerMovement: {fileID: 418963750}
+  levels:
+  - {fileID: 11400000, guid: 2a2f5d6a304a54640a72e1b728a4229f, type: 2}
+  - {fileID: 11400000, guid: 4e6bdafd18dd6a04b956a24a302390dd, type: 2}
+  - {fileID: 11400000, guid: 994d9ea525071f1448c48a0fd5ab2b1b, type: 2}
   timePassed: 0
   timeLimit: 30
   playerAnimator: {fileID: 418963752}
