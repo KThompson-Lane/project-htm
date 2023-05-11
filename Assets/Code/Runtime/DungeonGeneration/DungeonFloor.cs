@@ -41,7 +41,19 @@ public class DungeonFloor : MonoBehaviour
         _floorMap = mTilemaps.First(map => map.name == "Floor");
         _wallsMap = mTilemaps.First(map => map.name == "Walls");
         
-        //  First generate dungeon floor
+        //  Load floor
+        LoadFloor(floorObject);
+
+        // Initialise events
+        RoomClearedEvent ??= new UnityEvent<bool>();
+        EnemyKilledEvent ??= new UnityEvent();
+    }
+
+    public void LoadFloor(DungeonFloorScriptableObject newFloor)
+    {
+        floorObject = newFloor;
+        
+        //  Generate new floor
         GenerateFloor();
         Debug.Log("Floor generated Successfully");
 
@@ -49,10 +61,6 @@ public class DungeonFloor : MonoBehaviour
         var startRoom = floorObject.GetStartRoom;
         Debug.Log("Loading start room");
         LoadRoom(startRoom);
-        
-        // Initialise events
-        RoomClearedEvent ??= new UnityEvent<bool>();
-        EnemyKilledEvent ??= new UnityEvent();
     }
     public void GenerateFloor()
     {

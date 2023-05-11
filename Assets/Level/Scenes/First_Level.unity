@@ -2240,7 +2240,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2786,7 +2786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 418963747}
-  floorObject: {fileID: 11400000, guid: c1cf0e9f31398e14493093ca64885978, type: 2}
+  floorObject: {fileID: 11400000, guid: 994d9ea525071f1448c48a0fd5ab2b1b, type: 2}
   roomLight: {fileID: 1575430685}
 --- !u!156049354 &536936516
 Grid:
