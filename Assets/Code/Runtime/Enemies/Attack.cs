@@ -22,6 +22,7 @@ public class Attack : MonoBehaviour
     private float _angleSpread;
     private float _projectilePerBurst;
     private float _startingDistance;
+    private float _bulletsInBurst;
     
     // Melee - collision damage
     private bool _inCollision;
@@ -36,6 +37,7 @@ public class Attack : MonoBehaviour
         _bulletPrefab = _enemyAttackSo.projectile;
 
         _angleSpread = _enemyAttackSo.angleSpread;
+        _bulletsInBurst = _enemyAttackSo.bulletsInBurst;
 
         _interval = 60 / _rateOfFire; //1 second / rate of fire
         _animator = GetComponent<Animator>();
@@ -94,57 +96,54 @@ public class Attack : MonoBehaviour
 
     private void Shoot()
     {
-        // Calc cone of influence
-        var firePointPosition = _firePoint.position;
-        var targetAngle = Mathf.Atan2(firePointPosition.y, firePointPosition.x) * Mathf.Rad2Deg;
-        var startAngle = targetAngle;
-        var endAngle = targetAngle;
-        var currentAngle = targetAngle;
-        var halfAngleSpread = 0f;
-        var angleStep = 0f;
-        var burst = 5; //todo - sort this!
-
-        // Calc cone of influence
         if (_angleSpread != 0)
         {
-            angleStep = _angleSpread / (burst - 1);
+            // Calc cone of influence
+            var firePointPosition = _firePoint.position;
+            var targetAngle = Mathf.Atan2(firePointPosition.y, firePointPosition.x) * Mathf.Rad2Deg;
+            var startAngle = targetAngle;
+            var endAngle = targetAngle;
+            var currentAngle = targetAngle;
+            var halfAngleSpread = 0f;
+            var angleStep = 0f;
+
+
+            angleStep = _angleSpread / (_bulletsInBurst);
             halfAngleSpread = _angleSpread / 2f;
             startAngle = targetAngle - halfAngleSpread;
             endAngle = targetAngle + halfAngleSpread;
             currentAngle = startAngle;
-        }
 
-        // Shoot bullets in bursts
-        
-        for (int i = 0; i < burst; i++)
+
+            // Shoot bullets in bursts
+
+            for (int i = 0; i < _bulletsInBurst; i++)
+            {
+                Vector2 pos = FindBulletSpawnLocation(currentAngle);
+
+                // Create bullet
+                GameObject bullet = Instantiate(_bulletPrefab, pos, Quaternion.identity);
+                bullet.transform.right = bullet.transform.position - firePointPosition;
+                bullet.GetComponent<Bullet>().SetDamage(_damage);
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                //rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
+                if (bullet.TryGetComponent(out BulletEnemy bulletEnemy))
+                {
+                    bulletEnemy.moveSpeed = 6;
+                }
+
+
+                currentAngle += angleStep;
+            }
+        }
+        else
         {
-            Vector2 pos = FindBulletSpawnLocation(currentAngle);
-        
             // Create bullet
-            GameObject bullet = Instantiate(_bulletPrefab, pos, Quaternion.identity);
-            bullet.transform.right = bullet.transform.position - firePointPosition;
-            //bullet.transform.right = bullet.transform.position - transform.position;
+            GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
             bullet.GetComponent<Bullet>().SetDamage(_damage);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            //rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
-            if (bullet.TryGetComponent(out BulletEnemy bulletEnemy))
-            {
-                bulletEnemy.moveSpeed = 6;
-            }
-
-
-            currentAngle += angleStep;
+            rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
         }
-
-        currentAngle = startAngle;
-
-
-
-        // Create bullet
-        //GameObject bullet = Instantiate(_bulletPrefab, firePointPosition, _firePoint.rotation);
-        //bullet.GetComponent<Bullet>().SetDamage(_damage);
-        //Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        //rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
     }
 
     private Vector2 FindBulletSpawnLocation(float currentAngle)
