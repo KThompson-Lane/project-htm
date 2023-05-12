@@ -26,8 +26,7 @@ public class DungeonFloor : MonoBehaviour
     
     private Tilemap _floorMap, _wallsMap;
     List<Vector3Int> _doorPositions = new();
-    private Door[] _doors;
-    
+
     public DungeonRoomScriptableObject CurrentRoom =>  _currentRoom;
     public DungeonRoomScriptableObject GetRoom(RoomIndex index) => floorObject.floorplan[index];
 
@@ -106,7 +105,6 @@ public class DungeonFloor : MonoBehaviour
         _floorMap.ClearAllTiles();
         _wallsMap.ClearAllTiles();
         _doorPositions.Clear();
-        _doors = null;
         _floorMap.origin = _currentRoom.RoomBounds.position;
         _floorMap.size = _currentRoom.RoomBounds.size;
         _floorMap.ResizeBounds();
