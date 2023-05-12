@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     private EnemySO enemySO;
 
     public delegate void EnemyDied(Vector3 deathPosition);
-    public event EnemyDied OnDie;
+    public static event EnemyDied OnDie;
     
     public HealthManager healthManager;
 

@@ -50,7 +50,7 @@ public abstract class DungeonRoomScriptableObject : ScriptableObject
     }
 
     public delegate void ClearRoom();
-    public event ClearRoom OnRoomCleared;
+    public static event ClearRoom OnRoomCleared;
     //TODO:
     //  Add positions of obstacles
     public Dictionary<Direction, RoomIndex> Neighbours { get; set; } = new();

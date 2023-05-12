@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Code.DungeonGeneration;
@@ -18,9 +19,9 @@ public class DungeonFloor : MonoBehaviour
     public delegate void RoomClear(RoomIndex cleared);
 
     public delegate void LevelChange();
-    public event RoomChange OnRoomChange;
-    public event RoomClear OnRoomCleared;
-    public event LevelChange OnLevelChange;
+    public static event RoomChange OnRoomChange;
+    public static event RoomClear OnRoomCleared;
+    public static event LevelChange OnLevelChange;
     private DungeonRoomScriptableObject _currentRoom;
     
     private Tilemap _floorMap, _wallsMap;
@@ -36,7 +37,21 @@ public class DungeonFloor : MonoBehaviour
     [NonSerialized] public UnityEvent EnemyKilledEvent;
 
     [SerializeField] private Light2DBase roomLight;
-    
+
+    private void OnEnable()
+    {
+        Door.OnDoorTrigger += OnDoorTriggered;
+        DungeonRoomScriptableObject.OnRoomCleared += OnRoomClear;
+        EnemyController.OnDie += OnEnemyKilled;
+    }
+
+    private void OnDisable()
+    {
+        Door.OnDoorTrigger -= OnDoorTriggered;
+        DungeonRoomScriptableObject.OnRoomCleared -= OnRoomClear;
+        EnemyController.OnDie -= OnEnemyKilled;
+    }
+
     private void Awake()
     {
         //  Get tilemaps and room doors script
@@ -87,8 +102,6 @@ public class DungeonFloor : MonoBehaviour
         
         //  Set our new room to be our current room
         _currentRoom = newRoom;
-        //  Subscribe to new room on clear
-        _currentRoom.OnRoomCleared += OnRoomClear;
         //  Clear and reset all room tiles
         _floorMap.ClearAllTiles();
         _wallsMap.ClearAllTiles();
@@ -122,13 +135,6 @@ public class DungeonFloor : MonoBehaviour
 
         //  Place pickups
         PlacePickups();
-
-        //  Load newly created door objects and subscribe to their events
-        _doors = GetComponentsInChildren<Door>();
-        foreach (var door in _doors)
-        {
-            door.OnDoorTrigger += OnDoorTriggered;
-        }
     }
 
     private void PlacePickups()
@@ -178,11 +184,6 @@ public class DungeonFloor : MonoBehaviour
                 _enemiesRemaining++;
                 break;
         }
-
-        foreach (var enemy in GetComponentsInChildren<EnemyController>())
-        {
-            enemy.OnDie += OnEnemyKilled;
-        }
     }
 
     private void CreateDoors()
@@ -231,8 +232,6 @@ public class DungeonFloor : MonoBehaviour
         if (!_currentRoom.Cleared) return;
         var newRoomIndex = _currentRoom.GetNeighbour(direction) ?? 
                            throw new Exception("Invalid room");
-        //  Unsubscribe from our previous room
-        _currentRoom.OnRoomCleared -= OnRoomClear;
         OnRoomChange?.Invoke(newRoomIndex, direction);
     }
 
@@ -286,11 +285,7 @@ public class DungeonFloor : MonoBehaviour
     private void OnRoomClear()
     {
         var bossRoom = false;
-        foreach (var doorPosition in _doorPositions)
-        {
-            _wallsMap.GetTile<DoorTile>(doorPosition).OpenDoor();
-            _wallsMap.RefreshTile(doorPosition);
-        }
+        StartCoroutine(OpenDoors());
 
         if (_currentRoom is BossRoomScriptableObject boss)
         {
@@ -300,6 +295,17 @@ public class DungeonFloor : MonoBehaviour
         OnRoomCleared?.Invoke(_currentRoom.Index);
         RoomClearedEvent.Invoke(bossRoom);
         roomLight.enabled = true;
+    }
+
+    public IEnumerator OpenDoors()
+    {
+        foreach (var doorPosition in _doorPositions)
+        {
+            _wallsMap.GetTile<DoorTile>(doorPosition).OpenDoor();
+        }
+        yield return null;
+        _wallsMap.RefreshAllTiles();
+
     }
     public void ClearRoom()
     {

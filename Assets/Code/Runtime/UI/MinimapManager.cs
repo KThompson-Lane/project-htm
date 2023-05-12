@@ -10,13 +10,21 @@ public class MinimapManager : MonoBehaviour
     [SerializeField] private Transform _playerMapIcon;
     [SerializeField] private MapTile bossRoomTile, startRoomTile, normalRoomTile;
     private Vector2Int _floorSize;
-    private void Awake()
+
+    private void OnEnable()
     {
-        floorScript.OnRoomChange += DiscoverRoom;
-        floorScript.OnRoomCleared += ClearRoom;
-        floorScript.OnLevelChange += Reset;
+        DungeonFloor.OnRoomChange += DiscoverRoom;
+        DungeonFloor.OnRoomCleared += ClearRoom;
+        DungeonFloor.OnLevelChange += Reset;
     }
 
+    private void OnDisable()
+    {
+        DungeonFloor.OnRoomChange -= DiscoverRoom;
+        DungeonFloor.OnRoomCleared -= ClearRoom;
+        DungeonFloor.OnLevelChange -= Reset;
+    }
+    
     public void Reset()
     {
         _dungeonFloorMap.ClearAllTiles();
