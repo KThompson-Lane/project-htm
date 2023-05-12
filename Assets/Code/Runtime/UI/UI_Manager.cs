@@ -12,9 +12,6 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Timer;
 
     [SerializeField] private HealthManager _healthManager;
-    
-    [SerializeField] private GameManager gameManager;
-
     [SerializeField] private GameObject heartPrefab;
 
     [SerializeField] private Transform healthBar;
@@ -52,7 +49,7 @@ public class UI_Manager : MonoBehaviour
 
     private void LateUpdate()
     {
-        var remainingTime = gameManager.GetRemainingTime();
+        var remainingTime = GameManager.instance.GetRemainingTime();
         var time = TimeSpan.FromSeconds(remainingTime);
         Timer.text = time.ToString("mm':'ss");
     }

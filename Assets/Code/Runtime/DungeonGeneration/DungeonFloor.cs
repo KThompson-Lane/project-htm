@@ -301,6 +301,10 @@ public class DungeonFloor : MonoBehaviour
         RoomClearedEvent.Invoke(bossRoom);
         roomLight.enabled = true;
     }
+    public void ClearRoom()
+    {
+        _currentRoom.Cleared = true;
+    }
 #if UNITY_EDITOR
     public void PreviewRoom()
     {
@@ -311,9 +315,6 @@ public class DungeonFloor : MonoBehaviour
         this.LoadRoom(startRoom);
     }
     //  TEST METHOD FOR CLEARING ROOMS
-    public void ClearRoom()
-    {
-        _currentRoom.Cleared = true;
-    }
+
 #endif
 }
