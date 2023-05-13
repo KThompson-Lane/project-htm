@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FirstFloor
   m_EditorClassIdentifier: 
   floorSize: {x: 8, y: 7}
-  level: 0
+  level: 1
   rooms: 0
   StartRoom: {fileID: 11400000, guid: 0dd8a739da6438f4986034da5909fe99, type: 2}
   BasicRooms:
