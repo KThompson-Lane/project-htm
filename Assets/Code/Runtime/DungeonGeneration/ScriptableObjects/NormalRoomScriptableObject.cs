@@ -14,9 +14,8 @@ namespace Code.DungeonGeneration
         
         public EnemyTile EnemyTile;
 
-        [SerializeField] private int maxEnemies;
-
-        [SerializeField] private int dropChance;
+        private int maxEnemies;
+        private int dropChance;
         
         //  Lists for storing the positions of enemies and pickups
         private List<Tuple<Vector3Int, EnemySO>>_enemies;
@@ -26,9 +25,7 @@ namespace Code.DungeonGeneration
         public Dictionary<Vector3Int, PickupSO> GetPickups() => _pickups;
 
         public void RemovePickup(Vector3Int position) => _pickups.Remove(position);
-        
 
-        
         //  Add obstacles / other data
         public override void InitializeRoom(int level = 1)
         {
