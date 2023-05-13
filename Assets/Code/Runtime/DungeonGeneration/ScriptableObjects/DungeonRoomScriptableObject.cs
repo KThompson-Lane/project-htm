@@ -54,7 +54,7 @@ public abstract class DungeonRoomScriptableObject : ScriptableObject
     //TODO:
     //  Add positions of obstacles
     public Dictionary<Direction, RoomIndex> Neighbours { get; set; } = new();
-    public abstract void InitializeRoom();
+    public abstract void InitializeRoom(int level = 1);
     public void SetNeighbour(Direction direction, RoomIndex index)
     {
         Neighbours.Add(direction, index);

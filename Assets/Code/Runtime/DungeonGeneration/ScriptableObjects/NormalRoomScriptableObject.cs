@@ -14,7 +14,10 @@ namespace Code.DungeonGeneration
         
         public EnemyTile EnemyTile;
 
-        public int MaxEnemies;
+        [SerializeField] private int maxEnemies;
+
+        [SerializeField] private int dropChance;
+        
         //  Lists for storing the positions of enemies and pickups
         private List<Tuple<Vector3Int, EnemySO>>_enemies;
         public List<Tuple<Vector3Int, EnemySO>> GetEnemies() => _enemies;
@@ -27,13 +30,16 @@ namespace Code.DungeonGeneration
 
         
         //  Add obstacles / other data
-        public override void InitializeRoom()
+        public override void InitializeRoom(int level = 1)
         {
-            //throw new System.NotImplementedException();
             _enemies = new List<Tuple<Vector3Int, EnemySO>>();
             _pickups = new Dictionary<Vector3Int, PickupSO>();
-            //  Generate list of possible positions
             
+            //  Use level to calculate drop rate and max enemies
+            maxEnemies = 3 + (int) (level * 2.6);
+            dropChance = 10 + (int) (level * 3.45);
+            
+            //  Generate list of possible positions
             var possibleLocations = FloorTiles.Tiles.Where(x => (x.Tile is not RuleTile)).SelectMany(x => x.Positions);
             possibleLocations =
                 possibleLocations.Where(position =>
@@ -45,14 +51,14 @@ namespace Code.DungeonGeneration
                 //  Check conditions
                 
                 //  Not already max enemies
-                if(_enemies.Count == MaxEnemies)
+                if(_enemies.Count == maxEnemies)
                     break;
                 //  No neighbouring enemies
                 if (_enemies.Any((pos) => pos.Item1.x == enemyPosition.x || pos.Item1.y == enemyPosition.y))
                     continue;
                 //  One in 3 chance of giving up 
-                //if (Random.Range(0, 4) < 3)
-                 //   continue;
+                if (Random.Range(0, 4) < 3)
+                    continue;
                 //  Add enemy to list
                 _enemies.Add(new (enemyPosition, EnemyPool[Random.Range(0,EnemyPool.Count)]));
             }
@@ -60,9 +66,11 @@ namespace Code.DungeonGeneration
 
         public bool RollPickups(Vector3Int dropPosition)
         {
+            if (PickupPool.Count == 0)
+                return false;
             //  Roll whether to place a pickup
-            var roll = Random.Range(0, 10);
-            return roll < PickupPool.Count && _pickups.TryAdd(dropPosition, PickupPool[Random.Range(0, PickupPool.Count)]);
+            var roll = Random.Range(0, 100);
+            return roll < dropChance && _pickups.TryAdd(dropPosition, PickupPool[Random.Range(0, PickupPool.Count)]);
         }
     }
 }
