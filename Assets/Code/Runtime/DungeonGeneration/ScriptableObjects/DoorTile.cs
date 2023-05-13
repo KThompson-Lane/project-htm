@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace Code.DungeonGeneration
@@ -14,13 +13,11 @@ namespace Code.DungeonGeneration
         
         private bool IsOpen;
 
-        public override void GetTileData(Vector3Int location, ITilemap tileMap, ref TileData tileData)
+        private void OnEnable()
         {
-            base.GetTileData(location, tileMap, ref tileData);
-            //    Change Sprite based on if door is open
-            tileData.sprite = IsOpen? OpenSprite : ClosedSprite;
-            tileData.gameObject = DoorPrefab;
+            this.gameObject = DoorPrefab;
         }
+        
         public override bool StartUp(Vector3Int location, ITilemap tilemap, GameObject go)
         {
             if (go != null)
@@ -30,13 +27,14 @@ namespace Code.DungeonGeneration
             }
             return true;
         }
+
         public void OpenDoor()
         {
-            IsOpen = true;
+            this.sprite = OpenSprite;
         }
         public void CloseDoor()
         {
-            IsOpen = false;
+            this.sprite = ClosedSprite;
         }
     }
 }

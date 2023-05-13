@@ -9,11 +9,12 @@ TagManager:
   - BulletObject
   - Pickup
   - Bullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Enemies

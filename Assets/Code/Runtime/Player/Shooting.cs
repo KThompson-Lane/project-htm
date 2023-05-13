@@ -18,9 +18,7 @@ public class Shooting : MonoBehaviour
     
     private bool _isShooting;
     [SerializeField] private Animator _gunAnimator;
-    
-    [SerializeField] private GameManager gameManager;
-    
+
     [SerializeField]
     private PlayerAttackSO playerAttackSo; //todo - fully implement this!!
 

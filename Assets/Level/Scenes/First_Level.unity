@@ -443,6 +443,9 @@ MonoBehaviour:
   - amountToPool: 10
     objectToPool: {fileID: 8511763033588874719, guid: 74037186b2910fc458838ec3c2d0c7ef, type: 3}
     shouldExpand: 1
+  - amountToPool: 50
+    objectToPool: {fileID: 372782904265678552, guid: 26ee6f9b80a1b7849aaf2894a81f9b54, type: 3}
+    shouldExpand: 1
 --- !u!4 &112935483
 Transform:
   m_ObjectHideFlags: 0
@@ -1945,7 +1948,7 @@ GameObject:
   - component: {fileID: 418963749}
   - component: {fileID: 418963750}
   - component: {fileID: 418963751}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1969,7 +1972,6 @@ MonoBehaviour:
   rateOfFire: 200
   damage: 1
   _gunAnimator: {fileID: 1044954317}
-  gameManager: {fileID: 863274192}
   playerAttackSo: {fileID: 11400000, guid: 331e9b3768bb31a4397f4f217c871734, type: 2}
 --- !u!114 &418963750
 MonoBehaviour:
@@ -2289,6 +2291,10 @@ PrefabInstance:
     - target: {fileID: 1804800989551463374, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804800989551463374, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
@@ -2830,7 +2836,7 @@ GameObject:
   - component: {fileID: 565991851}
   - component: {fileID: 565991850}
   - component: {fileID: 565991852}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6084,7 +6090,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timer: {fileID: 340590518}
   _healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
-  gameManager: {fileID: 863274192}
   heartPrefab: {fileID: 973762222700605671, guid: 25d56edf8d0455a47a6258ad396964cd, type: 3}
   healthBar: {fileID: 1951610648}
   endScreen: {fileID: 581662507}
