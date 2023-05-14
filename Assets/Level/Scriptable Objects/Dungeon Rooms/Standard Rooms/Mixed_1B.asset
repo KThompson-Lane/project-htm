@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cdc8e7a14674cdcb6e38baeb279457d, type: 3}
   m_Name: Mixed_1B
   m_EditorClassIdentifier: 
-  layout: {fileID: 11400000, guid: 90edebab57cdc4c459a24588cf5d9f95, type: 2}
+  layout: {fileID: 11400000, guid: b6bebabbbd34f0a489e10f50e3f70118, type: 2}
   EnemyPool:
   - {fileID: 11400000, guid: 7f0e73ec5ab9baa448f3fe50fac81b4d, type: 2}
   - {fileID: 11400000, guid: 98479f6ccf8c16f4ab19ab84d2660307, type: 2}

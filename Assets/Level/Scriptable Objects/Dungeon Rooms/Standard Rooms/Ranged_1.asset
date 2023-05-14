@@ -12,19 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cdc8e7a14674cdcb6e38baeb279457d, type: 3}
   m_Name: Ranged_1
   m_EditorClassIdentifier: 
-  WallTile: {fileID: 0}
-  NorthDoor: {fileID: 0}
-  EastDoor: {fileID: 0}
-  SouthDoor: {fileID: 0}
-  WestDoor: {fileID: 0}
-  FloorTiles:
-    Tiles: []
-  RoomBounds:
-    m_Position: {x: 0, y: 0, z: 0}
-    m_Size: {x: 0, y: 0, z: 0}
+  layout: {fileID: 11400000, guid: 4f628804c687d974e9fd52c0ea18219d, type: 2}
   EnemyPool:
   - {fileID: 11400000, guid: 6bb29eaec5eb28342944c92240ff8ecc, type: 2}
   - {fileID: 11400000, guid: 98479f6ccf8c16f4ab19ab84d2660307, type: 2}
   PickupPool:
   - {fileID: 11400000, guid: b703ada0941fa6e47a33206d14e85cf3, type: 2}
-  EnemyTile: {fileID: 0}
+  EnemyTile: {fileID: 11400000, guid: 39ae01c641a4ec043a485c52dbcf090b, type: 2}
