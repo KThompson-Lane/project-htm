@@ -15,9 +15,8 @@ MonoBehaviour:
   level: 1
   moveRange: 30
   rotationSpeed: 3
-  enemyRangedTypes:
+  enemyAttackTypes:
   - {fileID: 11400000, guid: 82cf3d89117091d46be9182096a40318, type: 2}
-  enemyMeleeTypes:
   - {fileID: 11400000, guid: 114a67640801d7945ad34645e7d728f7, type: 2}
   enemySprite: {fileID: 21300000, guid: f80f69362f5cd03499a8b459077c1c14, type: 3}
   enemyIcon: {fileID: 21300000, guid: b18c3ecdb86cb2f4cb7807d108069020, type: 3}
