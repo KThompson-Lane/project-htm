@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UI_Manager uiManager;
     [SerializeField] private HealthManager healthManager;
     [SerializeField] private DungeonFloor dungeonFloor;
-    [SerializeField] private GameObject portal;
     [FormerlySerializedAs("playerMovement")] [SerializeField] private PlayerController playerController;
     
     [SerializeField] private DungeonFloorScriptableObject[] levels;
@@ -130,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearFloor()
     {
-        portal.SetActive(true);
+        dungeonFloor.PortalActive = true;
     }
     
     public void PauseGame(bool pause)
@@ -158,7 +157,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        portal.SetActive(false);
+        dungeonFloor.PortalActive = false;
         if(currentLevel == levels.Length)
             WinGame();
         else
