@@ -2284,17 +2284,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1804800989551463372, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
-      propertyPath: enemySO
-      value: 
-      objectReference: {fileID: 11400000, guid: 395979959cd1ae743bacfc389c556eb3, type: 2}
     - target: {fileID: 1804800989551463374, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463374, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
@@ -2796,6 +2792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 418963747}
   floorObject: {fileID: 11400000, guid: 994d9ea525071f1448c48a0fd5ab2b1b, type: 2}
+  ai: {fileID: 536936520}
   roomLight: {fileID: 1575430685}
   portal: {fileID: 2023678370}
 --- !u!156049354 &536936516

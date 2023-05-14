@@ -83,6 +83,8 @@ namespace Code.Runtime.AI
         {
             List<Vector3> waypoints = new();
             var directionOld = Vector2.zero;
+            if(path.Count > 0)
+                waypoints.Add(path[0].worldPosition);
             for (int i = 1; i < path.Count; i++)
             {
                 var directionNew = new Vector2(path[i - 1].gridIndex.x - path[i].gridIndex.x,

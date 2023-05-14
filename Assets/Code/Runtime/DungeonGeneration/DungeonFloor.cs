@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.DungeonGeneration;
 using Code.Runtime;
+using Code.Runtime.AI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
@@ -30,6 +31,7 @@ public class DungeonFloor : MonoBehaviour
     public DungeonRoomScriptableObject CurrentRoom =>  _currentRoom;
     public DungeonRoomScriptableObject GetRoom(RoomIndex index) => floorObject.floorplan[index];
 
+    public AStarGrid ai;
     private int _enemiesRemaining;
     
     [NonSerialized] public UnityEvent<bool> RoomClearedEvent;
@@ -136,6 +138,9 @@ public class DungeonFloor : MonoBehaviour
             _wallsMap.SetTile(new Vector3Int(_currentRoom.RoomBounds.xMin, y), _currentRoom.WallTile);
             _wallsMap.SetTile(new Vector3Int(_currentRoom.RoomBounds.xMax-1, y), _currentRoom.WallTile);
         }
+
+        //  Update AI pathfinding
+        ai.CreateGrid();
 
         //  Create room doors
         CreateDoors();

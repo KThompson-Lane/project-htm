@@ -48,7 +48,7 @@ public class EnemyController : MonoBehaviour
         gameObject.AddComponent<PolygonCollider2D>();
 
         _seeker = GetComponent<Seeker>();
-        _seeker.speed = enemy.GetSpeed();
+        _seeker.speed = enemy.GetSpeed() * 6f;
         _seeker.turnSpeed = enemy.GetRotationSpeed();
 
         // health 
