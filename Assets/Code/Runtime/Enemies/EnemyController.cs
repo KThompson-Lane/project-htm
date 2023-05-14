@@ -1,6 +1,7 @@
+using Code.Runtime.AI;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(Seeker))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
@@ -29,6 +30,8 @@ public class EnemyController : MonoBehaviour
 
     private Sprite _sprite;
 
+    private Seeker _seeker;
+
     // Start is called before the first frame update
     public void Initialise(EnemySO enemy)
     {
@@ -43,6 +46,10 @@ public class EnemyController : MonoBehaviour
         
         //Create polygon collider after setting sprite
         gameObject.AddComponent<PolygonCollider2D>();
+
+        _seeker = GetComponent<Seeker>();
+        _seeker.speed = enemy.GetSpeed();
+        _seeker.turnSpeed = enemy.GetRotationSpeed();
 
         // health 
         _currentHealth = enemySO.GetMaxHealth();
@@ -75,12 +82,17 @@ public class EnemyController : MonoBehaviour
         if (playerToEnemyDistance >= _range)
         {
             //  Move this
-            _mRb2d.MovePosition(_mRb2d.position + (Vector2)vectorToTarget * (_moveSpeed * Time.fixedDeltaTime));
+            //_mRb2d.MovePosition(_mRb2d.position + (Vector2)vectorToTarget * (_moveSpeed * Time.fixedDeltaTime));
+            _seeker.MoveToTarget(_mPlayerTransform);
             _animator.SetBool("Moving", true);
         }
         else
         {
+            _seeker.StopMoving();
             _animator.SetBool("Moving", false);
+            var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
+            var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * _rotationSpeed);
         }
 
         
@@ -88,9 +100,9 @@ public class EnemyController : MonoBehaviour
         _mRb2d.velocity = vec;
 
         // rotate to look at player
-        var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
-        var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * _rotationSpeed);
+        //var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90; //z rotation. Note: Atan2 takes y first, then x, subtract 90degrees for sprite rotation
+        //var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * _rotationSpeed);
     }
 
     private void InitializeAttacks()

@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 namespace Code.Runtime.DungeonGeneration
 {
-    [RequireComponent(typeof(Grid))]
+    [RequireComponent(typeof(UnityEngine.Grid))]
     public class RoomCreator : MonoBehaviour
     {
         //  Child tilemaps

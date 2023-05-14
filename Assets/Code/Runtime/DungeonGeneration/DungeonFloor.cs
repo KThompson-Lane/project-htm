@@ -9,7 +9,7 @@ using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 using UnityEngine.U2D;
 
-[RequireComponent(typeof(Grid))]
+[RequireComponent(typeof(UnityEngine.Grid))]
 public class DungeonFloor : MonoBehaviour
 {
     public Transform player;
