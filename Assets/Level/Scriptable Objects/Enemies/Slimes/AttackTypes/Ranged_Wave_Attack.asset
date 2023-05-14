@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   range: 0
-  rateOfFire: 240
+  rateOfFire: 180
   angleSpread: 359
   startingDistance: 0.1
-  bulletsInBurst: 10
+  bulletsInBurst: 8
   waveStepAmount: 7.5
   bulletForce: 5
