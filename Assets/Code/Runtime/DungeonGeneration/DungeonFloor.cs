@@ -121,22 +121,22 @@ public class DungeonFloor : MonoBehaviour
         _floorMap.ClearAllTiles();
         _wallsMap.ClearAllTiles();
         _doorPositions.Clear();
-        _floorMap.origin = _currentRoom.RoomBounds.position;
-        _floorMap.size = _currentRoom.RoomBounds.size;
+        _floorMap.origin = _currentRoom.layout.RoomBounds.position;
+        _floorMap.size = _currentRoom.layout.RoomBounds.size;
         _floorMap.ResizeBounds();
-        foreach (var (tile, position) in _currentRoom.GetFloorTiles())
+        foreach (var (tile, position) in _currentRoom.layout.GetFloorTiles())
         {
             _floorMap.SetTile(position, tile);
         }
-        for (int x = _currentRoom.RoomBounds.xMin; x < _currentRoom.RoomBounds.xMax; x++)
+        for (int x = _currentRoom.layout.RoomBounds.xMin; x < _currentRoom.layout.RoomBounds.xMax; x++)
         {
-            _wallsMap.SetTile(new Vector3Int(x, _currentRoom.RoomBounds.yMin), _currentRoom.WallTile);
-            _wallsMap.SetTile(new Vector3Int(x, _currentRoom.RoomBounds.yMax-1), _currentRoom.WallTile);
+            _wallsMap.SetTile(new Vector3Int(x, _currentRoom.layout.RoomBounds.yMin), _currentRoom.layout.WallTile);
+            _wallsMap.SetTile(new Vector3Int(x, _currentRoom.layout.RoomBounds.yMax-1), _currentRoom.layout.WallTile);
         }
-        for (int y = _currentRoom.RoomBounds.yMin; y < _currentRoom.RoomBounds.yMax; y++)
+        for (int y = _currentRoom.layout.RoomBounds.yMin; y < _currentRoom.layout.RoomBounds.yMax; y++)
         {
-            _wallsMap.SetTile(new Vector3Int(_currentRoom.RoomBounds.xMin, y), _currentRoom.WallTile);
-            _wallsMap.SetTile(new Vector3Int(_currentRoom.RoomBounds.xMax-1, y), _currentRoom.WallTile);
+            _wallsMap.SetTile(new Vector3Int(_currentRoom.layout.RoomBounds.xMin, y), _currentRoom.layout.WallTile);
+            _wallsMap.SetTile(new Vector3Int(_currentRoom.layout.RoomBounds.xMax-1, y), _currentRoom.layout.WallTile);
         }
 
         //  Update AI pathfinding
@@ -198,7 +198,7 @@ public class DungeonFloor : MonoBehaviour
             case BossRoomScriptableObject room:
                 var bossTile = Instantiate(room.BossTile);
                 bossTile.SetEnemy(room.BossSO);
-                _floorMap.SetTile(Vector3Int.RoundToInt(room.RoomBounds.center), bossTile);
+                _floorMap.SetTile(Vector3Int.RoundToInt(room.layout.RoomBounds.center), bossTile);
                 _enemiesRemaining++;
                 break;
         }
@@ -209,30 +209,30 @@ public class DungeonFloor : MonoBehaviour
         //  Set doors
         if (_currentRoom.GetNeighbour(Direction.North) != null)
         {
-            var position = new Vector3Int(0, _currentRoom.RoomBounds.size.y / 2, 0);
+            var position = new Vector3Int(0, _currentRoom.layout.RoomBounds.size.y / 2, 0);
             _doorPositions.Add(position);
-            _wallsMap.SetTile(position, _currentRoom.NorthDoor);
+            _wallsMap.SetTile(position, _currentRoom.layout.NorthDoor);
         }
 
         if (_currentRoom.GetNeighbour(Direction.East) != null)
         {
-            var position = new Vector3Int(_currentRoom.RoomBounds.size.x / 2, 0, 0); 
+            var position = new Vector3Int(_currentRoom.layout.RoomBounds.size.x / 2, 0, 0); 
             _doorPositions.Add(position);
-            _wallsMap.SetTile(position, _currentRoom.EastDoor);
+            _wallsMap.SetTile(position, _currentRoom.layout.EastDoor);
         }
             
         if (_currentRoom.GetNeighbour(Direction.South) != null)
         {
-            var position = new Vector3Int(0, -_currentRoom.RoomBounds.size.y / 2, 0); 
+            var position = new Vector3Int(0, -_currentRoom.layout.RoomBounds.size.y / 2, 0); 
             _doorPositions.Add(position);
-            _wallsMap.SetTile(position, _currentRoom.SouthDoor);
+            _wallsMap.SetTile(position, _currentRoom.layout.SouthDoor);
         }
             
         if (_currentRoom.GetNeighbour(Direction.West) != null)
         {
-            var position = new Vector3Int(-_currentRoom.RoomBounds.size.x / 2, 0, 0); 
+            var position = new Vector3Int(-_currentRoom.layout.RoomBounds.size.x / 2, 0, 0); 
             _doorPositions.Add(position);
-            _wallsMap.SetTile(position, _currentRoom.WestDoor);
+            _wallsMap.SetTile(position, _currentRoom.layout.WestDoor);
         }
         foreach (var doorPosition in _doorPositions)
         {
@@ -260,10 +260,10 @@ public class DungeonFloor : MonoBehaviour
     
         var newLocation = entranceDirection switch
         {
-            Direction.North => new Vector3Int(0, (-_currentRoom.RoomBounds.size.y / 2) + 2, 0),
-            Direction.South => new Vector3Int(0, (_currentRoom.RoomBounds.size.y / 2) - 2, 0),
-            Direction.East => new Vector3Int((-_currentRoom.RoomBounds.size.x / 2) + 2, 0, 0),
-            Direction.West => new Vector3Int((_currentRoom.RoomBounds.size.x / 2) - 2, 0, 0),
+            Direction.North => new Vector3Int(0, (-_currentRoom.layout.RoomBounds.size.y / 2) + 2, 0),
+            Direction.South => new Vector3Int(0, (_currentRoom.layout.RoomBounds.size.y / 2) - 2, 0),
+            Direction.East => new Vector3Int((-_currentRoom.layout.RoomBounds.size.x / 2) + 2, 0, 0),
+            Direction.West => new Vector3Int((_currentRoom.layout.RoomBounds.size.x / 2) - 2, 0, 0),
             _ => Vector3Int.zero
         };
         player.transform.position = _floorMap.GetCellCenterWorld(newLocation);
