@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Slime_C
   m_EditorClassIdentifier: 
   level: 3
-  moveRange: 3
+  moveRange: 0
   rotationSpeed: 3
   enemyAttackTypes:
-  - {fileID: 11400000, guid: 8d42379832dfd7641bce12fcbf792656, type: 2}
+  - {fileID: 11400000, guid: 44472e79dc4b9c6489a2d485acc41076, type: 2}
   enemySprite: {fileID: 21300000, guid: 68bd076c2316e324095ec4d9535d915e, type: 3}
   enemyIcon: {fileID: 21300000, guid: c8f25d7da11668741aa860bf168b93f7, type: 3}
   enemyAnimator: {fileID: 22100000, guid: 744a435dd0c6c4f449395e8d05cfd4cd, type: 2}

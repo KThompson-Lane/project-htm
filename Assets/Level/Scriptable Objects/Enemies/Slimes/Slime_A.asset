@@ -16,7 +16,7 @@ MonoBehaviour:
   moveRange: 0
   rotationSpeed: 3
   enemyAttackTypes:
-  - {fileID: 11400000, guid: c8efd1bbda8027d4088a6bf05ce99ef3, type: 2}
+  - {fileID: 11400000, guid: 44472e79dc4b9c6489a2d485acc41076, type: 2}
   enemySprite: {fileID: 21300000, guid: f80f69362f5cd03499a8b459077c1c14, type: 3}
   enemyIcon: {fileID: 21300000, guid: b18c3ecdb86cb2f4cb7807d108069020, type: 3}
   enemyAnimator: {fileID: 22100000, guid: 8a7c8954f92f15543be7a0de775bf530, type: 2}

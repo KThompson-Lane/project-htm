@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53b27cc4612c3a540859b663b448a664, type: 3}
-  m_Name: Melee_Basic
+  m_Script: {fileID: 11500000, guid: 59edaaf8741245d8b13922df46726ba8, type: 3}
+  m_Name: Melee_Attack
   m_EditorClassIdentifier: 
-  ranged: 0
   damage: 1
   range: 0
   rateOfFire: 120
-  bulletForce: 0
-  projectile: {fileID: 0}
