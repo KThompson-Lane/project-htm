@@ -8,7 +8,6 @@ namespace Code.Runtime.Enemies
         private GameObject _enemy;
         
         private Transform _firePoint;
-        private GameObject _bulletPrefab;
         private float _bulletForce;
         private bool _isShooting;
         private float _angleSpread;
@@ -25,7 +24,6 @@ namespace Code.Runtime.Enemies
             Damage = _enemyRangedSo.damage; 
             
             // Bullet variables
-            _bulletPrefab = _enemyRangedSo.projectile;
             _bulletForce = _enemyRangedSo.bulletForce;
             _startingDistance = _enemyRangedSo.startingDistance;
 

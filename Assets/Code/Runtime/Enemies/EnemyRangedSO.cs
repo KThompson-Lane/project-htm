@@ -10,6 +10,5 @@ namespace Code.Runtime.Enemies
         public float bulletsInBurst = 1;
         public float waveStepAmount = 0;
         public float bulletForce = 5f;
-        public GameObject projectile;
     }
 }
