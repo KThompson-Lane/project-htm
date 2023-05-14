@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   range: 30
-  rateOfFire: 120
-  angleSpread: 0
-  bulletsInBurst: 1
+  rateOfFire: 240
+  angleSpread: 359
+  startingDistance: 0.1
+  bulletsInBurst: 10
+  waveStepAmount: 0
   bulletForce: 5
   projectile: {fileID: 372782904265678552, guid: 26ee6f9b80a1b7849aaf2894a81f9b54, type: 3}

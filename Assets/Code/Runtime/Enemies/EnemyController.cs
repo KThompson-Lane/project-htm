@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     
     public HealthManager healthManager;
 
-    //private EnemyAttackSO[] _enemyAttackSOs;
+    private EnemyAttackSO[] _enemyAttackSOs;
     private EnemyRangedSO[] _enemyRangedSOs;
     private EnemyMeleeSO[] _enemyMeleeSOs;
 

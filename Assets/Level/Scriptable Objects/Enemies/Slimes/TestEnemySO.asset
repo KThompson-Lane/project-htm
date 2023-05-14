@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestEnemySO
   m_EditorClassIdentifier: 
   level: 1
-  moveRange: 0
+  moveRange: 30
   rotationSpeed: 3
   enemyRangedTypes:
   - {fileID: 11400000, guid: 82cf3d89117091d46be9182096a40318, type: 2}

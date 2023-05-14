@@ -11,9 +11,6 @@ namespace Code.Runtime.Enemies
         public override void Start()
         {
             _rateOfFire = _enemyMeleeSo.rateOfFire;
-
-
-
             _damage = _enemyMeleeSo.damage; 
             
             base.Start();
