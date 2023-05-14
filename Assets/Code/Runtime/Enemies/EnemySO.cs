@@ -7,7 +7,7 @@ public class EnemySO : ScriptableObject
 {
     public float level = 1; //default to base
     public float moveRange; 
-        
+    
     private float _maxHealth;
     private float _speed;
     [SerializeField] private float rotationSpeed = 3.0f; //Note - seems to be the right speed for all enemies but may need changing later

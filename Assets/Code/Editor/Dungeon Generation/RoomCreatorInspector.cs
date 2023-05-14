@@ -44,6 +44,11 @@ namespace Code.Editor.Dungeon_Generation
                 AssetDatabase.CreateAsset(roomObject, $"Assets/Level/Scriptable Objects/Dungeon Rooms/Boss Rooms/{_roomName}.asset");                    
                 AssetDatabase.SaveAssets();         
             }
+
+            if (GUILayout.Button("Preview Dungeon Room"))
+            {
+                myScript.LoadRoom();
+            }
         }
     }
 

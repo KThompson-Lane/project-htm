@@ -15,6 +15,16 @@ namespace Code.Runtime.DungeonGeneration
 
         public TileList FloorTiles { get; set; } = new();
         public BoundsInt RoomBounds;
+
+        public DungeonRoomScriptableObject ViewRoom;
+
+        public void LoadRoom()
+        {
+            foreach (var (tile, position) in ViewRoom.GetFloorTiles())
+            {
+                Floor.SetTile(position, tile);
+            }
+        }
         
         private void OnEnable()
         {

@@ -9,7 +9,7 @@ namespace Code.DungeonGeneration
         //TODO:
         //Add start room specific things
         //TBD
-        public override void InitializeRoom()
+        public override void InitializeRoom(int level = 1)
         {
             Debug.Log(levelMessage);
         }
