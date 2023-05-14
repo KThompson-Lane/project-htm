@@ -33,7 +33,7 @@ namespace Code.DungeonGeneration
             _pickups = new Dictionary<Vector3Int, PickupSO>();
             
             //  Use level to calculate drop rate and max enemies
-            maxEnemies = 3 + (int) (level * 2.6);
+            maxEnemies = 3 + (int)(level);// * 2.6);
             dropChance = 10 + (int) (level * 3.45);
             
             //  Generate list of possible positions
