@@ -11,9 +11,7 @@ public class EnemySO : ScriptableObject
     private float _maxHealth;
     private float _speed;
     [SerializeField] private float rotationSpeed = 3.0f; //Note - seems to be the right speed for all enemies but may need changing later
-    //public EnemyAttackSO[] enemyAttackTypes;
-    public EnemyRangedSO[] enemyRangedTypes;
-    public EnemyMeleeSO[] enemyMeleeTypes;
+    public EnemyAttackSO[] enemyAttackTypes;
 
     public Sprite enemySprite;
     public Sprite enemyIcon;

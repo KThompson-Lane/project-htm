@@ -13,8 +13,6 @@ public class EnemyController : MonoBehaviour
     public HealthManager healthManager;
 
     private EnemyAttackSO[] _enemyAttackSOs;
-    private EnemyRangedSO[] _enemyRangedSOs;
-    private EnemyMeleeSO[] _enemyMeleeSOs;
 
     private float _currentHealth;
 
@@ -23,8 +21,7 @@ public class EnemyController : MonoBehaviour
     private float _range;
     
     private Transform _firePoint;
-    //private float _bulletForce;
-    
+
     private Rigidbody2D _mRb2d;
     private Animator _animator;
 
@@ -37,9 +34,8 @@ public class EnemyController : MonoBehaviour
     {
         enemySO = enemy;
         _firePoint = transform;
-        //_enemyAttackSOs = enemySO.enemyAttackTypes;
-        _enemyRangedSOs = enemySO.enemyRangedTypes;
-        _enemyMeleeSOs = enemySO.enemyMeleeTypes;
+        _enemyAttackSOs = enemySO.enemyAttackTypes;
+        
         InitializeAttacks();
 
         // sprite
@@ -100,37 +96,29 @@ public class EnemyController : MonoBehaviour
 
     private void InitializeAttacks()
     {
-        //foreach (var attack in _enemyAttackSOs)
-        //{
-        //    if (attack == null)
-        //        return;
-        //    var attackScript = gameObject.AddComponent<Attack>();
-        //    attackScript.SetHealthManager(healthManager);
-        //    attackScript.SetBulletForce(attack.bulletForce);
-        //    attackScript.SetFirePoint(_firePoint);
-        //    attackScript.SetEnemyAttackSO(attack);
-        //}
+        foreach (var attack in _enemyAttackSOs)
+        {
+            if (attack == null)
+                return;
 
-        foreach (var attack in _enemyRangedSOs)
-        {
-            if (attack == null)
-                return;
-            
-            var attackScript = gameObject.AddComponent<RangedAttack>();
-            attackScript.SetHealthManager(healthManager);
-            //attackScript.SetBulletForce(attack.bulletForce);
-            attackScript.SetFirePoint(_firePoint);
-            attackScript.SetEnemyRangedSO(attack);
-        }
-        
-        foreach (var attack in _enemyMeleeSOs)
-        {
-            if (attack == null)
-                return;
-            
-            var attackScript = gameObject.AddComponent<MeleeAttack>();
-            attackScript.SetHealthManager(healthManager);
-            attackScript.SetEnemyMeleeSO(attack);
+            switch (attack)
+            {
+                case EnemyMeleeSO so:
+                {
+                    var attackScript = gameObject.AddComponent<MeleeAttack>();
+                    attackScript.SetHealthManager(healthManager);
+                    attackScript.SetEnemyMeleeSO(so);
+                    break;
+                }
+                case EnemyRangedSO so:
+                {
+                    var attackScript = gameObject.AddComponent<RangedAttack>();
+                    attackScript.SetHealthManager(healthManager);
+                    attackScript.SetFirePoint(_firePoint);
+                    attackScript.SetEnemyRangedSO(so);
+                    break;
+                }
+            }
         }
     }
 
@@ -139,10 +127,8 @@ public class EnemyController : MonoBehaviour
         _currentHealth -= damage;
         Debug.Log("Health is: " + _currentHealth);
         _animator.SetTrigger("Hit");
-        if (_currentHealth <= 0)
-        {
-            OnDie?.Invoke(transform.position);
-            Destroy(gameObject);
-        }
+        if (!(_currentHealth <= 0)) return;
+        OnDie?.Invoke(transform.position);
+        Destroy(gameObject);
     }
 }

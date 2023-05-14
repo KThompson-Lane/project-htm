@@ -10,8 +10,8 @@ namespace Code.Runtime.Enemies
 
         public override void Start()
         {
-            _rateOfFire = _enemyMeleeSo.rateOfFire;
-            _damage = _enemyMeleeSo.damage; 
+            RateOfFire = _enemyMeleeSo.rateOfFire;
+            Damage = _enemyMeleeSo.damage; 
             
             base.Start();
         }
@@ -19,26 +19,26 @@ namespace Code.Runtime.Enemies
         public void Update()
         {
             //Attack when not on cooldown
-            if (_coolDown <= 0f)
+            if (CoolDown <= 0f)
             {
                 if (_inCollision)
                 {
                     Hit();
-                    _animator.SetTrigger("Attack");
-                    _coolDown = _interval;
+                    Animator.SetTrigger("Attack");
+                    CoolDown = Interval;
                 }
             }
 
-            if (_coolDown > 0)
+            if (CoolDown > 0)
             {
                 // update cooldown
-                _coolDown -= Time.deltaTime;
+                CoolDown -= Time.deltaTime;
             }
         }
         
         private void Hit()
         {
-            healthManager.DecreaseHealth(_damage);
+            healthManager.DecreaseHealth(Damage);
         }
         
         private void OnCollisionEnter2D(Collision2D collision)
