@@ -15,9 +15,8 @@ MonoBehaviour:
   damage: 1
   range: 0
   rateOfFire: 120
-  angleSpread: 359
+  angleSpread: 278
   startingDistance: 0.1
   bulletsInBurst: 5
   waveStepAmount: 0
   bulletForce: 5
-  projectile: {fileID: 0}
