@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         healthManager.HealthChangedEvent.RemoveListener(OnPlayerHit);
         dungeonFloor.RoomClearedEvent.RemoveListener(RoomCleared);
         dungeonFloor.EnemyKilledEvent.RemoveListener(IncEnemyKilled);
-        DungeonFloor.OnRoomChange += RoomChanged;
+        DungeonFloor.OnRoomChange -= RoomChanged;
     }
 
     // Timer Functions
