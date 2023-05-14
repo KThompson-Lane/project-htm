@@ -1,12 +1,15 @@
 using System;
+using Codice.Client.BaseCommands;
 using UnityEngine;
 
 public class BulletEnemy : Bullet
 {
     [SerializeField]
     private HealthManager healthManager; // for player health
-    
-    private float _moveSpeed = 0; //todo - accessor!!!
+
+    private GameObject _owner;
+
+    private float _moveSpeed = 0;
     
     private void Update()
     {
@@ -37,5 +40,10 @@ public class BulletEnemy : Bullet
     public void SetMoveSpeed(float moveSpeed)
     {
         _moveSpeed = moveSpeed;
+    }
+
+    public void SetOwner(GameObject owner)
+    {
+        _owner = owner;
     }
 }

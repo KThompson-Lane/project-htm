@@ -22,7 +22,6 @@ public class EnemyController : MonoBehaviour
     private float _rotationSpeed;
     private float _range;
     
-    private Transform _firePoint;
     private GameObject _enemy;
 
     private Rigidbody2D _mRb2d;
@@ -36,8 +35,6 @@ public class EnemyController : MonoBehaviour
     public void Initialise(EnemySO enemy)
     {
         enemySO = enemy;
-        //_firePoint = transform;
-        //_firePoint = GetComponent<Transform>();
         _enemyAttackSOs = enemySO.enemyAttackTypes;
         _enemy = gameObject;
         
@@ -119,18 +116,12 @@ public class EnemyController : MonoBehaviour
                 {
                     var attackScript = gameObject.AddComponent<RangedAttack>();
                     attackScript.SetHealthManager(healthManager);
-                    //attackScript.SetFirePoint(_firePoint);
                     attackScript.SetEnemyRangedSO(so);
                     attackScript.SetEnemy(_enemy);
                     break;
                 }
             }
         }
-    }
-
-    public Transform UpdateFirePoint()
-    {
-        return _firePoint = GetComponent<Transform>();
     }
 
     public virtual void TakeDamage(int damage)

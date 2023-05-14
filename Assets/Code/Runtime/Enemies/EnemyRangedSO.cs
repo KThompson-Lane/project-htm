@@ -11,6 +11,5 @@ namespace Code.Runtime.Enemies
         public float waveStepAmount = 0;
         public float bulletForce = 5f;
         public GameObject projectile;
-        //private GameObject _firePoint;
     }
 }

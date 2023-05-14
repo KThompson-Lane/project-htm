@@ -75,6 +75,10 @@ namespace Code.Runtime.Enemies
             bullet.transform.rotation = _firePoint.rotation;
             bullet.SetActive(true);
             bullet.GetComponent<Bullet>().SetDamage(Damage);
+            if (bullet.TryGetComponent(out BulletEnemy bulletEnemy))
+            {
+                bulletEnemy.SetOwner(_enemy);
+            }
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse); //todo - maybe change to move speed
         }
@@ -116,6 +120,7 @@ namespace Code.Runtime.Enemies
                 if (bullet.TryGetComponent(out BulletEnemy bulletEnemy))
                 {
                     bulletEnemy.SetMoveSpeed(_bulletForce);
+                    bulletEnemy.SetOwner(_enemy);
                 }
                 
                 currentAngle += angleStep;
