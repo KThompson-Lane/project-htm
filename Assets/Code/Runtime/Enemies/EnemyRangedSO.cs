@@ -9,8 +9,8 @@ namespace Code.Runtime.Enemies
         public float startingDistance = 0.1f;
         public float bulletsInBurst = 1;
         public float waveStepAmount = 0;
-
         public float bulletForce = 5f;
         public GameObject projectile;
+        //private GameObject _firePoint;
     }
 }

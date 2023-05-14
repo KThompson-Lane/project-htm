@@ -1,5 +1,7 @@
 using Code.Runtime.Enemies;
+using Codice.Client.Common;
 using UnityEngine;
+using Time = UnityEngine.Time;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class EnemyController : MonoBehaviour
@@ -21,6 +23,7 @@ public class EnemyController : MonoBehaviour
     private float _range;
     
     private Transform _firePoint;
+    private GameObject _enemy;
 
     private Rigidbody2D _mRb2d;
     private Animator _animator;
@@ -33,8 +36,10 @@ public class EnemyController : MonoBehaviour
     public void Initialise(EnemySO enemy)
     {
         enemySO = enemy;
-        _firePoint = transform;
+        //_firePoint = transform;
+        //_firePoint = GetComponent<Transform>();
         _enemyAttackSOs = enemySO.enemyAttackTypes;
+        _enemy = gameObject;
         
         InitializeAttacks();
 
@@ -114,12 +119,18 @@ public class EnemyController : MonoBehaviour
                 {
                     var attackScript = gameObject.AddComponent<RangedAttack>();
                     attackScript.SetHealthManager(healthManager);
-                    attackScript.SetFirePoint(_firePoint);
+                    //attackScript.SetFirePoint(_firePoint);
                     attackScript.SetEnemyRangedSO(so);
+                    attackScript.SetEnemy(_enemy);
                     break;
                 }
             }
         }
+    }
+
+    public Transform UpdateFirePoint()
+    {
+        return _firePoint = GetComponent<Transform>();
     }
 
     public virtual void TakeDamage(int damage)

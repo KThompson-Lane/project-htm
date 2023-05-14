@@ -5,6 +5,7 @@ namespace Code.Runtime.Enemies
     public class RangedAttack : Attack
     {
         private EnemyRangedSO _enemyRangedSo;
+        private GameObject _enemy;
         
         private Transform _firePoint;
         private GameObject _bulletPrefab;
@@ -38,6 +39,8 @@ namespace Code.Runtime.Enemies
 
         public void Update()
         {
+            _firePoint = _enemy.transform;
+            _firePoint.rotation = _enemy.transform.rotation;
             //Attack when not on cooldown
             if (CoolDown <= 0f)
             {
@@ -53,10 +56,10 @@ namespace Code.Runtime.Enemies
             }
         }
 
-        public void SetFirePoint(Transform point)
-        {
-            _firePoint = point;
-        }
+        //public void SetFirePoint(Transform point)
+        //{
+        //    _firePoint = point;
+        //}
 
         private void Shoot()
         {
@@ -84,12 +87,17 @@ namespace Code.Runtime.Enemies
         // Shoot multiple bullets in a cone shape
         private void MultiBulletCone(float stepAmount) //angle, ect
         {
+            //todo - doesn't need recalcing every time!!
             // Calc cone
-            var firePointPosition = _firePoint.position;
-            var targetAngle = Mathf.Atan2(firePointPosition.y, firePointPosition.x) * Mathf.Rad2Deg; // find in game angle
-            var angleStep = _angleSpread / (_bulletsInBurst);
+            //var firePointPosition = _firePoint.position;
+            var firePointPosition = _firePoint.transform;
+            //firePointPosition.rotation = _firePoint.transform.rotation;
+            //var targetAngle = Mathf.Atan2(firePointPosition.forward.y, firePointPosition.forward.x) * Mathf.Rad2Deg; // find in game angle
+            //var targetAngle = Mathf.Atan2(firePointPosition.y, firePointPosition.x) * Mathf.Rad2Deg; // find in game angle
+            var angleStep = _angleSpread / (_bulletsInBurst - 1);
             var halfAngleSpread = _angleSpread / 2f;
-            var startAngle = targetAngle - halfAngleSpread;
+            //var startAngle = targetAngle - halfAngleSpread;
+            var startAngle = - halfAngleSpread;
 
             if (stepAmount > 0)
             {
@@ -109,16 +117,22 @@ namespace Code.Runtime.Enemies
                 float dist = _startingDistance;
 
                 var pos = FindBulletSpawnLocation(currentAngle, dist);
-
+                Quaternion quat = Quaternion.Euler(0,0,currentAngle);
+                var right = quat * _enemy.transform.up;
                 // Create bullet
                 var bullet = ObjectPooler.SharedInstance.GetPooledObject("EnemyBullet");
                 if (bullet == null)
                     return;
                 
-                bullet.transform.position = pos;
-                bullet.transform.rotation = Quaternion.identity;
+                bullet.transform.position = _firePoint.position;
+                //bullet.transform.position = _firePoint.position;
+                //bullet.transform.rotation = pos.rotation;
+                //bullet.transform.rotation = Quaternion.identity;
+                //bullet.transform.rotation = _enemy.transform.rotation;
                 bullet.SetActive(true);
-                bullet.transform.right = bullet.transform.position - firePointPosition;
+                //bullet.transform.right = bullet.transform.position - firePointPosition;
+                //bullet.transform.right = bullet.transform.position - firePointPosition.position;
+                bullet.transform.right = right;
                 bullet.GetComponent<Bullet>().SetDamage(Damage);
                 if (bullet.TryGetComponent(out BulletEnemy bulletEnemy))
                 {
@@ -127,6 +141,19 @@ namespace Code.Runtime.Enemies
                 
                 currentAngle += angleStep;
             }
+        }
+        
+        private Transform FindBulletSpawnLocation2(float currentAngle, float distance)
+        {
+            var position = _firePoint.transform;;
+            var x = position.forward.x + distance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
+            var y = position.forward.y + distance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
+
+            var newPosition = new Vector2(x, y);
+            //var newPosition = new Transform(Vector2(x, y), position.rotation, position.localScale);
+            position.position = newPosition;
+            
+            return position;
         }
 
         private Vector2 FindBulletSpawnLocation(float currentAngle, float distance)
@@ -143,6 +170,11 @@ namespace Code.Runtime.Enemies
         public void SetEnemyRangedSO(EnemyRangedSO eso)
         {
             _enemyRangedSo = eso;
+        }
+
+        public void SetEnemy(GameObject enemy)
+        {
+            _enemy = enemy;
         }
     }
 }

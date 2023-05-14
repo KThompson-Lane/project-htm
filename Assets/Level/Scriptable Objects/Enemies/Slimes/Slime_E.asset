@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bc0f28f76b3ba4d86ea13d8d7070a1, type: 3}
   m_Name: Slime_E
   m_EditorClassIdentifier: 
-  level: 2
-  moveRange: 4
+  level: 1
+  moveRange: 0
   rotationSpeed: 3
   enemyAttackTypes:
+  - {fileID: 11400000, guid: 44472e79dc4b9c6489a2d485acc41076, type: 2}
   - {fileID: 11400000, guid: e1766bfaef3443e48a04a0667c87a38b, type: 2}
   enemySprite: {fileID: 21300000, guid: 6f4eb2be264d62a40a7280d3cb1f9ce1, type: 3}
   enemyIcon: {fileID: 21300000, guid: d46185d3109d7ad4bbdbf7311a0db830, type: 3}
