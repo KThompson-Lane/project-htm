@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerAttackSO
   m_EditorClassIdentifier: 
   baseDamage: 1
-  damage: 2
+  damage: 1
   range: 0
-  baseRateOfFire: 300
-  rateOfFire: 330
+  baseRateOfFire: 60
+  rateOfFire: 60
