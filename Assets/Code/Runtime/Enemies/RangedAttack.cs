@@ -85,7 +85,11 @@ namespace Code.Runtime.Enemies
         private void MultiBulletCone(float stepAmount) //angle, ect
         {
             // Calc cone
-            var angleStep = _angleSpread / (_bulletsInBurst - 1); //todo - angle doesn't need recalcing every time - move this
+            float angleStep;
+            if (_angleSpread == 359)
+                angleStep = _angleSpread / _bulletsInBurst; // prevents two bullets spawning at one location
+            else
+                angleStep = _angleSpread / (_bulletsInBurst - 1); //todo - angle doesn't need recalcing every time - move this
             var halfAngleSpread = _angleSpread / 2f;
             var startAngle = - halfAngleSpread;
 
