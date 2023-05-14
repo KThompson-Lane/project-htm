@@ -37,6 +37,19 @@ public class DungeonFloor : MonoBehaviour
 
     [SerializeField] private Light2DBase roomLight;
 
+    [SerializeField] private GameObject portal;
+    private bool _portalActive;
+    
+    public bool PortalActive
+    {
+        get => _portalActive;
+        set
+        {
+            _portalActive = value;
+            portal.SetActive(value);
+        }
+    }
+    
     private void OnEnable()
     {
         Door.OnDoorTrigger += OnDoorTriggered;
@@ -66,7 +79,6 @@ public class DungeonFloor : MonoBehaviour
     public void LoadFloor(DungeonFloorScriptableObject newFloor)
     {
         floorObject = newFloor;
-        
         //  Generate new floor
         GenerateFloor();
         Debug.Log("Floor generated Successfully");
@@ -101,6 +113,8 @@ public class DungeonFloor : MonoBehaviour
         
         //  Set our new room to be our current room
         _currentRoom = newRoom;
+        if(PortalActive)
+            portal.SetActive(_currentRoom is BossRoomScriptableObject);
         //  Clear and reset all room tiles
         _floorMap.ClearAllTiles();
         _wallsMap.ClearAllTiles();

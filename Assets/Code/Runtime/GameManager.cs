@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Code.DungeonGeneration;
+using Code.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -11,7 +12,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UI_Manager uiManager;
     [SerializeField] private HealthManager healthManager;
     [SerializeField] private DungeonFloor dungeonFloor;
-    [SerializeField] private GameObject portal;
     [FormerlySerializedAs("playerMovement")] [SerializeField] private PlayerController playerController;
     
     [SerializeField] private DungeonFloorScriptableObject[] levels;
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearFloor()
     {
-        portal.SetActive(true);
+        dungeonFloor.PortalActive = true;
     }
     
     public void PauseGame(bool pause)
@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        portal.SetActive(false);
+        dungeonFloor.PortalActive = false;
         if(currentLevel == levels.Length)
             WinGame();
         else
@@ -202,10 +202,7 @@ public class GameManager : MonoBehaviour
         //  Wait for fade in to finish
         yield return StartCoroutine(uiManager.BeginTransition());
         //  Disable all powerups
-        foreach (var pickup in FindObjectsOfType<Pickup>())
-        {
-            pickup.gameObject.SetActive(false);
-        }
+        ObjectPooler.SharedInstance.DisableAllObjects();
 
         //  Load new room
         dungeonFloor.ChangeRoom(newRoom);

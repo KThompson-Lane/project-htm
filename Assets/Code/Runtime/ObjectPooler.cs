@@ -40,5 +40,10 @@ namespace Code.Runtime
                 return obj;
             }
         }
+
+        public void DisableAllObjects()
+        {
+            pooledObjects.ForEach(go => go.SetActive(false));
+        }
     }
 }

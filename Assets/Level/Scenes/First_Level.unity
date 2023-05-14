@@ -2794,6 +2794,7 @@ MonoBehaviour:
   player: {fileID: 418963747}
   floorObject: {fileID: 11400000, guid: 994d9ea525071f1448c48a0fd5ab2b1b, type: 2}
   roomLight: {fileID: 1575430685}
+  portal: {fileID: 2023678370}
 --- !u!156049354 &536936516
 Grid:
   m_ObjectHideFlags: 0
@@ -5909,7 +5910,6 @@ MonoBehaviour:
   uiManager: {fileID: 957619991}
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
   dungeonFloor: {fileID: 536936515}
-  portal: {fileID: 2023678370}
   playerController: {fileID: 418963750}
   levels:
   - {fileID: 11400000, guid: 2a2f5d6a304a54640a72e1b728a4229f, type: 2}
