@@ -168,6 +168,7 @@ public class DungeonFloor : MonoBehaviour
                 foreach (var (position, enemy) in room.GetEnemies())
                 {
                     var enemyTile = Instantiate(room.EnemyTile);
+                    enemy.level = floorObject.level;
                     enemyTile.SetEnemy(enemy);
                     _floorMap.SetTile(position, enemyTile);
                     _enemiesRemaining++;

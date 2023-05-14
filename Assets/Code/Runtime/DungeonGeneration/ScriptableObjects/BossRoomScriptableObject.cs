@@ -10,7 +10,7 @@ namespace Code.DungeonGeneration
         public EnemySO BossSO;
         //TODO:
             //TBD
-            public override void InitializeRoom()
+            public override void InitializeRoom(int level = 1)
             {
                 Debug.Log($"BOSS: {BossName}");
             }

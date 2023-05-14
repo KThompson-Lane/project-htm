@@ -54,7 +54,7 @@ public class DungeonFloorScriptableObject : ScriptableObject
         //  Initialise Rooms!
         foreach (var (_, room) in floorplan)
         {
-            room.InitializeRoom();
+            room.InitializeRoom(level);
         }
     }
     
