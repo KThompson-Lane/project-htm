@@ -8,47 +8,33 @@ namespace Code.Editor.Dungeon_Generation
     [CustomEditor(typeof(RoomCreator))]
     public class RoomCreatorInspector : UnityEditor.Editor
     {
-        private string _roomName = "newRoom";
+        private string _layoutName = "basic layout";
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
             RoomCreator myScript = (RoomCreator) target;
-            _roomName = EditorGUILayout.TextField ("Room name", _roomName);
-            if (GUILayout.Button("Create normal room"))
+            _layoutName = EditorGUILayout.TextField ("Layout name", _layoutName);
+            if (GUILayout.Button("Save room layout"))
             {
-                myScript.CreateRoom();
+                myScript.SaveLayout();
 
-                var roomObject = CreateInstance<NormalRoomScriptableObject>();
+                var roomObject = CreateInstance<RoomLayout>();
                 roomObject.SetTilemaps(myScript.FloorTiles);
                 roomObject.RoomBounds = myScript.RoomBounds;
-                AssetDatabase.CreateAsset(roomObject, $"Assets/Level/Scriptable Objects/Dungeon Rooms/Standard Rooms/{_roomName}.asset");                    
+                roomObject.NorthDoor = myScript.NorthDoor;
+                roomObject.SouthDoor = myScript.SouthDoor;
+                roomObject.EastDoor = myScript.EastDoor;
+                roomObject.WestDoor = myScript.WestDoor;
+                roomObject.WallTile = myScript.WallTile;
+                
+                AssetDatabase.CreateAsset(roomObject, $"Assets/Level/Scriptable Objects/Dungeon Rooms/Layouts/{_layoutName}.asset");                    
                 AssetDatabase.SaveAssets();         
             }
-            if (GUILayout.Button("Create start room"))
+            if (GUILayout.Button("Load room layout"))
             {
-                myScript.CreateRoom();
-
-                var roomObject = CreateInstance<StartRoomScriptableObject>();
-                roomObject.SetTilemaps(myScript.FloorTiles);
-                roomObject.RoomBounds = myScript.RoomBounds;
-                AssetDatabase.CreateAsset(roomObject, $"Assets/Level/Scriptable Objects/Dungeon Rooms/Starter Rooms/{_roomName}.asset");                    
-                AssetDatabase.SaveAssets();         
-            }
-            if (GUILayout.Button("Create boss room"))
-            {
-                myScript.CreateRoom();
-
-                var roomObject = CreateInstance<BossRoomScriptableObject>();
-                roomObject.SetTilemaps(myScript.FloorTiles);
-                roomObject.RoomBounds = myScript.RoomBounds;
-                AssetDatabase.CreateAsset(roomObject, $"Assets/Level/Scriptable Objects/Dungeon Rooms/Boss Rooms/{_roomName}.asset");                    
-                AssetDatabase.SaveAssets();         
+                myScript.LoadLayout();
             }
 
-            if (GUILayout.Button("Preview Dungeon Room"))
-            {
-                myScript.LoadRoom();
-            }
         }
     }
 
