@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Code.DungeonGeneration;
+using Code.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -201,10 +202,7 @@ public class GameManager : MonoBehaviour
         //  Wait for fade in to finish
         yield return StartCoroutine(uiManager.BeginTransition());
         //  Disable all powerups
-        foreach (var pickup in FindObjectsOfType<Pickup>())
-        {
-            pickup.gameObject.SetActive(false);
-        }
+        ObjectPooler.SharedInstance.DisableAllObjects();
 
         //  Load new room
         dungeonFloor.ChangeRoom(newRoom);
