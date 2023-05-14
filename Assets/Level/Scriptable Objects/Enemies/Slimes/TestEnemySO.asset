@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bc0f28f76b3ba4d86ea13d8d7070a1, type: 3}
+  m_Name: TestEnemySO
+  m_EditorClassIdentifier: 
+  level: 1
+  moveRange: 0
+  rotationSpeed: 3
+  enemyRangedTypes:
+  - {fileID: 11400000, guid: 82cf3d89117091d46be9182096a40318, type: 2}
+  enemyMeleeTypes:
+  - {fileID: 11400000, guid: 114a67640801d7945ad34645e7d728f7, type: 2}
+  enemySprite: {fileID: 21300000, guid: f80f69362f5cd03499a8b459077c1c14, type: 3}
+  enemyIcon: {fileID: 21300000, guid: b18c3ecdb86cb2f4cb7807d108069020, type: 3}
+  enemyAnimator: {fileID: 22100000, guid: 8a7c8954f92f15543be7a0de775bf530, type: 2}

@@ -1,3 +1,4 @@
+using Code.Runtime.Enemies;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
@@ -11,7 +12,9 @@ public class EnemyController : MonoBehaviour
     
     public HealthManager healthManager;
 
-    private EnemyAttackSO[] _enemyAttackSOs;
+    //private EnemyAttackSO[] _enemyAttackSOs;
+    private EnemyRangedSO[] _enemyRangedSOs;
+    private EnemyMeleeSO[] _enemyMeleeSOs;
 
     private float _currentHealth;
 
@@ -34,7 +37,9 @@ public class EnemyController : MonoBehaviour
     {
         enemySO = enemy;
         _firePoint = transform;
-        _enemyAttackSOs = enemySO.enemyAttackTypes;
+        //_enemyAttackSOs = enemySO.enemyAttackTypes;
+        _enemyRangedSOs = enemySO.enemyRangedTypes;
+        _enemyMeleeSOs = enemySO.enemyMeleeTypes;
         InitializeAttacks();
 
         // sprite
@@ -95,15 +100,37 @@ public class EnemyController : MonoBehaviour
 
     private void InitializeAttacks()
     {
-        foreach (var attack in _enemyAttackSOs)
+        //foreach (var attack in _enemyAttackSOs)
+        //{
+        //    if (attack == null)
+        //        return;
+        //    var attackScript = gameObject.AddComponent<Attack>();
+        //    attackScript.SetHealthManager(healthManager);
+        //    attackScript.SetBulletForce(attack.bulletForce);
+        //    attackScript.SetFirePoint(_firePoint);
+        //    attackScript.SetEnemyAttackSO(attack);
+        //}
+
+        foreach (var attack in _enemyRangedSOs)
         {
             if (attack == null)
                 return;
-            var attackScript = gameObject.AddComponent<Attack>();
+            
+            var attackScript = gameObject.AddComponent<RangedAttack>();
             attackScript.SetHealthManager(healthManager);
-            attackScript.SetBulletForce(attack.bulletForce);
+            //attackScript.SetBulletForce(attack.bulletForce);
             attackScript.SetFirePoint(_firePoint);
-            attackScript.SetEnemyAttackSO(attack);
+            attackScript.SetEnemyRangedSO(attack);
+        }
+        
+        foreach (var attack in _enemyMeleeSOs)
+        {
+            if (attack == null)
+                return;
+            
+            var attackScript = gameObject.AddComponent<MeleeAttack>();
+            attackScript.SetHealthManager(healthManager);
+            attackScript.SetEnemyMeleeSO(attack);
         }
     }
 
