@@ -15,5 +15,5 @@ MonoBehaviour:
   baseDamage: 1
   damage: 1
   range: 0
-  baseRateOfFire: 2
-  rateOfFire: 2
+  baseRateOfFire: 60
+  rateOfFire: 60
