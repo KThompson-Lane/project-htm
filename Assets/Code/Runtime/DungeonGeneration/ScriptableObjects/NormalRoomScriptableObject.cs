@@ -40,8 +40,8 @@ namespace Code.DungeonGeneration
             var possibleLocations = layout.FloorTiles.Tiles.Where(x => (x.Tile is not RuleTile)).SelectMany(x => x.Positions);
             possibleLocations =
                 possibleLocations.Where(position =>
-                    (position.x != layout.RoomBounds.xMax && position.x != layout.RoomBounds.xMin) &&
-                    (position.y != (layout.RoomBounds.yMax-1) && position.y != layout.RoomBounds.yMin));
+                    (position.x < layout.RoomBounds.xMax -3 && position.x > layout.RoomBounds.xMin + 3) &&
+                    (position.y < (layout.RoomBounds.yMax -2) && position.y > layout.RoomBounds.yMin + 2));
             
             foreach (var enemyPosition in possibleLocations.OrderBy(_ => Guid.NewGuid()))
             {
