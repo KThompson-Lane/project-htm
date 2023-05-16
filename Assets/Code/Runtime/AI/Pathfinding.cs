@@ -40,7 +40,7 @@ namespace Code.Runtime.AI
                     {
                         if(!neighbour.walkable || closedSet.Contains(neighbour))
                             continue;
-                        var newMoveCostToNeighbour = currentNode.gCost + currentNode.Distance(neighbour);
+                        var newMoveCostToNeighbour = currentNode.gCost + currentNode.Distance(neighbour) + neighbour.movementPenalty;
                         if (newMoveCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                         {
                             neighbour.gCost = newMoveCostToNeighbour;

@@ -7,6 +7,7 @@ namespace Code.Runtime.AI
         public bool walkable;
         public Vector3 worldPosition;
         public Vector2Int gridIndex;
+        public int movementPenalty;
         public int gCost;
         public int hCost;
         public int fCost => hCost + gCost;

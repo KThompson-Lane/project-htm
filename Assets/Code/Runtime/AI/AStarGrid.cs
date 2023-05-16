@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -38,8 +39,20 @@ namespace Code.Runtime.AI
                 {
                     var cellPosition = worldBottomLeft + new Vector3Int(x, y, 0);
                     var worldPosition = map.CellToWorld(cellPosition) + map.tileAnchor;
-                    bool walkable = map.GetTile(cellPosition) is not RuleTile;
+                    bool walkable = map.GetTile(cellPosition) is not RuleTile && Mathf.Abs(cellPosition.x) != map.cellBounds.xMax-1 &&  Mathf.Abs(cellPosition.y) != map.cellBounds.yMax-1;
                     _grid[x, y] = new Node(walkable, worldPosition, new(x,y));
+                }
+            }
+            ApplyPenalties();
+        }
+
+        private void ApplyPenalties()
+        {
+            for (int x = 0; x < _gridSizeX; x++)
+            {
+                for (int y = 0; y < _gridSizeY; y++)
+                {
+                    _grid[x, y].movementPenalty = GetNeighbours(_grid[x, y]).Count(node => !node.walkable) * 4;
                 }
             }
         }
