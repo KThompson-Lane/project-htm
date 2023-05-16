@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.DungeonGeneration;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -112,9 +113,9 @@ public class UI_Manager : MonoBehaviour
     }
     
     // Screens
-    public void ShowEndScreen(bool win, float duration, int kills, int roomsCleared, int levelsCleared)
+    public void ShowEndScreen(bool win, float duration, int kills, int roomsCleared, int levelsCleared, [CanBeNull] EnemySO attacker)
     {
-        endScreen.ShowEndScreen(win, duration, kills, roomsCleared, levelsCleared);
+        endScreen.ShowEndScreen(win, duration, kills, roomsCleared, levelsCleared, attacker);
     }
 
     // Transition animation

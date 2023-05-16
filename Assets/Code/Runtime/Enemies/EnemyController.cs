@@ -1,4 +1,7 @@
+using Code.Runtime.Enemies;
+using Codice.Client.Common;
 using UnityEngine;
+using Time = UnityEngine.Time;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class EnemyController : MonoBehaviour
@@ -19,9 +22,8 @@ public class EnemyController : MonoBehaviour
     private float _rotationSpeed;
     private float _range;
     
-    private Transform _firePoint;
-    //private float _bulletForce;
-    
+    private GameObject _enemy;
+
     private Rigidbody2D _mRb2d;
     private Animator _animator;
 
@@ -33,8 +35,9 @@ public class EnemyController : MonoBehaviour
     public void Initialise(EnemySO enemy)
     {
         enemySO = enemy;
-        _firePoint = transform;
         _enemyAttackSOs = enemySO.enemyAttackTypes;
+        _enemy = gameObject;
+        
         InitializeAttacks();
 
         // sprite
@@ -99,11 +102,28 @@ public class EnemyController : MonoBehaviour
         {
             if (attack == null)
                 return;
-            var attackScript = gameObject.AddComponent<Attack>();
-            attackScript.SetHealthManager(healthManager);
-            attackScript.SetBulletForce(attack.bulletForce);
-            attackScript.SetFirePoint(_firePoint);
-            attackScript.SetEnemyAttackSO(attack);
+
+            switch (attack)
+            {
+                case EnemyMeleeSO so:
+                {
+                    var attackScript = gameObject.AddComponent<MeleeAttack>();
+                    attackScript.SetHealthManager(healthManager);
+                    attackScript.SetEnemyMeleeSO(so);
+                    attackScript.SetEnemy(_enemy);
+                    attackScript.SetSO(enemySO);
+                    break;
+                }
+                case EnemyRangedSO so:
+                {
+                    var attackScript = gameObject.AddComponent<RangedAttack>();
+                    attackScript.SetHealthManager(healthManager);
+                    attackScript.SetEnemyRangedSO(so);
+                    attackScript.SetEnemy(_enemy);
+                    attackScript.SetSO(enemySO);
+                    break;
+                }
+            }
         }
     }
 
@@ -112,10 +132,8 @@ public class EnemyController : MonoBehaviour
         _currentHealth -= damage;
         Debug.Log("Health is: " + _currentHealth);
         _animator.SetTrigger("Hit");
-        if (_currentHealth <= 0)
-        {
-            OnDie?.Invoke(transform.position);
-            Destroy(gameObject);
-        }
+        if (!(_currentHealth <= 0)) return;
+        OnDie?.Invoke(transform.position);
+        Destroy(gameObject);
     }
 }
