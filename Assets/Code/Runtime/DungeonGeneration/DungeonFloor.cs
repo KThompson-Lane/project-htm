@@ -139,7 +139,7 @@ public class DungeonFloor : MonoBehaviour
 
         //  Create room doors
         CreateDoors();
-
+        _currentRoom.InitializeRoom();
         roomLight.enabled = _currentRoom.Cleared;
 
         if(!_currentRoom.Cleared)
@@ -229,6 +229,8 @@ public class DungeonFloor : MonoBehaviour
             _doorPositions.Add(position);
             _wallsMap.SetTile(position, _currentRoom.layout.WestDoor);
         }
+
+        _currentRoom.layout.doorPositions = _doorPositions;
         foreach (var doorPosition in _doorPositions)
         {
             var doorTile = _wallsMap.GetTile<DoorTile>(doorPosition);

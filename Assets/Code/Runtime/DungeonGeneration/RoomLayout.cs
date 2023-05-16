@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.DungeonGeneration;
 using Code.Runtime.DungeonGeneration;
 using UnityEngine;
@@ -29,4 +30,12 @@ public class RoomLayout : ScriptableObject
     
     //  Room size
     public BoundsInt RoomBounds;
+
+    [NonSerialized] public List<Vector3Int> doorPositions;
+
+    public float DistanceToClosestDoor(Vector3Int position)
+    {
+        var closest = doorPositions.OrderBy(door => (door - position).sqrMagnitude).First();
+        return Vector3Int.Distance(closest, position);
+    }
 }

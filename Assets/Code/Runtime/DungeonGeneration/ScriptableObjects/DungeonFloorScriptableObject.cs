@@ -46,18 +46,8 @@ public class DungeonFloorScriptableObject : ScriptableObject
         {
             floorplan[cell] = BasicRooms[_random.Next(BasicRooms.Count)];
         }
-        InitialiseRooms();
     }
 
-    private void InitialiseRooms()
-    {
-        //  Initialise Rooms!
-        foreach (var (_, room) in floorplan)
-        {
-            room.InitializeRoom(level);
-        }
-    }
-    
     private DungeonRoomScriptableObject GetRandomRoom()
     {
         var room = BasicRooms[_random.Next(BasicRooms.Count)];
