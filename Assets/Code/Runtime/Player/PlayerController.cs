@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
@@ -28,6 +27,8 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
         _xMoveID = Animator.StringToHash("Movement_X");
         _yMoveID = Animator.StringToHash("Movement_Y");
+        
+        
     }
     public void OnMove(InputAction.CallbackContext context)
     {

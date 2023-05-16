@@ -24,6 +24,7 @@ public class Shooting : MonoBehaviour
 
     public void Start()
     {
+        playerAttackSo.ResetStats();
         rateOfFire = playerAttackSo.rateOfFire;
         damage = playerAttackSo.baseDamage;
         //todo - all other so variables
