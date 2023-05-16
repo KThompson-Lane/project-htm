@@ -4,6 +4,7 @@ using Code.DungeonGeneration;
 using Code.Runtime;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,11 +12,12 @@ public class PlayerAttackSO : ScriptableObject
     
     [System.NonSerialized] public UnityEvent<int> DamageModifiedEvent;
     [System.NonSerialized] public UnityEvent<float> RoFModifiedEvent;
-    
+
     private void OnEnable()
     {
         damage = baseDamage;
         rateOfFire = baseRateOfFire;
+        
         // Set up events
         DamageModifiedEvent ??= new UnityEvent<int>();
         RoFModifiedEvent ??= new UnityEvent<float>();
@@ -33,5 +33,11 @@ public class PlayerAttackSO : ScriptableObject
     {
         rateOfFire += amount;
         RoFModifiedEvent.Invoke(rateOfFire);
+    }
+
+    public void ResetStats()
+    {
+        damage = baseDamage;
+        rateOfFire = baseRateOfFire;
     }
 }

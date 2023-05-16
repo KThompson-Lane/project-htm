@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d410ab7712054fc68e350eb8ba6f6df7, type: 3}
-  m_Name: Ranged_Wave_Attack
+  m_Name: Ranged_Wave_Attack 1
   m_EditorClassIdentifier: 
   damage: 1
   range: 0

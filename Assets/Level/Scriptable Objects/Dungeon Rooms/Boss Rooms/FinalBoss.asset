@@ -15,4 +15,4 @@ MonoBehaviour:
   layout: {fileID: 11400000, guid: 33f71f2cd68ba534b8f0ff0c47977f90, type: 2}
   BossName: Gary L'escargot
   BossTile: {fileID: 11400000, guid: 39ae01c641a4ec043a485c52dbcf090b, type: 2}
-  BossSO: {fileID: 11400000, guid: 395979959cd1ae743bacfc389c556eb3, type: 2}
+  BossSO: {fileID: 11400000, guid: 3a4d7eaf673f88c448bae568a5db732e, type: 2}

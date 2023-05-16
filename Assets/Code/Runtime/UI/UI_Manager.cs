@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Code.DungeonGeneration;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -39,7 +36,6 @@ public class UI_Manager : MonoBehaviour
     {
         _instance = this;
         hearts = new List<HeartContainer>();
-        //endScreen = GetComponentInChildren<EndScreen>();
     }
 
     private void Start()
