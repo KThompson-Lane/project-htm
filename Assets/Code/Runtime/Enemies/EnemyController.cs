@@ -110,6 +110,8 @@ public class EnemyController : MonoBehaviour
                     var attackScript = gameObject.AddComponent<MeleeAttack>();
                     attackScript.SetHealthManager(healthManager);
                     attackScript.SetEnemyMeleeSO(so);
+                    attackScript.SetEnemy(_enemy);
+                    attackScript.SetSO(enemySO);
                     break;
                 }
                 case EnemyRangedSO so:
@@ -118,6 +120,7 @@ public class EnemyController : MonoBehaviour
                     attackScript.SetHealthManager(healthManager);
                     attackScript.SetEnemyRangedSO(so);
                     attackScript.SetEnemy(_enemy);
+                    attackScript.SetSO(enemySO);
                     break;
                 }
             }

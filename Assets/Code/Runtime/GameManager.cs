@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Code.DungeonGeneration;
 using Code.Runtime;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
 
         // If time runs out, pause and show game over screen
         if (time > TimeSpan.FromSeconds(0)) return;
-        LoseGame();
+        LoseGame(null);
     }
     
     private void OnEnable()
@@ -217,18 +218,18 @@ public class GameManager : MonoBehaviour
         PauseGame(false);
     }
 
-    private void LoseGame()
+    private void LoseGame([CanBeNull] EnemySO attacker)
     {
         // Pause and show death screen
         PauseGame(true);
-        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared, currentLevel);
+        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared, currentLevel, attacker);
     }
     
     private void WinGame()
     {
         // Pause and show win screen
         PauseGame(true);
-        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared, currentLevel);
+        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared, currentLevel, null);
     }
 
     public void QuitGame()

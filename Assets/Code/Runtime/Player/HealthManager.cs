@@ -14,7 +14,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
 
     [NonSerialized] public UnityEvent<float> HealthChangedEvent; //Note: currently only when health is lost/reset
     [NonSerialized] public UnityEvent<float> MaxHealthChangedEvent;
-    [NonSerialized] public UnityEvent HealthDepletedEvent;
+    [NonSerialized] public UnityEvent<EnemySO> HealthDepletedEvent;
 
     private void OnEnable()
     {
@@ -24,10 +24,10 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         // Set up events
         HealthChangedEvent ??= new UnityEvent<float>();
         MaxHealthChangedEvent ??= new UnityEvent<float>();
-        HealthDepletedEvent ??= new UnityEvent();
+        HealthDepletedEvent ??= new UnityEvent<EnemySO>();
     }
 
-    public void DecreaseHealth(int amount)
+    public void DecreaseHealth(int amount, EnemySO attacker)
     {
         if (_godMode) return; //ensure we are not in god mode
         health -= amount;
@@ -35,7 +35,7 @@ public class HealthManager : ScriptableObject //todo - probably rename this to b
         HealthChangedEvent.Invoke(health);
 
         if (!(health <= 0)) return;
-        HealthDepletedEvent.Invoke();
+        HealthDepletedEvent.Invoke(attacker);
     }
 
     public bool IncreaseHealth(int amount)

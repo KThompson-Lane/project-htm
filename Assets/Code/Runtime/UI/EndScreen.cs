@@ -1,6 +1,8 @@
 using System;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndScreen : MonoBehaviour
 {
@@ -10,9 +12,10 @@ public class EndScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelsCleared;
     [SerializeField] private TextMeshProUGUI missionStatus;
     [SerializeField] private GameObject failureCause;
+    [SerializeField] private Image failureObject;
     // Start is called before the first frame update
 
-    public void ShowEndScreen(bool win, float duration, int kills, int rooms, int levels)
+    public void ShowEndScreen(bool win, float duration, int kills, int rooms, int levels, [CanBeNull] EnemySO attacker)
     {
         gameObject.SetActive(true);
         enemiesKilled.text = kills.ToString();
@@ -28,6 +31,7 @@ public class EndScreen : MonoBehaviour
         {
             missionStatus.text = "Mission Failed!";
             failureCause.SetActive(true);
+            failureObject.sprite = attacker.enemySprite;
         }
     }
 }

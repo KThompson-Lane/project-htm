@@ -8,6 +8,7 @@ public class BulletEnemy : Bullet
     private HealthManager healthManager; // for player health
 
     private GameObject _owner;
+    private EnemySO _so;
 
     private float _moveSpeed = 0;
     
@@ -25,7 +26,7 @@ public class BulletEnemy : Bullet
         var playerController = col.gameObject.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            healthManager.DecreaseHealth(Damage);
+            healthManager.DecreaseHealth(Damage, _so);
         }
 
         _moveSpeed = 0;
@@ -45,5 +46,10 @@ public class BulletEnemy : Bullet
     public void SetOwner(GameObject owner)
     {
         _owner = owner;
+    }
+    
+    public void SetSO(EnemySO so)
+    {
+        _so = so;
     }
 }

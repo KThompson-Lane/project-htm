@@ -7,6 +7,8 @@ namespace Code.Runtime.Enemies
         // Melee - collision damage
         private bool _inCollision;
         private EnemyMeleeSO _enemyMeleeSo;
+        private EnemySO _so;
+        private GameObject _enemy;
 
         public override void Start()
         {
@@ -38,7 +40,7 @@ namespace Code.Runtime.Enemies
         
         private void Hit()
         {
-            healthManager.DecreaseHealth(Damage);
+            healthManager.DecreaseHealth(Damage, _so);
         }
         
         private void OnCollisionEnter2D(Collision2D collision)
@@ -60,6 +62,16 @@ namespace Code.Runtime.Enemies
         public void SetEnemyMeleeSO(EnemyMeleeSO eso)
         {
             _enemyMeleeSo = eso;
+        }
+        
+        public void SetSO(EnemySO so)
+        {
+            _so = so;
+        }
+        
+        public void SetEnemy(GameObject enemy)
+        {
+            _enemy = enemy;
         }
     }
 }

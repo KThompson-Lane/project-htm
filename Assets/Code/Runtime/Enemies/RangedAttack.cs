@@ -5,6 +5,7 @@ namespace Code.Runtime.Enemies
     public class RangedAttack : Attack
     {
         private EnemyRangedSO _enemyRangedSo;
+        private EnemySO _so;
         private GameObject _enemy;
         
         private Transform _firePoint;
@@ -76,6 +77,7 @@ namespace Code.Runtime.Enemies
             if (bullet.TryGetComponent(out BulletEnemy bulletEnemy))
             {
                 bulletEnemy.SetOwner(_enemy);
+                bulletEnemy.SetSO(_so);
             }
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse); //todo - maybe change to move speed
@@ -123,6 +125,7 @@ namespace Code.Runtime.Enemies
                 {
                     bulletEnemy.SetMoveSpeed(_bulletForce);
                     bulletEnemy.SetOwner(_enemy);
+                    bulletEnemy.SetSO(_so);
                 }
                 
                 currentAngle += angleStep;
@@ -137,6 +140,11 @@ namespace Code.Runtime.Enemies
         public void SetEnemy(GameObject enemy)
         {
             _enemy = enemy;
+        }
+        
+        public void SetSO(EnemySO so)
+        {
+            _so = so;
         }
     }
 }
