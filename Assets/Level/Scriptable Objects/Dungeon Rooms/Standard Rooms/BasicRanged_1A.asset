@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cdc8e7a14674cdcb6e38baeb279457d, type: 3}
+  m_Name: BasicRanged_1A
+  m_EditorClassIdentifier: 
+  layout: {fileID: 11400000, guid: f4787e15c90642341a515004117611fc, type: 2}
+  EnemyPool:
+  - {fileID: 11400000, guid: 6bb29eaec5eb28342944c92240ff8ecc, type: 2}
+  PickupPool:
+  - {fileID: 11400000, guid: b703ada0941fa6e47a33206d14e85cf3, type: 2}
+  EnemyTile: {fileID: 11400000, guid: 39ae01c641a4ec043a485c52dbcf090b, type: 2}

@@ -1,3 +1,4 @@
+using Code.Runtime.Enemies;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -18,13 +19,13 @@ public class EnemySO : ScriptableObject
 
     public void OnEnable()
     {
-        //_maxHealth = level; //Note - this may want changing in the future - thinking about bosses (might have separate SO though)
-        //_speed = level / 4; //Note - this may also want changing in the future
+        _maxHealth = level; //Note - this may want changing in the future - thinking about bosses (might have separate SO though)
+        _speed = level / 5; //Note - this may also want changing in the future
     }
 
     public float GetSpeed()
     {
-        return level/4;
+        return _speed = level / 5;
     }
 
     public float GetRotationSpeed()
@@ -34,6 +35,6 @@ public class EnemySO : ScriptableObject
 
     public float GetMaxHealth()
     {
-        return level;
+        return _maxHealth = level;
     }
 }

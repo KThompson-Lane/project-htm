@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53b27cc4612c3a540859b663b448a664, type: 3}
-  m_Name: Ranged_InCircle
+  m_Script: {fileID: 11500000, guid: d410ab7712054fc68e350eb8ba6f6df7, type: 3}
+  m_Name: Ranged_Circle_Attack
   m_EditorClassIdentifier: 
-  ranged: 1
-  angleSpread: 359
+  damage: 1
+  range: 0
+  rateOfFire: 120
+  angleSpread: 278
   startingDistance: 0.1
   bulletsInBurst: 5
-  damage: 1
-  range: 3.5
-  rateOfFire: 30
+  waveStepAmount: 0
   bulletForce: 5
-  projectile: {fileID: 372782904265678552, guid: 26ee6f9b80a1b7849aaf2894a81f9b54, type: 3}
