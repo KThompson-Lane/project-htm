@@ -17,7 +17,9 @@ MonoBehaviour:
   rooms: 8
   StartRoom: {fileID: 11400000, guid: 0dd8a739da6438f4986034da5909fe99, type: 2}
   BasicRooms:
+  - {fileID: 11400000, guid: 6bfbb4f71803c414ebdef863336bbf70, type: 2}
   - {fileID: 11400000, guid: 504e2135e84613048b61f85315393da7, type: 2}
-  - {fileID: 11400000, guid: 1dc76ff3a32eae24393c7fd859724532, type: 2}
+  - {fileID: 11400000, guid: bdbf0c8510a31224abaac4e184907718, type: 2}
+  - {fileID: 11400000, guid: bcada82bb4a5e87499892ae9c5b9bed0, type: 2}
   BossRooms:
   - {fileID: 11400000, guid: 662b623809b7a1e4a9a5883565f3b6ba, type: 2}

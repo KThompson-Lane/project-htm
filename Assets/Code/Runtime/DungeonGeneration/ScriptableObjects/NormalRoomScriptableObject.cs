@@ -33,16 +33,17 @@ namespace Code.DungeonGeneration
             _pickups = new Dictionary<Vector3Int, PickupSO>();
             
             //  Use level to calculate drop rate and max enemies
-            maxEnemies = 3 + (int) (level * 2.6);
+            maxEnemies = 3 + (int)(level);// * 2.6);
             dropChance = 10 + (int) (level * 3.45);
             
             //  Generate list of possible positions
             var possibleLocations = layout.FloorTiles.Tiles.Where(x => (x.Tile is not RuleTile)).SelectMany(x => x.Positions);
             possibleLocations =
                 possibleLocations.Where(position =>
-                    (position.x != layout.RoomBounds.xMax && position.x != layout.RoomBounds.xMin) &&
-                    (position.y != (layout.RoomBounds.yMax-1) && position.y != layout.RoomBounds.yMin));
-            
+                    (Mathf.Abs(position.x) != layout.RoomBounds.xMax-1) &&
+                    (Mathf.Abs(position.y) != layout.RoomBounds.yMax-1) &&
+                    (layout.DistanceToClosestDoor(position) > 2.5f));
+
             foreach (var enemyPosition in possibleLocations.OrderBy(_ => Guid.NewGuid()))
             {
                 //  Check conditions

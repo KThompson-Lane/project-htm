@@ -2246,11 +2246,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.33
+      value: -4.18
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09
+      value: 2.37
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2258,7 +2258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.46507388
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2270,7 +2270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.88527185
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2282,7 +2282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463368, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -124.57
       objectReference: {fileID: 0}
     - target: {fileID: 1804800989551463374, guid: 8755856f8ffeb8d44b76e78383725e2d, type: 3}
       propertyPath: m_Name
@@ -4685,6 +4685,8 @@ MonoBehaviour:
   levelsCleared: {fileID: 622430790}
   missionStatus: {fileID: 1958109305}
   failureCause: {fileID: 325623392}
+  failureObject: {fileID: 418065201}
+  failureInfo: {fileID: 915434128}
 --- !u!1 &611149293
 GameObject:
   m_ObjectHideFlags: 0
@@ -6017,9 +6019,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Agent was killed while fighting <Enemy name>
-
-'
+  m_text: Agent was killed while fighting this...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -31,10 +31,12 @@ namespace Code.DungeonGeneration
         public void OpenDoor()
         {
             this.sprite = OpenSprite;
+            this.colliderType = ColliderType.Grid;
         }
         public void CloseDoor()
         {
             this.sprite = ClosedSprite;
+            this.colliderType = ColliderType.Sprite;
         }
     }
 }

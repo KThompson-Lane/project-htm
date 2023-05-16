@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cdc8e7a14674cdcb6e38baeb279457d, type: 3}
-  m_Name: EasyRoom
+  m_Name: Ranged_3B
   m_EditorClassIdentifier: 
-  layout: {fileID: 11400000, guid: f4787e15c90642341a515004117611fc, type: 2}
+  layout: {fileID: 11400000, guid: d7c042b597c3c924d891df983992b5ab, type: 2}
   EnemyPool:
-  - {fileID: 11400000, guid: 6bb29eaec5eb28342944c92240ff8ecc, type: 2}
+  - {fileID: 11400000, guid: 7f0e73ec5ab9baa448f3fe50fac81b4d, type: 2}
+  - {fileID: 11400000, guid: 98479f6ccf8c16f4ab19ab84d2660307, type: 2}
   PickupPool:
+  - {fileID: 11400000, guid: 0cd5fbdeda654ca44a6e5db0eee500d9, type: 2}
   - {fileID: 11400000, guid: b703ada0941fa6e47a33206d14e85cf3, type: 2}
+  - {fileID: 11400000, guid: 3dc051c7be2b6aa4f8516a824e2d3980, type: 2}
   EnemyTile: {fileID: 11400000, guid: 39ae01c641a4ec043a485c52dbcf090b, type: 2}

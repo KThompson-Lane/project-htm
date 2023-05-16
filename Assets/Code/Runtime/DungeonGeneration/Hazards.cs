@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// UNUSED CODE
+
 namespace Code.Runtime.DungeonGeneration
 {
     [RequireComponent(typeof(Collider2D))]
@@ -20,7 +22,7 @@ namespace Code.Runtime.DungeonGeneration
             if (other.CompareTag("Player"))
             {
                 Debug.Log("Player stepped on hazard");
-                playerHealthManager.DecreaseHealth(damage);
+                //playerHealthManager.DecreaseHealth(damage); //todo - needs to pass a game object 
             }
         }
     }
