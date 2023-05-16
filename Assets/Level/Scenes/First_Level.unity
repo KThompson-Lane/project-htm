@@ -4645,6 +4645,7 @@ MonoBehaviour:
   missionStatus: {fileID: 1958109305}
   failureCause: {fileID: 325623392}
   failureObject: {fileID: 418065201}
+  failureInfo: {fileID: 915434128}
 --- !u!1 &611149293
 GameObject:
   m_ObjectHideFlags: 0

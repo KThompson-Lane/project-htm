@@ -13,6 +13,7 @@ public class EndScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI missionStatus;
     [SerializeField] private GameObject failureCause;
     [SerializeField] private Image failureObject;
+    [SerializeField] private TextMeshProUGUI failureInfo;
     // Start is called before the first frame update
 
     public void ShowEndScreen(bool win, float duration, int kills, int rooms, int levels, [CanBeNull] EnemySO attacker)
@@ -30,6 +31,12 @@ public class EndScreen : MonoBehaviour
         else
         {
             missionStatus.text = "Mission Failed!";
+            if (attacker == null)
+            {
+                failureInfo.text = "Ran out of time";
+                failureCause.SetActive(false);
+                return;
+            }
             failureCause.SetActive(true);
             failureObject.sprite = attacker.enemySprite;
         }
