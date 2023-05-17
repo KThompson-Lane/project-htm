@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layout: {fileID: 11400000, guid: d7c042b597c3c924d891df983992b5ab, type: 2}
   EnemyPool:
-  - {fileID: 11400000, guid: 7f0e73ec5ab9baa448f3fe50fac81b4d, type: 2}
+  - {fileID: 11400000, guid: e4b5bd65054197343afa8ed90d56ebda, type: 2}
   - {fileID: 11400000, guid: 98479f6ccf8c16f4ab19ab84d2660307, type: 2}
   PickupPool:
   - {fileID: 11400000, guid: 0cd5fbdeda654ca44a6e5db0eee500d9, type: 2}
