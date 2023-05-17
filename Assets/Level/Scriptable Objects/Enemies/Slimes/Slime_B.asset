@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bc0f28f76b3ba4d86ea13d8d7070a1, type: 3}
   m_Name: Slime_B
   m_EditorClassIdentifier: 
-  level: 1
-  moveRange: 5
+  level: 2
+  moveRange: 3
   rotationSpeed: 3
   enemyAttackTypes:
   - {fileID: 11400000, guid: e1766bfaef3443e48a04a0667c87a38b, type: 2}
