@@ -15,13 +15,17 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Transform healthBar;
     private List<HeartContainer> hearts;
 
+    [SerializeField] private TextMeshProUGUI damageStat;
+    [SerializeField] private TextMeshProUGUI fireRateStat;
+    [SerializeField] private PlayerAttackSO _playerAttackSo;
+
     [SerializeField] private EndScreen endScreen;
 
     //  Change this
     public Animator transitionAnimator;
     private static UI_Manager _instance;
     
-
+    
     public static UI_Manager Instance
     {
         get
@@ -42,6 +46,8 @@ public class UI_Manager : MonoBehaviour
     {
         ChangeHeartContainers(_healthManager.maxHealth);
         ChangeHealth(_healthManager.health);
+        ChangeDamage(_playerAttackSo.damage);
+        ChangeFireRate(_playerAttackSo.rateOfFire);
     }
 
     private void LateUpdate()
@@ -56,6 +62,9 @@ public class UI_Manager : MonoBehaviour
         // Listen for health changed trigger
         _healthManager.MaxHealthChangedEvent.AddListener(ChangeHeartContainers);
         _healthManager.HealthChangedEvent.AddListener(ChangeHealth);
+        // Listen for stat events
+        _playerAttackSo.DamageModifiedEvent.AddListener(ChangeDamage);
+        _playerAttackSo.RoFModifiedEvent.AddListener(ChangeFireRate);
 
     }
     
@@ -64,7 +73,9 @@ public class UI_Manager : MonoBehaviour
         // Stop listening for health changed trigger
         _healthManager.MaxHealthChangedEvent.RemoveListener(ChangeHeartContainers);
         _healthManager.HealthChangedEvent.RemoveListener(ChangeHealth);
-
+        // Stop listening for stat events
+        _playerAttackSo.DamageModifiedEvent.RemoveListener(ChangeDamage);
+        _playerAttackSo.RoFModifiedEvent.RemoveListener(ChangeFireRate);
     }
     
     // Heart Containers
@@ -106,6 +117,16 @@ public class UI_Manager : MonoBehaviour
         hearts.Clear();
         foreach(Transform child in healthBar)
             Destroy(child.gameObject);
+    }
+    
+    //  Stats
+    private void ChangeDamage(int amount)
+    {
+        damageStat.text = amount.ToString();
+    }
+    private void ChangeFireRate(float amount)
+    {
+        fireRateStat.text = (amount/60).ToString("F");
     }
     
     // Screens

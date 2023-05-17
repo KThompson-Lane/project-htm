@@ -139,7 +139,8 @@ public class DungeonFloor : MonoBehaviour
 
         //  Create room doors
         CreateDoors();
-        _currentRoom.InitializeRoom();
+        if(!_currentRoom.Cleared)
+            _currentRoom.InitializeRoom();
         roomLight.enabled = _currentRoom.Cleared;
 
         if(!_currentRoom.Cleared)
