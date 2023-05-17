@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         _roomsCleared++;
         if (bossRoom)
             ClearFloor(); //todo - will need changing when more floors added
-        IncTimer(_hitThisRoom ? 5 : 10); //todo - remove magic number
+        IncTimer(_hitThisRoom ? 10 : 15); //todo - remove magic number
         _hitThisRoom = false;
     }
 
