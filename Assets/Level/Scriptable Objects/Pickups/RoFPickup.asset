@@ -15,4 +15,4 @@ MonoBehaviour:
   playerAttackSo: {fileID: 11400000, guid: 331e9b3768bb31a4397f4f217c871734, type: 2}
   healthManager: {fileID: 11400000, guid: 1241b7d940061af4c8e908719b6f79bb, type: 2}
   pickupSprite: {fileID: 827482856, guid: 219b10ec752bb704a96a69d6ce09216c, type: 3}
-  amount: 30
+  amount: 10
