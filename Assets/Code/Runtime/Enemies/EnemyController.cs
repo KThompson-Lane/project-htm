@@ -132,6 +132,11 @@ public class EnemyController : MonoBehaviour
         Debug.Log("Health is: " + _currentHealth);
         _animator.SetTrigger("Hit");
         if (!(_currentHealth <= 0)) return;
+        _animator.SetTrigger("Die");
+    }
+
+    public void Die()
+    {
         OnDie?.Invoke(transform.position);
         Destroy(gameObject);
     }
