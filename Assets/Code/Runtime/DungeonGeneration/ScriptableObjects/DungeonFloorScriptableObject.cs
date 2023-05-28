@@ -38,8 +38,10 @@ public class DungeonFloorScriptableObject : ScriptableObject
         while (!validFloor)
             validFloor = CreateFloorPlan();
         //  Once we have a valid floor plan, assign rooms
-        //  Make not icky
-        var emptyCells = floorplan.Where(cell => cell.Value == null).Select(cell => cell.Key).ToList();
+        var emptyCells = floorplan
+            .Where(cell => cell.Value == null)
+            .Select(cell => cell.Key)
+            .ToList();
         
         //  Set all our empty cells to a random basic room.
         foreach (var cell in emptyCells)
@@ -60,11 +62,10 @@ public class DungeonFloorScriptableObject : ScriptableObject
         Cells = new();
         
         //  Determine number of rooms
-        //  TODO: Change formula
         rooms = Random.Range(1, 3) + 5 +(int) (level * 2.6);
         var endRooms = new List<RoomIndex>();
         
-        //  Place our starting cell (2,3 (middle)) into the queue
+        //  Place starting cell (2,3 (middle)) into the queue
         RoomIndex startCell = new RoomIndex(floorSize.x / 2 , floorSize.y / 2);
         AddRoom(startCell, Instantiate(StartRoom));
         _startRoom = startCell;
