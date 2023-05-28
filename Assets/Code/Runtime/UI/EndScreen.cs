@@ -14,7 +14,6 @@ public class EndScreen : MonoBehaviour
     [SerializeField] private GameObject failureCause;
     [SerializeField] private Image failureObject;
     [SerializeField] private TextMeshProUGUI failureInfo;
-    // Start is called before the first frame update
 
     public void ShowEndScreen(bool win, float duration, int kills, int rooms, int levels, [CanBeNull] EnemySO attacker)
     {
