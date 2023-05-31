@@ -25,8 +25,7 @@ namespace Code.DungeonGeneration
         public Dictionary<Vector3Int, PickupSO> GetPickups() => _pickups;
 
         public void RemovePickup(Vector3Int position) => _pickups.Remove(position);
-
-        //  Add obstacles / other data
+        
         public override void InitializeRoom(int level = 1)
         {
             _enemies = new List<Tuple<Vector3Int, EnemySO>>();

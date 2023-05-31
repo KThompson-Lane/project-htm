@@ -11,7 +11,6 @@ using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private UI_Manager uiManager;
     [SerializeField] private HealthManager healthManager;
     [SerializeField] private DungeonFloor dungeonFloor;
     [FormerlySerializedAs("playerMovement")] [SerializeField] private PlayerController playerController;
@@ -123,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ReloadScene()
     {
-        yield return StartCoroutine(uiManager.BeginTransition());
+        yield return StartCoroutine(UI_Manager.Instance.BeginTransition());
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //todo - change to first level
         _remainingTime = timeLimit;
         PauseGame(false);
@@ -150,7 +149,7 @@ public class GameManager : MonoBehaviour
     {
         _roomsCleared++;
         if (bossRoom)
-            ClearFloor(); //todo - will need changing when more floors added
+            ClearFloor();
         IncTimer(_hitThisRoom ? 10 : 15); //todo - remove magic number
         _hitThisRoom = false;
     }
@@ -199,7 +198,7 @@ public class GameManager : MonoBehaviour
         
         //  Begin animation
         //  Wait for fade in to finish
-        yield return StartCoroutine(uiManager.BeginTransition());
+        yield return StartCoroutine(UI_Manager.Instance.BeginTransition());
         //  Disable all powerups
         ObjectPooler.SharedInstance.DisableAllObjects();
 
@@ -210,7 +209,7 @@ public class GameManager : MonoBehaviour
         
         //  Fade out
         //  Wait for fade out to finish
-        yield return StartCoroutine(uiManager.FinishTransition());
+        yield return StartCoroutine(UI_Manager.Instance.FinishTransition());
         
         //  Unpause game
         PauseGame(false);
@@ -220,14 +219,14 @@ public class GameManager : MonoBehaviour
     {
         // Pause and show death screen
         PauseGame(true);
-        uiManager.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared, currentLevel, attacker);
+        UI_Manager.Instance.ShowEndScreen(false, timePassed, _enemiesKilled, _roomsCleared, currentLevel, attacker);
     }
     
     private void WinGame()
     {
         // Pause and show win screen
         PauseGame(true);
-        uiManager.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared, currentLevel, null);
+        UI_Manager.Instance.ShowEndScreen(true, timePassed, _enemiesKilled, _roomsCleared, currentLevel, null);
     }
 
     public void QuitGame()

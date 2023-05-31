@@ -60,7 +60,6 @@ public class MinimapManager : MonoBehaviour
     private void DiscoverRoom(RoomIndex room, Direction _)
     {
         //  Reveal our current room and place neighbour rooms
-
         Vector3Int tilePosition = new Vector3Int(room.X, room.Y, 1);
         _dungeonFloorMap.GetTile<MapTile>(tilePosition).Discover();
         _dungeonFloorMap.RefreshTile(tilePosition);

@@ -6,7 +6,6 @@ public class HeartContainer : MonoBehaviour
     public Sprite full, half, empty;
 
     private Image _containerImage;
-    // Start is called before the first frame update
     void Awake()
     {
         _containerImage = GetComponent<Image>();

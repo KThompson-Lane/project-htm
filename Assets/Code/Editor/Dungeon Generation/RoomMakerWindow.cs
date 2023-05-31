@@ -3,6 +3,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 #if UNITY_EDITOR
+/// <summary>
+///     Deprecated, use the Room Creator inspector instead
+/// </summary>
 public class RoomMakerWindow : EditorWindow
 {
     private string roomName = "My Room";
@@ -13,7 +16,7 @@ public class RoomMakerWindow : EditorWindow
     private GameObject _active;
     private bool _generated;
     
-    [MenuItem("Window/Create Dungeon Room")]
+    [MenuItem("Window/Create Dungeon Room (Deprecated)")]
     public static void ShowWindow()
     {
         GetWindow<RoomMakerWindow>();

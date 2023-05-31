@@ -160,8 +160,4 @@ public class UI_Manager : MonoBehaviour
             yield return null;
         } while (transitionAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Finish"));
     }
-    
-    //  TODO: Implement
-    //private TextMeshPro Player2Health; - will need a new health manager
-   // private TextMeshPro Timer;
 }

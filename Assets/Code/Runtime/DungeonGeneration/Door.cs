@@ -8,7 +8,6 @@ public class Door : MonoBehaviour
     public delegate void DoorTriggered(Direction direction);
     public static event DoorTriggered OnDoorTrigger;
 
-    
     void OnTriggerEnter2D(Collider2D col)
     {
         if(!col.CompareTag("Player"))

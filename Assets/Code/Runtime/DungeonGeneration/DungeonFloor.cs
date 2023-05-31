@@ -336,7 +336,5 @@ public class DungeonFloor : MonoBehaviour
         var startRoom = floorObject.GetStartRoom;
         this.LoadRoom(startRoom);
     }
-    //  TEST METHOD FOR CLEARING ROOMS
-
 #endif
 }
