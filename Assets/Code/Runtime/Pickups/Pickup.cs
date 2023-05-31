@@ -30,7 +30,7 @@ public class Pickup : MonoBehaviour
         {
             OnPickupApply?.Invoke(transform.position);
             OnPickupApply?.RemoveAllListeners();
-            gameObject.SetActive(false); //todo - only if heal works
+            gameObject.SetActive(false);
         }
     }
 }

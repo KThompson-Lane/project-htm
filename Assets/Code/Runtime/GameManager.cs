@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
     {
         _roomsCleared++;
         if (bossRoom)
-            ClearFloor(); //todo - will need changing when more floors added
+            ClearFloor();
         IncTimer(_hitThisRoom ? 10 : 15); //todo - remove magic number
         _hitThisRoom = false;
     }

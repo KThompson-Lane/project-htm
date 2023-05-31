@@ -10,6 +10,6 @@ public class RoFPickup : PickupSO
     {
         // Change RoF
         playerAttackSo.ModifyRoF(amount);
-        return true; //todo - this
+        return true;
     }
 }

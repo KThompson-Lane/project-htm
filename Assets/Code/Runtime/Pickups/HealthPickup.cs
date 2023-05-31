@@ -10,8 +10,5 @@ public class HealthPickup : PickupSO
     {
         // Change Health
         return healthManager.IncreaseHealth(amount);
-        
-        //todo - Destroy pick up if health changed
-
     }
 }

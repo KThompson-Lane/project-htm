@@ -10,6 +10,6 @@ public class DamagePickup : PickupSO
     {
         // Change Damage
         playerAttackSo.ModifyDamage(amount);
-        return true; //todo - this
+        return true;
     }
 }

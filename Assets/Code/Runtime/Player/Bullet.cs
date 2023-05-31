@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
         
         if (enemyController != null)
         {
-            enemyController.TakeDamage(Damage); //todo - variable damage
+            enemyController.TakeDamage(Damage);
         }
         
         gameObject.SetActive(false);
