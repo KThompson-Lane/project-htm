@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         StartCoroutine(DisableAfter(10));
     }
 
-    public IEnumerator DisableAfter(float seconds)
+    private IEnumerator DisableAfter(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         gameObject.SetActive(false);
